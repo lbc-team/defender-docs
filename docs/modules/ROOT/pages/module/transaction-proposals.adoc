@@ -1,23 +1,23 @@
 [[transaction-proposals]]
-= Transaction Proposals
+= 交易提案
 
-Transaction Proposals are very similar to actions, but instead of having to write the javascript code, you can use a form-based editor to define the transaction parameters. +
-This low-code format is very useful for non technical users and simple scenarios, but lacks the flexibility of the Actions. If you need to invoke external APIs or contracts, or perform more complex logic, you should use the xref:module/actions.adoc[Actions] instead.
+交易提案与 actions 非常相似，但您无需编写 JavaScript 代码，而是可以使用基于表单的编辑器来定义交易参数。+
+这种低代码格式对于非技术用户和简单场景非常有用，但缺乏 Actions 的灵活性。如果您需要调用外部 API 或合约，或执行更复杂的逻辑，则应改用 xref:module/actions.adoc[Actions]。
 
 [[general-information]]
-== General Information
-To create a Transaction Proposal from Defender, you need to define a few parameters:
+== 常规信息
+要从 Defender 创建交易提案，您需要定义几个参数：
 
-* Title: A descriptive name for the proposal. This will be latter shown in the proposal list.
-* Description(optional): A longer description of the proposal. This will be shown in the proposal details.
-* Target Contract: The smart contract that you want to run the transaction on.
+* 标题：提案的描述性名称。这将稍后显示在提案列表中。
+* 描述(可选)：提案的更长描述。这将显示在提案详细信息中。
+* 目标合约：您要在其上运行交易的智能合约。
 
-NOTE: If you have trouble connecting your wallet to Defender, there may be a conflict between wallet extensions if multiple are installed.
+NOTE: 如果您在将钱包连接到 Defender 时遇到问题，如果安装了多个钱包扩展，则可能是钱包扩展之间存在冲突。
 
 [[function]]
-== Function
-Define the function that you want to call on the target contract. You can select from a list of functions that are available on the contract interface. If the function has parameters, you can define them here.
+== 函数
+定义要在目标合约上调用的函数。您可以从合约接口上可用的函数列表中进行选择。如果该函数具有参数，您可以在此处定义它们。
 
 [[approval-process]]
-== Approval Process
-Define how you want the transaction to be executed. You can choose from any of the xref:settings.adoc#approval-processes[transaction approval processes] available in Defender that you have previously configured or you can optionally create a new one.
+== 审批流程
+定义您希望如何执行交易。您可以从已配置的 Defender 中可用的任何 xref:settings.adoc#approval-processes[交易审批流程]中进行选择，或者您可以选择创建一个新的审批流程。

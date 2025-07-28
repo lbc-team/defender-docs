@@ -1,53 +1,53 @@
-# Adding a complete Private Network
+= 添加一个完整的私有网络
 
-Private Networks allow you to customize your account by adding compatible mainnets and testnets. You can then use them as any other supported network to deploy, monitor, and manage smart contracts on those networks. This guide will lead you through the steps of adding a Private Network with a subgraph and Safe contracts.
+私有网络允许你通过添加兼容的主网和测试网来定制你的账户。然后，你可以像使用任何其他受支持的网络一样使用它们，在这些网络上部署、监控和管理智能合约。本指南将引导你完成添加带有 subgraph 和 Safe 合约的私有网络的步骤。
 
 [[pre-requisites]]
-== Pre-requisites
+== 前提条件
 
-* OpenZeppelin Defender account.
+* OpenZeppelin Defender 账户。
 
 [[configure-forked-network]]
-== 1. Configure Private Network
+== 1. 配置私有网络
 
-As an example, this guide uses https://tenderly.co/[Tenderly, window=_blank] to create a network to use. Follow these steps:
+例如，本指南使用 https://tenderly.co/[Tenderly, window=_blank] 创建一个要使用的网络。请按照以下步骤操作：
 
-. Regsiter an account on Tenderly and create a fork network from Ethereum mainnet. Toggle the custom chain ID and set it to a unique value to prevent conflicts with public chain IDs.
+. 在 Tenderly 上注册一个账户，并从 Ethereum 主网创建一个 fork 网络。切换自定义链 ID，并将其设置为唯一值，以防止与公共链 ID 冲突。
 +
-image::guide-tenderly-private-network.png[Tenderly create network]
+image::guide-tenderly-private-network.png[Tenderly 创建网络]
 
-. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/settings/networks/private/new[Private Network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
+. 复制网络 RPC，然后转到 https://defender.openzeppelin.com/v2/#/settings/networks/private/new[Defender 上的私有网络页面, window=_blank]。使用网络信息填写并提交表单，将可选字段留空（将在后续步骤中配置）：
 +
-image::guide-configure-private-network.png[Configure network on Defender]
+image::guide-configure-private-network.png[在 Defender 上配置网络]
 
 [[deploy-safe-contracts]]
-== 2. Deploy Safe contracts
+== 2. 部署 Safe 合约
 
-With the Private Network created, you can now deploy the Safe contracts, which can be used for multisigs or CREATE2 deployments. Follow these steps:
+创建私有网络后，你现在可以部署 Safe 合约，这些合约可用于 multisig 或 CREATE2 部署。请按照以下步骤操作：
 
-. Clone the `safe-smart-account` repository and install the dependencies:
+. 克隆 `safe-smart-account` 存储库并安装依赖项：
 +
 ```
 git clone https://github.com/safe-global/safe-smart-account && cd safe-smart-account && npm install
 ```
 
-. Create a new wallet, copy its mnemonic, and paste it in the `.env` file alongside the RPC url of the Private Network in the `NODE_URL` parameter. For example, with https://book.getfoundry.sh/[Foundry, window=_blank]:
+. 创建一个新的钱包，复制其助记词，并将其粘贴到 `.env` 文件中，以及私有网络的 RPC url 粘贴到 `NODE_URL` 参数中。例如，使用 https://book.getfoundry.sh/[Foundry, window=_blank]：
 +
 ```
 cast wallet new-mnemonic
 ```
 
-. Fund the wallet with native tokens (like Ether) via Tenderly.
+. 通过 Tenderly 使用原生代币（如 Ether）为钱包提供资金。
 +
-image::guide-fund-private-network-relayer.png[Fund wallet on Private Network]
+image::guide-fund-private-network-relayer.png[在私有网络上为钱包提供资金]
 
-. Paste the private key of the wallet and network RPC in the following command to deploy the CREATE2 Deployer contract. Copy the contract address in `contractAddress` for the next step.
+. 将钱包的私钥和网络 RPC 粘贴到以下命令中，以部署 CREATE2 Deployer 合约。复制下一步中 `contractAddress` 的合约地址。
 +
 ```
 cast send --rpc-url NETWORK_RPC --private-key PRIVATE_KEY --create 0x604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3
 ```
 
-. Replace the `deterministicDeployment` function in `hardhat.config.ts` with the following code, replacing `YOUR_CONTRACT_ADDRESS` and `YOUR_WALLET_ADDRESS`:
+. 将 `hardhat.config.ts` 中的 `deterministicDeployment` 函数替换为以下代码，替换 `YOUR_CONTRACT_ADDRESS` 和 `YOUR_WALLET_ADDRESS`：
 +
 [source,jsx]
 ----
@@ -61,45 +61,45 @@ const deterministicDeployment = (): DeterministicDeploymentInfo => {
 };
 ----
 
-. Run the following command to deploy the Safe contracts (don't worry about the verification errors):
+. 运行以下命令以部署 Safe 合约（不用担心验证错误）：
 + 
 ```
 npm run deploy-all custom
 ```
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/settings/networks/private[`Private Networks` page on Defender, window=_blank] and click on the edit button of the network you created. 
+. 导航到 https://defender.openzeppelin.com/v2/#/settings/networks/private[`Defender 上的“私有网络”页面, window=_blank]，然后单击你创建的网络的编辑按钮。
 +
-image::guide-edit-private-network.png[Edit Private Network on Defender]
+image::guide-edit-private-network.png[在 Defender 上编辑私有网络]
 
-. Copy the following addreses from the Safe contracts deployment output and paste them on Defender:
-* Safe Master Address: `Safe`
-* Safe Proxy Factory Address: `SafeProxyFactory`
-* Safe Multi-Send Call-Only Address: `MultiSendCallOnly`
-* Safe Create Call Address: `CreateCall`
+. 从 Safe 合约部署输出中复制以下地址，然后将其粘贴到 Defender 上：
+* Safe 主地址：`Safe`
+* Safe 代理工厂地址：`SafeProxyFactory`
+* Safe Multi-Send Call-Only 地址：`MultiSendCallOnly`
+* Safe Create Call 地址：`CreateCall`
 
 [[create-subgraph]]
-== 3. Create subgraph
+== 3. 创建 subgraph
 
-Subgraphs on Defender are powered by https://thegraph.com[TheGraph, window=_blank]. In order to create one for a Private Network, the network must be first supported by the TheGraph. https://github.com/graphprotocol/graph-tooling/blob/121843e982c69ffb31aae911431a68a2349ea062/packages/cli/src/protocols/index.ts#L91[Here's, window=_blank] the list of supported networks as data sources. Follow these steps to create a subgraph:
+Defender 上的 Subgraph 由 https://thegraph.com[TheGraph, window=_blank] 提供支持。为了为私有网络创建一个 subgraph，该网络必须首先得到 TheGraph 的支持。https://github.com/graphprotocol/graph-tooling/blob/121843e982c69ffb31aae911431a68a2349ea062/packages/cli/src/protocols/index.ts#L91[这是, window=_blank] 作为数据源的受支持网络列表。请按照以下步骤创建 subgraph：
 
-. Clone the Defender subgraph toolkit repository and install the dependencies:
+. 克隆 Defender subgraph 工具包存储库并安装依赖项：
 +
 ```
 git clone https://github.com/OpenZeppelin/defender-subgraphs && cd defender-subgraphs && yarn
 ```
 
-. Follow the steps in the https://github.com/OpenZeppelin/defender-subgraphs/blob/main/README.md[README,window=_blank].
-. Copy the subgraph URL and paste it in the `Subgraph URL` field on the Defender Private Network configuration.
+. 按照 https://github.com/OpenZeppelin/defender-subgraphs/blob/main/README.md[自述文件,window=_blank] 中的步骤操作。
+. 复制 subgraph URL，然后将其粘贴到 Defender 私有网络配置上的“Subgraph URL”字段中。
 
-image::guide-subgraph-private-network.png[Subgraph URL on Defender]
+image::guide-subgraph-private-network.png[Defender 上的 Subgraph URL]
 
 [[next-steps]]
-== Next steps
+== 后续步骤
 
-Congratulations! You have successfully added a complete Private Network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
+恭喜你！你已成功添加一个完整的私有网络。现在，你可以使用它来部署和测试你的智能合约，其中包含 Safe 合约和 subgraph。
 
 [[references]]
-== References
+== 参考
 
-* https://github.com/safe-global/safe-smart-account#deployments[Safe contracts deployments, window=_blank]
-* https://github.com/OpenZeppelin/defender-subgraphs[Defender subgraph toolkit, window=_blank]
+* https://github.com/safe-global/safe-smart-account#deployments[Safe 合约部署, window=_blank]
+* https://github.com/OpenZeppelin/defender-subgraphs[Defender subgraph 工具包, window=_blank]

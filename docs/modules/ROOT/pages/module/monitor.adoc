@@ -1,25 +1,25 @@
 [[monitor]]
 = Monitor
 
-Monitors allow you to gain full visibility into your smart contracts' risks and behaviors. You can detect threats, get alerts on threats and anomalies, and automatically respond and resolve issues.
+监视器允许您全面了解智能合约的风险和行为。您可以检测威胁，获取关于威胁和异常的警报，并自动响应和解决问题。
 
 [[use-cases]]
-== Use cases
+== 用例
 
-* Monitor crucial events and authorized functions like ownership transfers, pauses, or mints.
-* Alert on potentially dangerous transactions or operational issues.
-* Integrate notifications to Slack, Telegram, Discord, email, PagerDuty, Opsgenie or custom APIs.
-* Use pre-built templates to setup monitoring quickly and easily.
-* Combine with other Defender modules to execute on-chain transactions with monitor triggers.
+* 监控关键事件和授权函数，如所有权转移、暂停或铸币。
+* 对潜在的危险交易或运营问题发出警报。
+* 将通知集成到 Slack、Telegram、Discord、电子邮件、PagerDuty、Opsgenie 或自定义 API。
+* 使用预构建的模板快速轻松地设置监控。
+* 与其他 Defender 模块结合使用，以使用监视器触发器执行链上交易。
 
 [[monitors]]
-== Monitors
+== 监视器
 
-Monitors can be created from scratch or from templates, which are designed for common use cases. Templates automatically pre-populate a monitor, so you can easily modify and re-adapt them.
+监视器可以从头开始创建，也可以从模板创建，这些模板是为常见用例设计的。模板会自动预填充监视器，因此您可以轻松修改和重新调整它们。
 
-image::monitor-templates.png[Monitor Templates]
+image::monitor-templates.png[监视器模板]
 
-Monitors are organized into five categories, according to the type of risk they monitor:
+监视器根据其监控的风险类型分为五个类别：
 
 * Governance
 * Access Control
@@ -27,135 +27,135 @@ Monitors are organized into five categories, according to the type of risk they 
 * Financial
 * Technical
 
-You can also specify a severity level, which your team can use to group or filter monitors by.
+您还可以指定严重程度，您的团队可以使用它按严重程度对监视器进行分组或过滤。
 
 * High Severity
 * Medium Severity
 * Low Severity
 
 [[configure-a-monitor]]
-== Configuring a Monitor
+== 配置监视器
 
-A monitor watches all on-chain contract transactions and notifies when one matches the parameters, filters, or events. 
+监视器会监视所有链上合约交易，并在交易与参数、过滤器或事件匹配时发出通知。
 
-IMPORTANT: At this time, Monitors are supported across all xref:index.adoc#networks[networks] except Fantom.
+IMPORTANT: 目前，除了 Fantom 之外，所有 xref:index.adoc#networks[网络]都支持监视器。
 
 [[general-info]]
-===  General Information
-* *Name*: The name assigned to the monitor.
+=== 常规信息
+* *Name*：分配给监视器的名称。
 
-* *Risk Category*: The risk category of the monitor, useful for filtering or grouping.
+* *Risk Category*：监视器的风险类别，用于过滤或分组。
 
-* *Contracts*: The smart contracts to monitor. Monitoring relies on the underlying ABI, so you may only have 1 ABI per monitor. In case of multiple smart contracts, the monitor must adhere to the same ABI/Interface.
+* *Contracts*：要监控的智能合约。监控依赖于底层的 ABI，因此每个监视器可能只有一个 ABI。如果存在多个智能合约，则监视器必须遵守相同的 ABI/Interface。
 
-* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, a higher confirmation block level is recommended, but if you want to be notified as soon as possible with tolerance to reorganizations, a lower confirmation block level is better. In chains where safe and finalized block tags are accepted, you can also select them as confirmation block level.
+* *Confirmation Blocks*：如果您希望仅在确定交易被接受到一定程度后才收到通知，建议使用更高的确认区块级别，但如果您希望尽快收到通知并容忍重组，则使用较低的确认区块级别更好。在接受安全和最终区块标签的链中，您也可以选择它们作为确认区块级别。
 
 [[matching-rules]]
-=== Matching Rules
+=== 匹配规则
 
-For a transaction to trigger a notification, it must satisfy *ALL* of the following:
+要使交易触发通知，它必须满足*所有*以下条件：
 
-* Transaction *MUST* have a To, From, or Address (from the log) that matches the configured address.
+* 交易*必须*具有与配置的地址匹配的 To、From 或 Address（来自日志）。
 
-* If a *Transaction Filter* is specified
+* 如果指定了*交易过滤器*
 
-    ** The Transaction *MUST* match the *Transaction Filter*.
+    ** 交易*必须*与*交易过滤器*匹配。
 
-* If *Events* are selected
+* 如果选择了*事件*
 
-    ** The Transaction *MUST* emit any of the selected Events and match the *Event Condition* (if any)
+    ** 交易*必须*发出任何选定的事件并匹配*事件条件*（如果有）
 
-* If *Functions* are selected
+* 如果选择了*函数*
 
-    ** The Transaction *MUST* directly invoke any of the selected Functions (contract calls are not detected at the moment) and match the *Function Condition* (if any)
+    ** 交易*必须*直接调用任何选定的函数（目前未检测到合约调用）并匹配*函数条件*（如果有）
 
 [[transaction-filters]]
-=== Transaction Filters
+=== 交易过滤器
 
-Transaction filters allows to narrow the transactions being monitored. These are entered as property expressions or Javascript code, offering great flexibility. To accommodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
+交易过滤器允许缩小被监控的交易范围。这些作为属性表达式或 JavaScript 代码输入，提供了极大的灵活性。为了适应校验和地址和非校验和地址的比较，比较是不区分大小写的。
 
-NOTE: To receive ALL transactions that involve the selected events/functions, transaction conditions should not be specified.
+NOTE: 要接收涉及所选事件/函数的所有交易，不应指定交易条件。
 
-* Conditions can use *AND*, *OR*, *NOT* and *()*
+* 条件可以使用 *AND*、*OR*、*NOT* 和 *()*
 
-* Conditions can use *==*, *&lt;*, *&gt;*, *&gt;=*, *&lt;=* to compare
+* 条件可以使用 *==*、*<*、*>*、*>=*、*<=* 进行比较
 
-* Number values can be referred to by Hex (0xabc123) or Decimal (10000000000)
+* 数字值可以用 Hex (0xabc123) 或 Decimal (10000000000) 表示
 
-* String values can only be compared via *==*
+* 字符串值只能通过 *==* 进行比较
 
-* Includes basic math operators: *+*, *-*, ***, */*, *^*
+* 包括基本数学运算符：*+*、*-*、***、*/、*^*
 
-IMPORTANT: If a transaction filter condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
+IMPORTANT: 如果指定了交易过滤器条件，则交易*必须*满足此条件才能触发通知。
 
-Transaction Conditions can refer to the following properties
+交易条件可以引用以下属性
 
-* *to* is the _to_ address for the transaction
+* *to* 是交易的 _to_ 地址
 
-* *from* is the _from_ address for the transaction
+* *from* 是交易的 _from_ 地址
 
-* *gasPrice* is the price of gas sent in the transaction. In EIP1559 transactions, it's equal to or below the `maxFeePerGas`.
+* *gasPrice* 是交易中发送的 Gas 价格。在 EIP1559 交易中，它等于或低于 `maxFeePerGas`。
 
-* *maxFeePerGas* is the maximum price the transaction was willing to pay for the transaction. Only existent in EIP1559 transactions.
+* *maxFeePerGas* 是交易愿意为交易支付的最高价格。仅存在于 EIP1559 交易中。
 
-* *maxPriorityFeePerGas* is the maximum amount of wei over the `BASE_FEE` the transaction is willing to pay to the miner for inclusion. Only existent in EIP1559 transactions.
+* *maxPriorityFeePerGas* 是交易愿意为包含支付给矿工的超过 `BASE_FEE` 的最高 Wei 金额。仅存在于 EIP1559 交易中。
 
-* *gasLimit* is the gas limit sent in the transaction
+* *gasLimit* 是交易中发送的 Gas 限制
 
-* *gasUsed* is the amount of gas used in the transaction
+* *gasUsed* 是交易中使用的 Gas 量
 
-* *value* is the value sent in the transaction
+* *value* 是交易中发送的值
 
-* *nonce* is the nonce for the specific transaction
+* *nonce* 是特定交易的 nonce
 
-* *status* is a derived value and can be compared with *"success"* or *"failed"*
+* *status* 是一个派生值，可以与 *"success"* 或 *"failed"* 进行比较
 
-==== Example Conditions
+==== 条件示例
 
-Transactions that are reverted
+已还原的交易
 
 [source,jsx]
 ----
 status == "failed"
 ----
 
-Transactions excluding those from 0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad
+排除来自 0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad 的交易
 
 [source,jsx]
 ----
 from != "0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad"
 ----
 
-Transactions that have BOTH a gasPrice higher than 50 gwei AND a gasUsed higher than 20000
+Gas 价格高于 50 Gwei 并且 GasUsed 高于 20000 的交易
 
 [source,jsx]
 ----
 gasPrice > 50000000000 and gasUsed > 20000
 ----
 
-=== Custom Filters
+=== 自定义过滤器
 
-Custom filters supports custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
+自定义过滤器支持用于过滤交易的自定义代码。如果指定了自定义过滤器，则将使用给定区块中找到的匹配项列表调用它。这允许监视器使用其他数据源和自定义逻辑来评估交易是否匹配。
 
-NOTE: Only transactions that match other conditions (event, function, transaction) will invoke the custom filter.
+NOTE: 只有符合其他条件（事件、函数、交易）的交易才会调用自定义过滤器。
 
-NOTE: Each invocation can contain up to 25 transactions.  
+NOTE: 每次调用最多可包含 25 个交易。
 
-==== Request Schema
+==== 请求 Schema
 
-The request body will contain the following structure. The `MonitorConditionRequest` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used for custom filters in Typescript.
+请求正文将包含以下结构。来自 https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] 包的 `MonitorConditionRequest` 类型可用于 Typescript 中的自定义过滤器。
 
 [source,jsx]
 ----
 {
   "events": [
   {
-    "hash": "0xab..123",                          // the transaction hash
-    "timestamp": "1699857792",                    // the timestamp of the transaction (block)
-    "blockNumber": 18561272,                      // the block number of the transaction
-    "blockHash": "0xab..123",                     // block hash from where this transaction was seen
-    "transaction": {                              // eth_getTransactionReceipt response body
-      ...                                         // see https://eips.ethereum.org/EIPS/eip-1474
+    "hash": "0xab..123",                          // 交易哈希
+    "timestamp": "1699857792",                    // 交易的时间戳 (区块)
+    "blockNumber": 18561272,                      // 交易的区块号
+    "blockHash": "0xab..123",                     // 看到此交易的区块哈希
+    "transaction": {                              // eth_getTransactionReceipt 响应正文
+      ...                                         // 参见 https://eips.ethereum.org/EIPS/eip-1474
       "cumulativeGasUsed": "0xc3614",
       "effectiveGasPrice": "0x6e214d78",
       "gasUsed": "0x6075",
@@ -170,57 +170,57 @@ The request body will contain the following structure. The `MonitorConditionRequ
       "transactionIndex": "0x9",
       "type": "0x2"
     },
-    "matchReasons": [                             // the reasons why monitor triggered
+    "matchReasons": [                             // 监视器触发的原因
       {
         "type": "event",                          // event, function, or transaction
-        "address": "0x123..abc",                  // address of the event emitting contract
-        "signature": "...",                       // signature of your event/function
-        "condition": "value > 5",                 // condition expression (if any)
-        "args": ["5"],                            // parameters by index (unnamed are present)
-        "params": { "value": "5" }                // parameters by name (unnamed are not present)
+        "address": "0x123..abc",                  // 发出事件的合约地址
+        "signature": "...",                       // 你的事件/函数的签名
+        "condition": "value > 5",                 // 条件表达式（如果有）
+        "args": ["5"],                            // 按索引的参数（未命名的存在）
+        "params": { "value": "5" }                // 按名称的参数（未命名的不存在）
       }
     ],
-    "matchedAddresses": ["0xabc..123"],           // the addresses from this transaction your are monitoring
-    "matchedChecksumAddresses": ["0xAbC..123"],   // the checksummed addresses from this transaction your are monitoring
+    "matchedAddresses": ["0xabc..123"],           // 你正在监控的来自此交易的地址
+    "matchedChecksumAddresses": ["0xAbC..123"],   // 你正在监控的来自此交易的校验和地址
     "monitor": {
-      "id": "44a7d5...31df5",                     // internal ID of your monitor
-      "name": "Monitor Name",                     // name of your monitor
-      "abi": [...],                               // abi of your addresses (or undefined)
-      "addresses": ["0x000..000"],                // addresses your monitor is watching
-      "confirmBlocks": 0,                         // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
-      "network": "rinkeby"                        // network of your addresses
-      "chainId": 4                                // chain Id of the network
+      "id": "44a7d5...31df5",                     // 你的监视器的内部 ID
+      "name": "Monitor Name",                     // 你的监视器的名称
+      "abi": [...],                               // 你的地址的 abi（或未定义）
+      "addresses": ["0x000..000"],                // 你的监视器正在监视的地址
+      "confirmBlocks": 0,                         // 监视器等待的区块数（在 PoS 客户端上可以是“safe”或“finalized”）
+      "network": "rinkeby"                        // 你的地址的网络
+      "chainId": 4                                // 网络的链 Id
     },
-    "metadata": "..."                             // metadata (if available)
+    "metadata": "..."                             // 元数据（如果可用）
   }
   ]
 }
 ----
 
-==== Response Schema
+==== 响应 Schema
 
-The custom filter must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `MonitorConditionResponse`.
+自定义过滤器必须返回一个包含所有匹配项的结构。返回一个空对象表示未发生匹配。此对象的类型为 `MonitorConditionResponse`。
 
-IMPORTANT: Errors will be treated as a non-match.
+IMPORTANT: 错误将被视为不匹配。
 
 [source,jsx]
 ----
 {
   "matches": [
     {
-      "hash": "0xabc...123",   // transaction hash
+      "hash": "0xabc...123",   // 交易哈希
       "metadata": {
-        "foo": true            // any object to be shared with notifications
+        "foo": true            // 要与通知共享的任何对象
       }              
     },
     {
-      "hash": "0xabc...123"    // example with no metadata specified
+      "hash": "0xabc...123"    // 没有指定元数据的示例
     }
   ]
 }
 ----
 
-==== Example Custom Filters
+==== 自定义过滤器示例
 
 [source,jsx]
 ----
@@ -230,9 +230,9 @@ exports.handler = async function(payload) {
   const events = conditionRequest.events;
   for(const evt of events) {
 
-    // add custom logic for matching here
+    // 在此处添加用于匹配的自定义逻辑
 
-    // metadata can be any JSON-marshalable object (or undefined)
+    // 元数据可以是任何可进行 JSON 编组的对象（或未定义）
     matches.push({
        hash: evt.hash,
        metadata: { 
@@ -248,19 +248,19 @@ exports.handler = async function(payload) {
 ----
 
 [[events-and-functions]]
-=== Events and Functions
+=== 事件和函数
 
-Events and functions can be selected as filters. Selecting multiple events acts as an OR clause (triggered for ANY selected events). The same applies for functions.
+事件和函数可以选择作为过滤器。选择多个事件充当 OR 子句（为任何选定的事件触发）。函数也是如此。
 
-Conditions for events or functions can further narrow the monitor. These can refer to arguments in the signature either by name (if the argument is named) or by index (e.g., $0, $1...). The variables must match the types shown in the interface. If left empty, the condition will be ignored.
+事件或函数的条件可以进一步缩小监视器的范围。这些可以通过名称（如果参数已命名）或通过索引（例如，$0，$1...）引用签名中的参数。变量必须与接口中显示的类型匹配。如果留空，则条件将被忽略。
 
-NOTE: If no events or functions are specified, then ALL transactions to or from the contracts will be in scope.
+NOTE: 如果未指定任何事件或函数，则到合约或来自合约的所有交易都将在范围内。
 
-IMPORTANT: Monitors seamlessly supports notifications for events emitted by a smart contract on all networks, regardless of whether they are triggered directly or through internal calls from a third contract. However, the capability to track and provide notifications for internal function calls within a contract is currently limited to the Ethereum mainnet.
+IMPORTANT: 监视器无缝支持智能合约在所有网络上发出的事件的通知，无论它们是直接触发还是通过来自第三方合约的内部调用触发。但是，跟踪和提供合约内内部函数调用通知的功能目前仅限于 Ethereum 主网。
 
-==== Example Conditions
+==== 条件示例
 
-Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ETH (in hex)
+发出 `Transfer(...)` 事件且值在 1 到 100 ETH 之间的交易（以十六进制表示）
 
 [source,jsx]
 ----
@@ -268,7 +268,7 @@ Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ET
 value > 0xde0b6b3a7640000 and value < 0x56bc75e2d63100000 
 ----
 
-Transactions that emit a `ValsEvent(...)` event with an array with a first element equal to 5
+发出 `ValsEvent(...)` 事件且具有第一个元素等于 5 的数组的交易
 
 [source,jsx]
 ----
@@ -276,7 +276,7 @@ Transactions that emit a `ValsEvent(...)` event with an array with a first eleme
 vals[0] == 5
 ----
 
-Transactions that invoke a `greet(...)` function with an unnamed string of "hello"
+调用具有未命名的字符串“hello”的 `greet(...)` 函数的交易
 
 [source,jsx]
 ----
@@ -284,129 +284,129 @@ Transactions that invoke a `greet(...)` function with an unnamed string of "hell
 $1 == "hello"
 ----
 
-// WARNING: There are some considerations unique to Hedera mainnet and testnet when configuring a monitor. Learn more xref:guide/hedera.adoc[here].
+// WARNING: 在配置监视器时，Hedera 主网和测试网有一些独特的考虑因素。在此处 xref:guide/hedera.adoc[了解更多信息]。
 
 [[alerts]]
-== Alerts
+== 警报
 
-A monitor can use any supported notification channel for alerting. It's also possible to connect an Action or a Workflow that should run with the monitor.
+监视器可以使用任何受支持的通知通道进行警报。也可以连接应该与监视器一起运行的 Action 或 Workflow。
 
-To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
+为防止来自单个监视器的重复警报并控制通知率，您可以使用“警报阈值”和“连续通知之间的最短时间”字段。
 
-* Alert Threshold: Define the number of times a monitor must trigger per unit of time before a notification is sent or an action is fired. The unit of time is defined by the Minimum time between consecutive notifications field.
-* Minimum time between consecutive notifications: Set the the minimum wait time between sending notifications.
+* 警报阈值：定义在发送通知或触发 Action 之前，监视器必须在每个时间单位内触发的次数。时间单位由“连续通知之间的最短时间”字段定义。
+* 连续通知之间的最短时间：设置发送通知之间的最短等待时间。
 
 ++++
 <div class="flex justify-center">
-  <img src="../_images/monitor-alert-v2.png" alt="Configure Defender Monitor alerts" style="width: 60%">
+  <img src="../_images/monitor-alert-v2.png" alt="配置 Defender 监视器警报" style="width: 60%">
 </div>
 ++++
 
 [[notifications]]
-=== Notifications
+=== 通知
 
-You can create *Notifications* attached to the Monitor alerts for getting notified about the on-chain events across many channels, see more about how to create and configure them in xref:settings/notifications.adoc[this section].
+您可以创建附加到监视器警报的*通知*，以便在多个渠道中获得有关链上事件的通知，有关如何创建和配置它们的更多信息，请参见 xref:settings/notifications.adoc[此部分]。
 
 [[customizing-notification]]
-==== Customizing Notification
+==== 自定义通知
 
-You can also modify the message body content and formatting using the Customize notification checkbox below the notification channel selector.
+您还可以使用通知通道选择器下方的“自定义通知”复选框来修改消息正文内容和格式。
 
-===== Template
+===== 模板
 
 [source,md]
 ----
-**Monitor Name**
+**监视器名称**
 
 {{ monitor.name }}
 
-**Network**
+**网络**
 
 {{ monitor.network }}
 
-**Block Hash**
+**区块哈希**
 
 {{ blockHash }}
 
-**Transaction Hash**
+**交易哈希**
 
 {{ transaction.transactionHash }}
 
-**Transaction Link** 
+**交易链接**
 
-[Block Explorer]({{ transaction.link }})
+[区块浏览器]({{ transaction.link }})
 
 {{ matchReasonsFormatted }}
 
-**value**
+**值**
 
 {{ value }}
 ----
 
-==== Preview
+==== 预览
 
 [source,md]
 ----
-*Monitor Name*
+*监视器名称*
 
 Monitor
 
-*Network*
+*网络*
 
 rinkeby
 
-*Block Hash*
+*区块哈希*
 
 0x22407d00e953e5f8dabea57673b9109dad31acfc15d07126b9dc22c33521af52
 
-*Transaction Hash*
+*交易哈希*
 
 0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50
 
-https://rinkeby.etherscan.io/tx/0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50[Block Explorer]
+https://rinkeby.etherscan.io/tx/0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50[区块浏览器]
 
-*Match Reason 1*
+*匹配原因 1*
 
-_Type:_ Function
+_类型：_ 函数
 
-_Matched Address_:_ 0x1bb1b73c4f0bda4f67dca266ce6ef42f520fbb98
+_匹配地址_：_ 0x1bb1b73c4f0bda4f67dca266ce6ef42f520fbb98
 
-_Signature:_ greet(name)
+_签名：_ greet(name)
 
-_Condition:_ name == 'test'
+_条件：_ name == 'test'
 
-_Params:_
+_参数：_
 
 name: test
 
-*Match Reason 2*
+*匹配原因 2*
 
-_Type:_ Transaction
+_类型：_ 交易
 
-_Condition:_ gasPrice > 10
+_条件：_ gasPrice > 10
 
-*Value*
+*值*
 
 0x16345785D8A0000
 ----
 
-===== Message Syntax
+===== 消息语法
 
-Custom notifications support a limited set of markdown syntax:
+自定义通知支持一组有限的 markdown 语法：
 
-* Bold (\\**this text is bold**)
-* Italic (\*this text* and \_this text_ are italic)
-* Links (this is a [link](\https://example.com))
+* 粗体 (\\**this text is bold**)
+* 斜体 (\*this text* and \_this text_ are italic)
+* 链接 (this is a [link](\https://example.com))
 
-There is partial support for additional markdown syntax, but rendering behavior varies by platform. Email supports full HTML and has the richest feature set, but other messaging platforms have limitations, including support for standard markdown features such as headings, block quotes, and tables. Combinations of the supported features (e.g., bold and italicized text) also have mixed support. A warning message will appear directly below the editor if the markdown contains any syntax with mixed platform support.
+部分支持其他 markdown 语法，但渲染行为因平台而异。电子邮件支持完整的 HTML，并且具有最丰富的功能集，但其他消息传递平台存在限制，包括对标准 markdown 功能（如标题、块引用和表格）的支持。受支持功能的组合（例如，粗体和斜体文本）也具有混合支持。如果 markdown 包含任何具有混合平台支持的语法，则警告消息将直接显示在编辑器下方。
 
-==== Monitor Event Schema
-You can access the following schema when using custom notification templates. This schema is also passed to the Action if you configure your monitor to execute one.
+==== 监视器事件 Schema
+使用自定义通知模板时，您可以访问以下 schema。如果您配置监视器来执行一个 Action，则此 schema 也会传递给该 Action。
 [source,jsx]
 ----
 {
-  "transaction": {                     // eth_getTransactionReceipt response body
-    ...                                // see https://eips.ethereum.org/EIPS/eip-1474
+  "transaction": {                     // eth_getTransactionReceipt 响应正文
+    ...                                // 参见 https://eips.ethereum.org/EIPS/eip-1474
     "cumulativeGasUsed": "0xc3614",
     "effectiveGasPrice": "0x6e214d78",
     "gasUsed": "0x6075",
@@ -421,57 +421,57 @@ You can access the following schema when using custom notification templates. Th
     "transactionIndex": "0x9",
     "type": "0x2"
   },
-  "blockHash": "0xab..123",            // block hash from where this transaction was seen
-  "matchReasons": [                    // the reasons why monitor triggered
+  "blockHash": "0xab..123",            // 看到此交易的区块哈希
+  "matchReasons": [                    // 监视器触发的原因
     {
       "type": "event",                 // event, function, or transaction
-      "address": "0x123..abc",         // address of the event emitting contract
-      "signature": "...",              // signature of event/function
-      "condition": "value > 5",        // condition expression (if any)
-      "args": ["5"],                   // parameters by index (unnamed are present)
-      "params": { "value": "5" }       // parameters by name (unnamed are not present)
+      "address": "0x123..abc",         // 发出事件的合约地址
+      "signature": "...",              // 事件/函数的签名
+      "condition": "value > 5",        // 条件表达式（如果有）
+      "args": ["5"],                   // 按索引的参数（未命名的存在）
+      "params": { "value": "5" }       // 按名称的参数（未命名的不存在）
     }
   ],
-  "matchedAddresses":["0x000..000"]    // the addresses from this transaction monitored
+  "matchedAddresses":["0x000..000"]    // 从此交易监控的地址
   "monitor": {
-    "id": "44a7d5...31df5",            // internal ID of monitor
-    "name": "Monitor Name",           // name of monitor
-    "abi": [...],                      // abi of address (or undefined)
-    "addresses": ["0x000..000"],       // addresses monitored
-    "confirmBlocks": 0,                // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
-    "network": "rinkeby"               // network of address
-    "chainId": 4                       // chain Id of the network
+    "id": "44a7d5...31df5",            // 监视器的内部 ID
+    "name": "Monitor Name",           // 监视器的名称
+    "abi": [...],                      // 地址的 abi（或未定义）
+    "addresses": ["0x000..000"],       // 监控的地址
+    "confirmBlocks": 0,                // 监视器等待的区块数（在 PoS 客户端上可以是“safe”或“finalized”）
+    "network": "rinkeby"               // 地址的网络
+    "chainId": 4                       // 网络的链 Id
   },
-  "value": "0x16345785D8A0000"         // value of the transaction
-  "metadata": {...}                // metadata injected by action condition (if applicable)
+  "value": "0x16345785D8A0000"         // 交易的值
+  "metadata": {...}                // 由 Action 条件注入的元数据（如果适用）
 }
 ----
 
-===== Dynamic Content
+===== 动态内容
 
-Custom notification templates render dynamic content using inline templating. Any string surrounded by double curly braces will be resolved against the Event Schema. Deeply nested items (including those in arrays) can be accessed using dot notation.
+自定义通知模板使用内联模板呈现动态内容。任何由双大括号包围的字符串都将针对事件 Schema 进行解析。可以使用点表示法访问深度嵌套的项目（包括数组中的项目）。
 
-In addition to the standard event schema, the following parameters are injected for usage in custom notification messages: 
+除了标准事件 schema 之外，还注入了以下参数以供在自定义通知消息中使用：
 
 * `transaction.link`
 * `matchReasonsFormatted`
 
-==== Character Limit
+==== 字符限制
 
-Messages will be truncated if they exceed a platform's character limit. The best practice is to limit messages to 1900 characters.
+如果消息超过平台的字符限制，则会被截断。最佳做法是将消息限制为 1900 个字符。
 
 [[settings]]
-== Settings
+== 设置
 
-In the settings tab, you can specify the default notification channel associated with the different severities: High, Medium, or Low.
+在设置选项卡中，您可以指定与不同严重程度（高、中或低）关联的默认通知通道。
 
-image::monitor-settings.png[Monitor Settings]
+image::monitor-settings.png[监视器设置]
 
 [[pausing]]
-== Pausing and Deleting
+== 暂停和删除
 
-From the monitor page, you can pause created monitors that are active. By clicking on the dotted button on the card, you can delete or save the monitor as a template. 
+在监视器页面中，您可以暂停已创建的处于活动状态的监视器。通过单击卡片上的虚线按钮，您可以删除监视器或将其另存为模板。
 
-Saving a monitor as a template stores its configuration and parameters, which can be found by clicking the template gallery tab.
+将监视器另存为模板会存储其配置和参数，可以通过单击模板库选项卡找到这些配置和参数。
 
-NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender. Check it out xref:tutorial/monitor.adoc[here]!
+NOTE: 我们提供了一个快速入门教程，用于使用 Defender 监视智能合约。在此处查看 xref:tutorial/monitor.adoc[它]！

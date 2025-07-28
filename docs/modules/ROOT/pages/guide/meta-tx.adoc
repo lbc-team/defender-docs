@@ -1,40 +1,40 @@
-# Relaying gasless meta-transactions with a web app
-Gasless meta-transactions offer users a more seamless experience on the blockchain, potentially eliminating the need to spend money on gas fees for every interaction. This method allows users to sign a transaction for free and have it securely executed by a third party, with that party paying the gas to complete the transaction.
+:page-title: 通过 Web 应用程序中继 Gasless Meta-Transaction
 
-Defender provides a seamless experience and secure way to implement gasless meta-transactions using Relayers. These Relayers handle sending transactions on behalf of users, eliminating the need for users to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
+Gasless meta-transaction 为用户在区块链上提供了更无缝的体验，有可能消除每次交互都花费 Gas 费用的需求。这种方法允许用户免费签署交易，并由第三方安全地执行该交易，该第三方支付 Gas 来完成交易。
 
-This demo app showcases how to implement meta-transactions using not just ERC-2771, but also explores other gasless transaction standards:
+Defender 提供了一种无缝体验和安全的方式，使用 Relayer 实现 gasless meta-transaction。这些 Relayer 代表用户处理发送交易，从而消除了用户管理私钥、交易签名、nonce 管理、Gas 估算和交易包含的需求。
 
-* ERC-2771: Secure Native Meta Transactions: This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[demo app, window=_blank] implements meta-transactions using https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Forwarder[ERC2771Forwarder, window=_blank] and https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Context[ERC2771Context, window=_blank] to separate `msg.sender` from the Relayer's address. All the user needs to do is sign a message using the account they would like to issue the transaction from. The signature is formed for the target contract and the data of the desired transaction, using the user's private key. This signing happens off-chain and costs no gas. The signature is passed to the Relayer so it can execute the transaction for the user (and pay the gas).
-* ERC-2612: Permit Function: This standard introduces a method for enabling gasless token approvals in ERC-20 tokens. Users can grant spending permission to a relayer service by signing a message instead of directly paying gas fees for the traditional "approve" function. This allows the relayer to handle token approvals on the user's behalf.
-* ERC-3009: Transfer with Authorization: This standard facilitates gasless token transfers through off-chain authorizations. Users sign messages authorizing specific token transfers, which can then be submitted to the blockchain by anyone, including a relayer service.
+此演示应用程序展示了如何不仅使用 ERC-2771 实现 meta-transaction，还探索了其他 gasless 交易标准：
 
-A gasless meta-transaction relay can be easily and securely implemented using Defender with xref::module/relayers.adoc[Relayers], which allow you to send transactions easily without needing to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
+* ERC-2771：安全的原生 Meta Transaction：此 https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[演示应用程序，window=_blank] 使用 https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Forwarder[ERC2771Forwarder, window=_blank] 和 https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Context[ERC2771Context, window=_blank] 实现 meta-transaction，以将 `msg.sender` 与 Relayer 的地址分开。用户只需使用他们想要从中发出交易的帐户签署消息。使用用户的私钥为目标合约和所需交易的数据形成签名。此签名在链下进行，不花费任何 Gas。签名被传递给 Relayer，以便它可以为用户执行交易（并支付 Gas）。
+* ERC-2612：Permit 函数：此标准引入了一种用于在 ERC-20 token 中启用 gasless token 批准的方法。用户可以通过签署消息而不是直接为传统的 "approve" 函数支付 Gas 费用来向 relayer 服务授予支出权限。这允许 relayer 代表用户处理 token 批准。
+* ERC-3009：带授权的转移：此标准通过链下授权促进 gasless token 转移。用户签署消息以授权特定的 token 转移，然后任何人（包括 relayer 服务）都可以将这些消息提交到区块链。
 
+可以使用 Defender 和 xref::module/relayers.adoc[Relayer] 轻松安全地实现 gasless meta-transaction 中继，这使您可以轻松发送交易，而无需管理私钥、交易签名、nonce 管理、Gas 估算和交易包含。
 
 [[pre-requisites]]
-== Pre-requisites
+== 先决条件
 
-* OpenZeppelin Defender account.
-* https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git, window=_blank] and https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable[Yarn, window=_blank] installed
+* OpenZeppelin Defender 帐户。
+* 安装 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git, window=_blank] 和 https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable[Yarn, window=_blank]
 
 [[erc-2771]]
-== 1. ERC-2771: Secure Native Meta Transactions
+== 1. ERC-2771：安全的原生 Meta Transaction
 
-You can view the live https://defender-metatx-workshop-demo.openzeppelin.com/[demo app, window=_blank] here. It accepts registrations directly if the user has the available funds to pay for the transaction, otherwise the data is sent as a meta-transaction.
+您可以在此处查看实时 https://defender-metatx-workshop-demo.openzeppelin.com/[演示应用程序, window=_blank]。如果用户有可用资金来支付交易，它会直接接受注册，否则数据将作为 meta-transaction 发送。
 
-In the example code, the functionality of the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/SimpleRegistry.sol[`SimpleRegistry` contract, window=_blank] is to take a string and store it. The contract's https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[meta-transaction implementation, window=_blank] achieves the same result by decoupling the signer from the sender of the transaction.
+在示例代码中，https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/SimpleRegistry.sol[`SimpleRegistry` 合约, window=_blank] 的功能是获取一个字符串并存储它。合约的 https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[meta-transaction 实现, window=_blank] 通过将签名者与交易的发送者分离来实现相同的结果。
 
-When comparing the code, note the meta-transaction's use of `_msgSender()` as opposed to the SimpleRegistry's use of `msg.sender`. By extending from `ERC2771Context` and `ERC2771Forwarder`, the contract becomes meta-transaction capable.
+在比较代码时，请注意 meta-transaction 使用 `_msgSender()` 而不是 SimpleRegistry 使用的 `msg.sender`。通过从 `ERC2771Context` 和 `ERC2771Forwarder` 扩展，合约变得具有 meta-transaction 功能。
 
-NOTE: All OpenZeppelin contracts are compatible with the use of `_msgSender()`.
+NOTE: 所有 OpenZeppelin 合约都与使用 `_msgSender()` 兼容。
 
-The second fundamental change between the two contracts is the need for the meta-transaction contract (https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[Registry, window=_blank]) to specify the address of the trusted forwarder, which in this case is the address of the `ERC2771Forwarder` contract.
+两个合约之间的第二个根本变化是 meta-transaction 合约（https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[Registry, window=_blank]）需要指定受信任转发器的地址，在本例中，它是 `ERC2771Forwarder` 合约的地址。
 
 [[configure-project]]
-=== 1.1 Configure the project
+=== 1.1 配置项目
 
-First, fork the repository and navigate to the directory for this guide. There, install the dependencies with `yarn`:
+首先，fork 存储库并导航到本指南的目录。在那里，使用 `yarn` 安装依赖项：
 
 ```
 $ git clone https://github.com/openzeppelin/workshops.git
@@ -42,7 +42,7 @@ $ cd workshops/25-defender-metatx-api/
 $ yarn
 ```
 
-Create a `.env` file in the project root and supply an API key and secret from the https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API keys page, window=_blank]. A private key will be used for local testing but the Relayer is used for actual contract deployment.
+在项目根目录中创建一个 `.env` 文件，并从 https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API 密钥页面, window=_blank] 提供 API 密钥和密钥。私钥将用于本地测试，但 Relayer 用于实际的合约部署。
 
 ```
 PRIVATE_KEY="0xabc"
@@ -51,15 +51,15 @@ API_SECRET="abc"
 ```
 
 [[create-relayer]]
-=== 1.2 Create Relayer
+=== 1.2 创建 Relayer
 
-Run the Relayer creation script, which will use the Defender API parameters in the `.env` file:
+运行 Relayer 创建脚本，该脚本将使用 `.env` 文件中的 Defender API 参数：
 
 ```
 $ yarn create-relay
 ```
 
-The Relayer is created using the `defender-sdk` package:
+Relayer 是使用 `defender-sdk` 包创建的：
 
 [source,jsx]
 ----
@@ -77,12 +77,12 @@ const relayer = await client.relay.create(requestParams);
 // ...
 ----
 
-After creating it, the script will fetch the Relayer ID and create an API key and secret set to send transacitons via it. The Relayer ID is automatically stored in the `relayer.json` file, and its API paramteres in the `.env` file.
+创建之后，脚本将获取 Relayer ID 并创建一个 API 密钥和密钥集以通过它发送交易。Relayer ID 自动存储在 `relayer.json` 文件中，其 API 参数存储在 `.env` 文件中。
 
 [[compile-using-hardhat]]
-=== 1.3 Compile the Contract Using Hardhat
+=== 1.3 使用 Hardhat 编译合约
 
-Within the `contracts` directory, you can find the both the `SimpleRegistry.sol` and `Registry.sol` contracts. The former contract contains the meta-transaction functionality, as you can see here:
+在 `contracts` 目录中，您可以找到 `SimpleRegistry.sol` 和 `Registry.sol` 合约。前者合约包含 meta-transaction 功能，您可以在此处看到：
 
 [source,jsx]
 ----
@@ -112,14 +112,14 @@ contract Registry is ERC2771Context {
 }
 ----
 
-Run `npx hardhat compile` to compile it for deployment.
+运行 `npx hardhat compile` 来编译它以进行部署。
 
 [[deploy-using-relayer]]
-=== 1.4 Deploy Using Relayer
+=== 1.4 使用 Relayer 部署
 
-You can easily deploy a compiled smart contract without handling a private key by using the Relayer client from the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] package.
+您可以使用来自 https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] 包的 Relayer 客户端轻松部署编译后的智能合约，而无需处理私钥。
 
-The `deploy.js` script pulls the Relayer's credentials from the local `.env` file along with the artifacts for the `Registry` and `ERC2771Forwarder` contracts and uses ethers.js to deploy. The relevant addresses of these contracts are saved to the local file `deploy.json`.
+`deploy.js` 脚本从本地 `.env` 文件中提取 Relayer 的凭据以及 `Registry` 和 `ERC2771Forwarder` 合约的工件，并使用 ethers.js 进行部署。这些合约的相关地址将保存到本地文件 `deploy.json` 中。
 
 [source,jsx]
 ----
@@ -143,22 +143,22 @@ const registry = await registryFactory.deploy(forwarder.address)
 // ...
 ----
 
-Run this script with `yarn deploy`.
+使用 `yarn deploy` 运行此脚本。
 
-After the contracts are deployed, the Relayer key and secret can be safely deleted; they are not needed unless additional local testing is desired. The contract addresses will be saved in the `deploy.json` file.
+合约部署后，可以安全地删除 Relayer 密钥和密钥；除非需要额外的本地测试，否则不需要它们。合约地址将保存在 `deploy.json` 文件中。
 
 [[create-action]]
-=== 1.5 Create Action via API
+=== 1.5 通过 API 创建 Action
 
-The demo app uses an xref:module/actions.adoc[Action] to supply the necessary logic for telling the Relayer to send a transaction to the `Forwarder` contract, supplying the signer's address. The Action will get triggered by each call to its webhook from the app.
+演示应用程序使用 xref:module/actions.adoc[Action] 来提供必要的逻辑，以告知 Relayer 向 `Forwarder` 合约发送交易，并提供签名者的地址。每次从应用程序调用其 webhook 时，都会触发 Action。
 
-Due to the tight relationship between components, the Relayer credentials are securely available to the Action simply by instantiating a new provider and signer.
+由于组件之间的紧密关系，Relayer 凭据可以通过实例化新的 provider 和 signer 安全地用于 Action。
 
-The position of the Action here is crucial -- only the Action's webhook is exposed to the frontend. The Action's role is to execute the transaction according to the logic assigned to it: if the user has funds, they pay for the transaction. If not, the Relayer pays for the transaction.
+Action 在这里的位置至关重要 -- 只有 Action 的 webhook 暴露给前端。Action 的作用是根据分配给它的逻辑执行交易：如果用户有资金，他们会支付交易费用。如果不是，Relayer 会支付交易费用。
 
-It's important that the Relayer's API key and secret are insulated from the frontend. If the Relayer keys were exposed, anyone could potentially use the Relayer to send any transaction they wanted. 
+重要的是，Relayer 的 API 密钥和密钥与前端隔离。如果 Relayer 密钥暴露，任何人都有可能使用 Relayer 发送他们想要的任何交易。
 
-Here is the code for the Action, found in `action/index.js`:
+这是 Action 的代码，可以在 `action/index.js` 中找到：
 
 [source,jsx]
 ----
@@ -209,9 +209,9 @@ module.exports = {
 }
 ----
 
-Note that the Action code must include an `index.js` file that exports a handler entrypoint. If the code relies on any external dependencies (such as an imported ABI) it's necessary to bundle the Action using webpack, rollup, etc. You can create an Action via https://defender.openzeppelin.com/v2/#/actions/automatic/new?[Defender, window=_blank] or with the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] package.
+请注意，Action 代码必须包含一个 `index.js` 文件，该文件导出一个 handler 入口点。如果代码依赖于任何外部依赖项（例如导入的 ABI），则需要使用 webpack、rollup 等捆绑 Action。您可以通过 https://defender.openzeppelin.com/v2/#/actions/automatic/new?[Defender, window=_blank] 或使用 https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] 包创建 Action。
 
-Run `yarn create-action` to compile the code and create the Action with the bundled code via the SDK's `action.create()` method:
+运行 `yarn create-action` 以编译代码并通过 SDK 的 `action.create()` 方法使用捆绑的代码创建 Action：
 
 [source,jsx]
 ----
@@ -228,20 +228,20 @@ const { actionId } = await client.action.create({
 // ...
 ----
 
-Head to https://defender.openzeppelin.com/v2/#/actions/automatic[Defender Actions, window=_blank] and copy the Actions's webhook so that you can test functionality and connect the app to the Action for relaying meta-transactions.
+前往 https://defender.openzeppelin.com/v2/#/actions/automatic[Defender Actions, window=_blank] 并复制 Actions 的 webhook，以便您可以测试功能并将应用程序连接到 Action 以中继 meta-transaction。
 
-image::guide-meta-tx-copy-webhook.png[Copy Webhook]
+image::guide-meta-tx-copy-webhook.png[复制 Webhook]
 
-Save the Action webhook in your `.env` file as `WEBHOOK_URL` and in the /app `.env` file as the `REACT_APP_WEBHOOK_URL`. 
+将 Action webhook 保存在 `.env` 文件中作为 `WEBHOOK_URL`，并在 /app `.env` 文件中作为 `REACT_APP_WEBHOOK_URL`。
 
-Test the meta-transaction's functionality with `yarn sign` followed by `yarn invoke`.
+使用 `yarn sign` 后跟 `yarn invoke` 测试 meta-transaction 的功能。
 
 [[create-web-app]]
-=== 1.6 Create Web App
+=== 1.6 创建 Web 应用程序
 
-The key building blocks have been laid, so next it is a matter of crafting a web application that makes use of these components.
+关键构建块已经准备好，因此接下来是制作一个利用这些组件的 Web 应用程序。
 
-You can see the details of this relationship in the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/app/src/eth/register.js[`register.js`, window=_blank] file. The user's transaction request is sent to the Relayer by way of the Action's webhook, and this executes the Actions's logic given the parameters supplied by the application. Note that the signer's nonce is incremented from the transaction. 
+您可以在 https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/app/src/eth/register.js[`register.js`, window=_blank] 文件中查看此关系的详细信息。用户的交易请求通过 Action 的 webhook 发送到 Relayer，这会根据应用程序提供的参数执行 Actions 的逻辑。请注意，签名者的 nonce 从交易中递增。
 
 [source,jsx]
 ----
@@ -294,16 +294,16 @@ export async function registerName(registry, provider, name) {
 ----
 
 [[permit]]
-== 2. ERC-2612: Permit Function
-EIP-2612 introduces the https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Permit[permit, window=_blank] function, a tool for enabling gasless transactions in ERC-20 tokens. By extending the ERC-20 interface with a method allowing users to modify their allowance via a signed message instead of the approve function, this standard empowers users to approve tokens without directly paying gas fees. This standard enables relayer services to execute transactions on behalf of users by paying gas fees, while the user only needs to sign a message.
+== 2. ERC-2612：Permit 函数
+EIP-2612 引入了 https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Permit[permit, window=_blank] 函数，这是一种在 ERC-20 token 中启用 gasless 交易的工具。通过扩展 ERC-20 接口，使用户可以通过签名消息而不是 approve 函数来修改其津贴，此标准使用户无需直接支付 Gas 费用即可批准 token。此标准使 relayer 服务能够通过支付 Gas 费用来代表用户执行交易，而用户只需签署消息。
 ```
 function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external
 ```
-This function modifies the `allowance` of the spender for the owner's tokens, based on a signed approval. The signature is split into `v`, `r`, and `s` components for verification.
+此函数根据已签名的批准修改所有者的 token 的 spender 的 `allowance`。签名分为 `v`、`r` 和 `s` 组件以进行验证。
 
 [[eip712-signing]]
-=== 2.1 EIP-712 signing front-end
-How it uses EIP-712 for structured data signing: EIP-2612 leverages EIP-712 for creating and signing structured data. This provides a human-readable representation of the data being signed, enhancing security and user experience. Example code:
+=== 2.1 EIP-712 签名前端
+它如何使用 EIP-712 进行结构化数据签名：EIP-2612 利用 EIP-712 来创建和签署结构化数据。这提供了正在签名的数据的人工可读表示，从而增强了安全性和用户体验。示例代码：
 
 [source,jsx]
 ----
@@ -355,8 +355,8 @@ How it uses EIP-712 for structured data signing: EIP-2612 leverages EIP-712 for 
   });
 ----
 [[relayer-service]]
-=== 2.2 Relayer service
-Create a back-end service to interact with Defender Relayers. The service will initially require the setup of https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers]. Once configured, it will handle incoming requests from the front-end and forward the signed EIP-712 message to the contract. The service will utilize the Relayers to execute the contract's permit function, allowing the Relayer to cover gas fees. The service will facilitate token approvals for end-users, enabling subsequent operations with the Relayers, such as transferring tokens to different wallets. 
+=== 2.2 Relayer 服务
+创建一个后端服务以与 Defender Relayer 交互。该服务最初需要设置 https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayer]。配置完成后，它将处理来自前端的传入请求，并将签名的 EIP-712 消息转发到合约。该服务将利用 Relayer 执行合约的 permit 函数，从而允许 Relayer 承担 Gas 费用。该服务将促进最终用户的 token 批准，从而使 Relayer 能够进行后续操作，例如将 token 转移到不同的钱包。
 [source,jsx]
 ----
 import { ethers, defender } from "hardhat";
@@ -395,15 +395,15 @@ await transferTx.wait();
 ----
 
 [[transfer-with-authorization]]
-== 3. ERC-3009: Transfer with Authorization
-ERC-3009 introduces a standard for gasless token transfers through off-chain authorizations. This standard allows users to sign messages authorizing token transfers, which can then be submitted to on-chain by anyone, through the https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers] service. Comparison with EIP-2612 (signing differences):
-While EIP-2612 focuses on approvals, ERC-3009 directly authorizes transfers. The key differences are:
+== 3. ERC-3009：使用授权转移
+ERC-3009 引入了一种通过链下授权进行 gasless token 转移的标准。此标准允许用户签署授权 token 转移的消息，然后任何人都可以通过 https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayer] 服务将其提交到链上。与 EIP-2612 的比较（签名差异）：
+虽然 EIP-2612 侧重于批准，但 ERC-3009 直接授权转移。主要区别在于：
 
-* Purpose: ERC-3009 authorizes specific transfers, while EIP-2612 approves an allowance.
-* Flexibility: ERC-3009 doesn't require EIP-712 for structured data signing, offering more flexibility in message formatting.
-* Time Window: ERC-3009 includes validAfter and validBefore parameters, allowing for more precise control over when the authorization can be executed.
+* 目的：ERC-3009 授权特定转移，而 EIP-2612 批准津贴。
+* 灵活性：ERC-3009 不需要 EIP-712 用于结构化数据签名，从而在消息格式方面提供更大的灵活性。
+* 时间窗口：ERC-3009 包括 validAfter 和 validBefore 参数，从而可以更精确地控制何时可以执行授权。
 
-The function definition:
+函数定义：
 ```
 function transferWithAuthorization(
     address from,
@@ -419,8 +419,8 @@ function transferWithAuthorization(
 ```
 
 [[erc2009-signing]]
-=== 3.1 EIP-712 signing front-end
-Similar to ERC-2612, you can use the EIP-712 format to sign messages on the front-end as the end user. While ERC-3009 offers more flexibility for front-end message signing, this example adheres to the EIP-712 standard. Example code:
+=== 3.1 EIP-712 签名前端
+与 ERC-2612 类似，您可以使用 EIP-712 格式在前端以最终用户的身份签署消息。虽然 ERC-3009 为前端消息签名提供了更大的灵活性，但此示例坚持 EIP-712 标准。示例代码：
 
 [source,jsx]
 ----
@@ -479,8 +479,8 @@ Similar to ERC-2612, you can use the EIP-712 format to sign messages on the fron
     headers: { 'Content-Type': 'application/json' },
   });
 ----
-=== 3.2 Relayer service
-Create a back-end service to interact with Defender Relayers. The service will initially require the setup of Defender Relayers. Once configured, it will handle incoming requests from the front-end and forward the signed messages to the contract. The service will utilize the Relayers to execute the contract's `transferWithAuthorization` function, allowing the Relayer to cover gas fees. The service will facilitate the transfer of tokens for the end-users.
+=== 3.2 Relayer 服务
+创建一个后端服务以与 Defender Relayer 交互。该服务最初需要设置 Defender Relayer。配置完成后，它将处理来自前端的传入请求，并将签名消息转发到合约。该服务将利用 Relayer 执行合约的 `transferWithAuthorization` 函数，从而允许 Relayer 承担 Gas 费用。该服务将促进最终用户的 token 转移。
 [source,jsx]
 ----
 import { ethers, defender } from "hardhat";
@@ -515,9 +515,9 @@ console.log("TransferWithAuthorization executed!");
 ----
 
 [[try-app]]
-== Try the app
+== 尝试应用程序
 
-Install the necessary dependencies and run the app.
+安装必要的依赖项并运行应用程序。
 
 ```
 $ cd app
@@ -525,15 +525,15 @@ $ yarn
 $ yarn start
 ```
 
-1. Open app: http://localhost:3000/[http://localhost:3000/, window=_blank]
-2. Change to Sepolia network in Metamask
-3. Enter a name to register and sign the meta-transaction in Metamask
-4. Your name will be registered, showing the address that created the meta-transaction and the name.
+1. 打开应用程序：http://localhost:3000/[http://localhost:3000/, window=_blank]
+2. 在 Metamask 中更改为 Sepolia 网络
+3. 输入一个名称以注册并在 Metamask 中签署 meta-transaction
+4. 您的姓名将被注册，显示创建 meta-transaction 的地址和姓名。
 
-Use the frontend to see it working for yourself! Compare what happens when you sign the registry with an account that has funds, and then try it with an account that has a zero ETH balance.
+使用前端来亲身体验！比较拥有资金的帐户注册表时会发生什么，然后尝试使用 ETH 余额为零的帐户进行注册。
 
 [[references]]
-== References
+== 参考资料
 
-* https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[Demo repo - Meta-Transaction Name Registry, window=_blank]
-* https://docs.openzeppelin.com/contracts/api/metatx[Documentation - Meta Transactions, window=_blank]
+* https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[演示存储库 - Meta-Transaction 名称注册表, window=_blank]
+* https://docs.openzeppelin.com/contracts/api/metatx[文档 - Meta Transactions, window=_blank]

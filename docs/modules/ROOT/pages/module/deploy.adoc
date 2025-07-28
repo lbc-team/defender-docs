@@ -1,80 +1,80 @@
 [[deploy]]
-= Deploy
+= 部署
 
-Deploy allows you to deploy and upgrade smart contracts across chains securely. You can prove that the code running on-chain matches the audited implementation and minimize crucial mistakes that can lead to losses or issues.
+通过部署，你可以安全地跨链部署和升级智能合约。你可以证明链上运行的代码与经过审计的实现相匹配，并最大限度地减少可能导致损失或问题的关键错误。
 
 [[use-cases]]
-== Use cases
+== 用例
 
-* Configure production and test environments with granularity over deployer addresses.
-* Pay gas for deployments automatically.
-* Ensure all smart contract deployments are verified on block explorers.
-* Manage deployments to multiple chains from a single place.
-* Automate multisig approval process for upgrades.
-* Fully compatible with CI/CD for automated releases.
-* Track the details and history for every deployment or upgrade.
+* 使用对部署者地址的粒度配置生产和测试环境。
+* 自动支付部署的 Gas 费用。
+* 确保所有智能合约部署都在区块浏览器上得到验证。
+* 从一个地方管理到多个链的部署。
+* 自动执行升级的多重签名批准流程。
+* 与 CI/CD 完全兼容，可实现自动化发布。
+* 跟踪每次部署或升级的详细信息和历史记录。
 
 [[environments]]
-== Environments
+== 环境
 
-Deploy is divided into production and test environments, with mainnet networks for the former and testnet networks for the latter. Each environment is associated with one or more networks according to its type of environment, which allows to separate test contracts from production safely. To facilitate the onboarding process, the setup for each environment is configured through a wizard, which swiftly walks you through the following steps.
+部署分为生产环境和测试环境，前者使用主网网络，后者使用测试网网络。每个环境根据其环境类型与一个或多个网络相关联，从而可以安全地将测试合约与生产合约分开。为了方便入门过程，每个环境的设置都通过向导进行配置，该向导会迅速引导你完成以下步骤。
 
 [[wizard]]
-=== Wizard
+=== 向导
 
 [[wizard-1]]
-==== Step 1: Networks
+==== 步骤 1：网络
 
-In the first step, you select the networks to use. Deploy supports multi-chain deployments, allowing users to deploy contracts to the same addresses across multiple networks. You can add or remove networks at any time through the environment page.
+在第一步中，你选择要使用的网络。部署支持多链部署，允许用户将合约部署到跨多个网络的相同地址。你可以随时 через 环境页面添加或删除网络。
 
-NOTE: To maintain the best security practices, the wizard will only show networks according to the type of environment chosen to prevent mixing networks.
+NOTE: 为了保持最佳的安全实践，向导只会根据所选环境的类型显示网络，以防止混合网络。
 
 [[wizard-2]]
-==== Step 2: Deploying
+==== 步骤 2：部署
 
-In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:settings.adoc#approval-processes[here].
+在此步骤中，用户为每个网络选择默认的批准流程。与此批准流程关联的资源将用于支付和执行部署交易。如果你没有网络的批准流程，向导将允许你创建 Relayer、Safe 或 EOA（"外部拥有的帐户"）类型的流程。你可以在 xref:settings.adoc#approval-processes[此处]{里]了解有关批准流程的更多信息。
 
 [[wizard-3]]
-==== Step 3: Upgrading
+==== 步骤 3：升级
 
-This last step is optional but recommended if you plan to deploy upgradeable contracts. Here you choose the approval process for upgrades for each network. You can find a list of supported processes xref:settings.adoc#approval-processes[here].
+最后一步是可选的，但如果你计划部署可升级的合约，则建议使用。在这里，你为每个网络的升级选择批准流程。你可以在 xref:settings.adoc#approval-processes[此处]{里]找到受支持流程的列表。
 
 [[wizard-4]]
 
 [[environment]]
-== Environment Page
+== 环境页面
 
-Once inside an environment, you can see the configuration and activity of deployments within it.
+进入环境后，你可以查看其中的配置和部署活动。
 
 [[configuration]]
-=== Configuration
+=== 配置
 
-You can edit the configuration of any network within the environment. To do so, click the edit button to reach the configuration page, where you can add or remove a network and change the default approval processes. We use system block explorer API keys to automatically verify contracts on Etherscan. You can manage your own keys in the configuration page.
+你可以编辑环境中的任何网络的配置。为此，请单击编辑按钮进入配置页面，你可以在其中添加或删除网络并更改默认的批准流程。我们使用系统区块浏览器 API 密钥来自动验证 Etherscan 上的合约。你可以在配置页面中管理自己的密钥。
 
 [[history]]
-=== History
+=== 历史记录
 
-The history table shows the activity within the environment, allowing you to check the status of deployments or upgrades. There are three possible statuses:
+历史记录表显示环境中的活动，允许你检查部署或升级的状态。有三种可能的状态：
 
-* `COMPLETE`: The deployment has been successfully executed in the network.
-* `PENDING`: The upgrade is waiting for approval.
-* `FAILED`: The deployment has failed. Make sure the relayer or EOA associated to the approval process has enough funds and that the smart contract is valid.
+* `COMPLETE`: 部署已在网络中成功执行。
+* `PENDING`: 升级正在等待批准。
+* `FAILED`: 部署失败。确保与批准流程关联的 Relayer 或 EOA 拥有足够的资金，并且智能合约有效。
 
 [[deployments]]
-== Deploying and Upgrading
+== 部署和升级
 
-After an environment is configured, you can use it for deployments and upgrades. To do so, we provide an https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[API, window=_blank], and https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat, window=_blank] and https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry, window=_blank] plugins. The Deploy API is recommended for custom projects that don't use Hardhat or Foundry. On the other hand, the plugins are extremely easy to use as they only require a few lines of code to implement.
+配置完环境后，你可以将其用于部署和升级。为此，我们提供了一个 https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[API, window=_blank]，以及 https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat, window=_blank] 和 https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry, window=_blank] 插件。建议将 Deploy API 用于不使用 Hardhat 或 Foundry 的自定义项目。另一方面，这些插件非常易于使用，因为它们只需要几行代码即可实现。
 
-Defender will use the default approve process for deployments and upgrades. However, the Hardhat and Foundry plugins allow you to specify a different approval process for upgrades. If a block explorer API key is not provided, Defender will try to verify the contracts with the default key. Otherwise, it will use the one provided. 
+Defender 将使用默认的批准流程进行部署和升级。但是，Hardhat 和 Foundry 插件允许你为升级指定不同的批准流程。如果未提供区块浏览器 API 密钥，Defender 将尝试使用默认密钥验证合约。否则，它将使用提供的密钥。
 
-NOTE: We provide a quickstart tutorial to deploy and upgrade a smart contract using Defender with Hardhat and Foundry. Check it out xref:tutorial/deploy.adoc[here]!
+NOTE: 我们提供了一个快速入门教程，用于使用 Defender 与 Hardhat 和 Foundry 部署和升级智能合约。在 xref:tutorial/deploy.adoc[此处]{里]查看！
 
-WARNING: Using `CREATE2` may affect `msg.sender` behavior; see documentation for details xref:tutorial/deploy.adoc#deploy-caveat[here]!
+WARNING: 使用 `CREATE2` 可能会影响 `msg.sender` 的行为；有关详细信息，请参阅 xref:tutorial/deploy.adoc#deploy-caveat[此处]{里]的文档！
 
 [[metadata]]
-== Metadata
+== 元数据
 
-To identify, tag, or classify deployments, you can use the `metadata` field, which includes properties like `commitHash`, `tag`, or any custom property that suits your use case.
+为了识别、标记或分类部署，你可以使用 `metadata` 字段，其中包含诸如 `commitHash`、`tag` 或适合你用例的任何自定义属性之类的属性。
 
 ```js
   const client = new Defender({
@@ -93,6 +93,6 @@ To identify, tag, or classify deployments, you can use the `metadata` field, whi
   });
 ```
 
-Once the deployment is submitted, these metadata fields will be displayed in the Defender UI under _Metadata_, formatted in JSON.
+提交部署后，这些元数据字段将以 JSON 格式显示在 Defender UI 的 _Metadata_ 下。
 
-image::deploy-metadata-1.0.png[Deploy Metadata]
+image::deploy-metadata-1.0.png[部署元数据]

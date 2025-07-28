@@ -1,72 +1,71 @@
-= Fireblocks integration within Defender
+:page-title: Defender 中的 Fireblocks 集成
 
-You can directly submit transactions to Fireblocks from Defender. Fireblocks is a robust asset management solution that utilizes multi-party computation to secure all treasury operations, ensuring enhanced security and efficiency.
-
+您可以直接从 Defender 向 Fireblocks 提交交易。Fireblocks 是一种强大的资产管理解决方案，它利用多方计算来保护所有资金库操作，从而确保更高的安全性和效率。
 
 [[pre-requisites]]
-== Pre-requisites
+== 前提条件
 
-* If you want leverage Fireblocks within Defender you can contact the OZ team to enable to Fireblocks integration for your account.
+* 如果您想在 Defender 中使用 Fireblocks，您可以联系 OZ 团队，为您的帐户启用 Fireblocks 集成。
 
 [[generate-csr-file]]
-== 1. Generate CSR file
-. To use this feature, navigate to the *Settings* page and click on *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account, go to the *Integrations* tab, which is located next to the *All Approval Process* tab.
+== 1. 生成 CSR 文件
+. 要使用此功能，请导航到*设置*页面，然后单击侧栏中的*审批流程*。如果您的帐户已启用 Fireblocks 集成，请转到*集成*选项卡，该选项卡位于*所有审批流程*选项卡旁边。
 +
-image::guide-fireblocks-integration-tab.png[Integration tab]
+image::guide-fireblocks-integration-tab.png[集成选项卡]
 +
-. Click on *Generate new API Key for Fireblocks*. Here, you will need to generate a Certificate Signing Request (CSR), which will be used within the Fireblocks platform to enable this feature and create API keys.
+. 点击*为 Fireblocks 生成新的 API 密钥*。在这里，您需要生成一个证书签名请求 (CSR)，该请求将在 Fireblocks 平台中使用，以启用此功能并创建 API 密钥。
 +
-image::guide-fireblocks-csr-modal.png[CSR Generation Modal]
-This will trigger Defender to generate a public/private key-pair. The CSR is then generated and signed with the private key and securely stored to prevent leakage.
+image::guide-fireblocks-csr-modal.png[CSR 生成模态框]
+这将触发 Defender 生成一个公钥/私钥对。然后生成 CSR 并使用私钥签名，并安全地存储，以防止泄露。
 
 [[create-fireblocks-api-user]]
-== 2. Create Fireblocks API user
-. First, you will need to import the CSR within the Fireblocks UI when creating a new API user. Note that the API user will require any role that can _at least_ initiate transactions, e.g. Signer.
+== 2. 创建 Fireblocks API 用户
+. 首先，您需要在创建新的 API 用户时，在 Fireblocks UI 中导入 CSR。请注意，API 用户将需要任何_至少_可以启动交易的角色，例如，签名者。
 +
-image::guide-fireblocks-add-user.png[Create API user, width=400]
+image::guide-fireblocks-add-user.png[创建 API 用户, width=400]
 +
-. Once the API user has been created and approved by the Fireblocks workspace owner, copy the Fireblocks API key and navigate to the Fireblocks API Keys page. You should see an incomplete API key setup, which you can then edit and complete with the Fireblocks API key. Note that you will not be able to generate a new CSR file unless you complete the setup or delete the previous incomplete one.
+. 创建 API 用户并经 Fireblocks 工作区所有者批准后，复制 Fireblocks API 密钥并导航到 Fireblocks API 密钥页面。您应该会看到一个不完整的 API 密钥设置，您可以编辑并使用 Fireblocks API 密钥完成该设置。请注意，除非您完成设置或删除之前不完整的设置，否则您将无法生成新的 CSR 文件。
 +
-image::guide-fireblocks-api-key.png[API Key generated]
+image::guide-fireblocks-api-key.png[API 密钥已生成]
 +
 
 
 [[setup-defender-integration]]
-== 3. Connect Fireblocks with Defender
-. First, navigate to the *Settings* page subsequently click *Approval Process* in the sidebar, the navigate to the *Integrations* tab. Over here click on the *Paste API Key from Fireblocks*.
+== 3. 将 Fireblocks 与 Defender 连接
+. 首先，导航到*设置*页面，然后单击侧栏中的*审批流程*，然后导航到*集成*选项卡。在这里，单击*从 Fireblocks 粘贴 API 密钥*。
 +
-image::guide-fireblock-paste-api-key.png[Insert API Key Defender]
+image::guide-fireblock-paste-api-key.png[插入 API 密钥 Defender]
 +
-. Insert the Fireblocks API key.
+. 插入 Fireblocks API 密钥。
 +
-image::guide-fireblocks-edit-api-key.png[Insert API key, width=600]
+image::guide-fireblocks-edit-api-key.png[插入 API 密钥, width=600]
 +
-NOTE: To submit a transaction to Fireblocks via Defender, ensure the correct permissions are set in Fireblocks, such as the relevant whitelisted addresses and the Transaction Access Policy (TAP). For example, you might need to whitelist the contract address you wish to interact with, as well as ensure that the newly created API user is allowed to interact with the relevant account and vaults (defined in the TAP).
+NOTE: 要通过 Defender 将交易提交到 Fireblocks，请确保在 Fireblocks 中设置了正确的权限，例如相关的白名单地址和交易访问策略 (TAP)。 例如，您可能需要将您希望与之交互的合约地址列入白名单，并确保新创建的 API 用户被允许与相关的帐户和资金库进行交互（在 TAP 中定义）。
 
 [[create-approval-process]]
-== 4. Create Approval Process
+== 4. 创建审批流程
 
 [[create-approval-process-automatic]]
-=== Pick a Fireblocks Wallet from the List
-You can pick a Fireblocks wallet from the list of available wallets by just providing the Fireblocks API key. We will attempt to fetch the list of available vaults and wallets from Fireblocks.
+=== 从列表中选择一个 Fireblocks 钱包
+您可以通过仅提供 Fireblocks API 密钥从可用钱包列表中选择一个 Fireblocks 钱包。我们将尝试从 Fireblocks 获取可用资金库和钱包的列表。
 
-image::guide-fireblocks-approval-process-automatic.png[Create Defender Approval Process]
+image::guide-fireblocks-approval-process-automatic.png[创建 Defender 审批流程]
 
 [[create-approval-process-manual]]
-=== Manually Add a Fireblocks Wallet
-In some rare cases you might not see your wallets in the list that is automatically fetched from Fireblocks. In that case you can select the `Manual` option and type in the required information manually.
+=== 手动添加 Fireblocks 钱包
+在一些罕见的情况下，您可能无法在从 Fireblocks 自动获取的列表中看到您的钱包。 在这种情况下，您可以选择“手动”选项并手动输入所需的信息。
 
-image::guide-fireblocks-approval-process-manual.png[Create Defender Approval Process]
+image::guide-fireblocks-approval-process-manual.png[创建 Defender 审批流程]
 
-To get your **Vault ID**, head to Fireblocks console, click on the vault you are interested in and copy the ID (last number) from the URL.
+要获取您的 **Vault ID**，请前往 Fireblocks 控制台，单击您感兴趣的资金库，然后从 URL 中复制 ID（最后一个数字）。
 
 image::guide-fireblocks-vault-id.png[Vault ID]
 
-To get your **Asset Wallet Address**, head to Fireblocks console, click on the asset you are interested in and copy the address (starts with 0x).
+要获取您的 **Asset Wallet Address**，请前往 Fireblocks 控制台，单击您感兴趣的资产，然后复制地址（以 0x 开头）。
 
-image::guide-fireblocks-asset-wallet-address.png[Asset Wallet Address]
+image::guide-fireblocks-asset-wallet-address.png[资产钱包地址]
 
 
 [[approve-reject-transaction]]
-== 5. Approve or Reject a Transaction
-Note, Defender will not allow you to approve or reject a transaction from the UI. This is only possible via the Fireblocks mobile app or console.
+== 5. 批准或拒绝交易
+请注意，Defender 不允许您从 UI 批准或拒绝交易。这只能通过 Fireblocks 移动应用程序或控制台实现。

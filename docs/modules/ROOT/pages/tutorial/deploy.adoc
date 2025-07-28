@@ -1,75 +1,81 @@
-# Securely deploy and upgrade a smart contract
+= 安全地部署和升级智能合约
 
-Defender allows you to easily deploy and upgrade smart contracts across chains while maintaining the best security practices. This tutorial shows how to use a xref::settings.adoc#relayers[Relayer] to deploy a contract called Box and upgrade it with the UUPS proxy pattern via a https://safe.global/[Safe wallet, window=_blank] (multisig).
+Defender 允许你轻松地跨链部署和升级智能合约，同时保持最佳安全实践。本教程展示了如何使用 xref::settings.adoc#relayers[Relayer] 部署一个名为 Box 的合约，并通过 https://safe.global/[Safe 钱包, window=_blank] (多重签名) 使用 UUPS 代理模式对其进行升级。
 
 [[pre-requisites]]
-== Pre-requisites
+== 前提条件
 
-* OpenZeppelin Defender account.
-* https://nodejs.org/en[NodeJS and NPM, window=_blank]
-* Any IDE or text editor
-* Web browser with Metamask (or any other compatible wallet), funded with Sepolia ETH.
+* OpenZeppelin Defender 账户。
+* https://nodejs.org/en[NodeJS 和 NPM, window=_blank]
+* 任何 IDE 或文本编辑器
+* 带有 Metamask (或任何其他兼容钱包) 的 Web 浏览器，并已充值 Sepolia ETH。
 
 [[configure]]
-== 1. Configure
+== 1. 配置
 
-=== Safe wallet
+=== Safe 钱包
 [[safe]]
 
-First, you need to create Safe wallet to manage the upgrade process. To do so, follow these steps:
+首先，你需要创建一个 Safe 钱包来管理升级过程。为此，请按照以下步骤操作：
 
-. Open the https://app.safe.global/welcome[Safe app, window=_blank] in a web browser and connect your wallet (make sure you are connected to the https://sepolia.etherscan.io/[Sepolia testnet, window=_blank]).
-. Click on *Create new Account* and follow the steps.
-. Note the address of the Safe wallet you created, you will need it later.
+. 在 Web 浏览器中打开 https://app.safe.global/welcome[Safe app, window=_blank] 并连接你的钱包 (确保你已连接到 https://sepolia.etherscan.io/[Sepolia 测试网, window=_blank])。
+. 点击 *创建新账户* 并按照步骤操作。
+. 记下你创建的 Safe 钱包的地址，稍后你需要它。
 +
-image::tutorial-deploy-safe.png[Deploy safe copy address]
+image::tutorial-deploy-safe.png[部署 safe 复制地址]
 
-=== Environment setup
+=== 环境设置
 [[environment-setup]]
 
-Now, you will create a Defender test environment with the Sepolia testnet, where you will deploy and upgrade the smart contracts. To do so, follow these steps:
+现在，你将使用 Sepolia 测试网创建一个 Defender 测试环境，你将在其中部署和升级智能合约。为此，请按照以下步骤操作：
 
-. Open https://defender.openzeppelin.com/v2/#/deploy[Defender Deploy, window=_blank].
-. Click on *Setup*.
+. 打开 https://defender.openzeppelin.com/v2/#/deploy[Defender Deploy, window=_blank]。
+. 点击 *设置*。
 +
-image::tutorial-deploy-environments.png[Deploy environments page]
+image::tutorial-deploy-environments.png[部署环境页面]
 
-. Pick *Sepolia* from the dropdown. 
+. 从下拉列表中选择 *Sepolia*。
 +
-image::tutorial-deploy-step1-wizard.png[Deploy networks wizard]
+image::tutorial-deploy-step1-wizard.png[部署网络向导]
 
-. Select the approval process associated with your funded relayer that will execute the deployments for the test environment. In case you don't already have an approval process, Defender will allow you to create one within the wizard flow. Relayers automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions. However, you may also choose to deploy using an EOA ("Externally Owned Account") or Safe wallet.
+. 选择与你已充值的 relayer 关联的审批流程，该流程将为测试环境执行部署。如果你还没有审批流程，Defender 将允许你在向导流程中创建一个。Relayer 自动执行 Gas 费用支付，并负责私钥安全存储、交易签名、nonce 管理、Gas 定价估计和重新提交。但是，你也可以选择使用 EOA (“外部拥有账户”) 或 Safe 钱包进行部署。
 +
-NOTE: Read more about relayers and how to manage them xref::settings.adoc#relayers[here].
-
-+
-image::tutorial-deploy-step2-wizard.png[Deploy block deploy wizard]
-
-. Click on the Approval Process field to expand the dropdown and click on *Create an Approval Process*. Enter "Safe Wallet Approval Process" as the name and expand the contract field to click on *Add contract*. Enter "Safe Wallet" as the name, paste the address of your Safe wallet you copied before and click on *Create*. Select "Safe Wallet" in the contract dropdown and click on *Continue*.
+[NOTE]
+====
+阅读更多关于 relayer 以及如何管理它们的信息 xref::settings.adoc#relayers[here]。
+====
 
 +
-image::tutorial-deploy-step3-wizard.png[Deploy block upgrade wizard]
+image::tutorial-deploy-step2-wizard.png[部署 block 部署向导]
 
-. Defender will generate an API Key and Secret for this environment, so copy and store them safely. Click on *Let's Deploy* to visit the environment page.
+. 点击审批流程字段以展开下拉列表，然后点击 *创建审批流程*。输入 "Safe Wallet Approval Process" 作为名称，然后展开合约字段以点击 *添加合约*。输入 "Safe Wallet" 作为名称，粘贴你之前复制的 Safe 钱包的地址，然后点击 *创建*。在合约下拉列表中选择 "Safe Wallet"，然后点击 *继续*。
 
 +
-image::tutorial-deploy-step4-wizard.png[Deploy block end wizard]
+image::tutorial-deploy-step3-wizard.png[部署 block 升级向导]
 
-NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
+. Defender 将为此环境生成 API 密钥和密钥，因此请安全地复制并存储它们。点击 *开始部署* 以访问环境页面。
 
-Defender supports both Hardhat and Foundry integrations. Pick the one that suits your project!
++
+image::tutorial-deploy-step4-wizard.png[部署 block 结束向导]
+
+[NOTE]
+====
+你配置了测试环境以便在不损失实际资金风险的情况下进行学习。设置生产环境的步骤相同。
+====
+
+Defender 支持 Hardhat 和 Foundry 集成。选择适合你项目的那个!
 
 [[foundry-setup]]
-=== Foundry setup
+=== Foundry 设置
 
-First, make sure you have https://book.getfoundry.sh/getting-started/installation[Foundry, window=_blank] installed. Follow these steps to create a new directory and project:
+首先，确保你已安装 https://book.getfoundry.sh/getting-started/installation[Foundry, window=_blank]。按照以下步骤创建一个新目录和项目：
 
-. Run the this command in your terminal:
+. 在终端中运行以下命令：
 +
 ```
 forge init deploy-tutorial && cd deploy-tutorial && forge install foundry-rs/forge-std && forge install OpenZeppelin/openzeppelin-foundry-upgrades && forge install OpenZeppelin/openzeppelin-contracts-upgradeable
 ```
-. Now, configure the `foundry.toml` file to enable ffi, ast, build info and storage layout:
+. 现在，配置 `foundry.toml` 文件以启用 ffi, ast, build info 和 storage layout：
 +
 [source,json]
 ----
@@ -79,7 +85,7 @@ ast = true
 build_info = true
 extra_output = ["storageLayout"]
 ----
-. Create a new file called `.env` in the project root directory and add the following content with the keys you received after creating the Defender environment:
+. 在项目根目录中创建一个名为 `.env` 的新文件，并添加以下内容，其中包含你在创建 Defender 环境后收到的密钥：
 +
 [source,json]
 ----
@@ -88,35 +94,35 @@ DEFENDER_SECRET = "<<YOUR_SECRET>>"
 ----
 
 [[hardhat-setup]]
-=== Hardhat setup
+=== Hardhat 设置
 
-First, make sure you have https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6. Follow these steps to create a new directory and project:
+首先，确保你已安装带有 ethers v6 的 https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank]。按照以下步骤创建一个新目录和项目：
 
-. Run the this command in your terminal:
+. 在终端中运行以下命令：
 +
 ```
 mkdir deploy-tutorial && cd deploy-tutorial && npx hardhat init
 ```
-. Hardhat will ask some questions to setup the configuration, so answer the following:
-+ 
-* What do you want to do: Create a *Typescript* project
-* Hardhat project root: _Leave it as it is_
-* Do you want to use .gitignore: Yes
-* Do you want to install this sample project's dependencies with npm: Yes
+. Hardhat 将询问一些问题来设置配置，所以回答以下问题：
++
+* 你想做什么：创建一个 *Typescript* 项目
+* Hardhat 项目根目录：_保持原样_
+* 你想使用 .gitignore 吗： 是
+* 你想使用 npm 安装此示例项目的依赖项吗：是
 
-. Hardhat will now install the tooling libraries, and create the project files for you. Afterwards, install the OpenZeppelin packages with the following command:
+. Hardhat 现在将安装工具库，并为你创建项目文件。之后，使用以下命令安装 OpenZeppelin 包：
 +
 ```
 npm i @openzeppelin/hardhat-upgrades @openzeppelin/contracts-upgradeable dotenv --save-dev
 ```
 
 +
-Once everything has been installed, your initial directory structure should look something like this:
+安装完成后，你的初始目录结构应如下所示：
 
 +
-image::tutorial-deploy-directory.png[Deploy directory structure,185,300]
+image::tutorial-deploy-directory.png[部署目录结构,185,300]
 
-. You now need to edit your Hardhat configuration to add the Defender keys and Sepolia network. Open the `hardhat.config.ts` file, and replace its content with the following code:
+. 现在你需要编辑你的 Hardhat 配置来添加 Defender 密钥和 Sepolia 网络。打开 `hardhat.config.ts` 文件，并将其内容替换为以下代码：
 +
 [source,jsx]
 ----
@@ -143,7 +149,7 @@ const config: HardhatUserConfig = {
 export default config;
 ----
 
-. Create a new file called `.env` in the project root directory and add the following content with the keys you received after creating the Defender environment:
+. 在项目根目录中创建一个名为 `.env` 的新文件，并添加以下内容，其中包含你在创建 Defender 环境后收到的密钥：
 +
 [source,json]
 ----
@@ -152,9 +158,9 @@ DEFENDER_SECRET = "<<YOUR_SECRET>>"
 ----
 
 [[deploy]]
-== 2. Deploy
+== 2. 部署
 
-. Create a new file called `Box.sol` inside the `contracts` or `src` directory and add the following code:
+. 在 `contracts` 或 `src` 目录中创建一个名为 `Box.sol` 的新文件，并添加以下代码：
 +
 [source,jsx]
 ----
@@ -198,16 +204,16 @@ contract Box is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 }
 ----
 +
-This is a contract that replicates a box, with three functions:
+这是一个复制一个 box 的合约，具有三个功能：
 +
-* `initialize()`: Initializes the upgradeable proxy with its initial implementation and sets the multisig as the owner.
-* `removeObject()`: Decreases the number of objects in the box by removing one.
-* `_authorizeUpgrade()`: Points the proxy to a new implementation address.
+* `initialize()`: 使用其初始实现初始化可升级代理，并将多重签名设置为所有者。
+* `removeObject()`: 通过删除一个来减少 box 中的对象数量。
+* `_authorizeUpgrade()`: 将代理指向一个新的实现地址。
 
 [[foundry-deploy]]
 === Foundry
 
-. Create a file named `Deploy.s.sol` inside the `script` directory. This script will deploy the upgradeable Box contract through Defender with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `Deploy.s.sol`:
+. 在 `script` 目录中创建一个名为 `Deploy.s.sol` 的文件。此脚本将通过 Defender 部署可升级的 Box 合约，其中包含 5 个初始对象，并将所有者设置为在环境设置中配置的多重签名地址。`initializer` 选项用于在合约部署后调用 `initialize()` 函数。将以下代码复制并粘贴到 `Deploy.s.sol` 中：
 +
 [source,jsx]
 ----
@@ -248,7 +254,7 @@ contract DefenderScript is Script {
     }
 }
 ----
-. Deploy by running the following command which executes your deployment script:
+. 通过运行以下命令部署，该命令执行你的部署脚本：
 +
 ```
 forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com
@@ -257,7 +263,7 @@ forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publ
 [[hardhat-deploy]]
 === Hardhat
 
-. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
+. 打开 `scripts` 目录中的 `deploy.ts` 文件。此脚本将通过 Defender 部署可升级的 Box 合约，其中包含 5 个初始对象，并将所有者设置为在环境设置中配置的多重签名地址。`initializer` 选项用于在合约部署后调用 `initialize()` 函数。将以下代码复制并粘贴到 `deploy.ts` 中：
 +
 [source,jsx]
 ----
@@ -287,33 +293,39 @@ main().catch((error) => {
 });
 ----
 +
-NOTE: You should use `deployProxy()`, `deployBeacon()` and `deployImplementation()` for upgradeable contracts, and `deployContract()` for non-upgradeable contracts. To forcefully use `deployContract()`, set the `unsafeAllowDeployContract` option to `true`. More information https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/docs/modules/ROOT/pages/defender-deploy.adoc[here, window=_blank].
+[NOTE]
+====
+对于可升级合约，你应该使用 `deployProxy()`、`deployBeacon()` 和 `deployImplementation()`，对于不可升级合约，应该使用 `deployContract()`。要强制使用 `deployContract()`，请将 `unsafeAllowDeployContract` 选项设置为 `true`。更多信息请参考 https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/docs/modules/ROOT/pages/defender-deploy.adoc[here, window=_blank]。
+====
 
-. Deploy your box by running the following command which executes your deployment script:
+. 通过运行以下命令部署你的 box，该命令执行你的部署脚本：
 +
 ```
 npx hardhat run --network sepolia scripts/deploy.ts
 ```
 
-Success! Your contracts should have been deployed in the Sepolia testnet. Navigate to Deploy in Defender and check that the proxy and implementation have been deployed inside the test environment. All Box transactions should be sent to the proxy address as it will store the state and point to the given implementation. Copy the address of the proxy to upgrade it next.
+成功! 你的合约应该已部署在 Sepolia 测试网上。导航到 Defender 中的部署并检查代理和实现是否已部署在测试环境中。所有 Box 交易都应发送到代理地址，因为它将存储状态并指向给定的实现。复制代理的地址以便稍后升级它。
 
-image::tutorial-deploy-contract.png[Deployed contract]
+image::tutorial-deploy-contract.png[已部署的合约]
 
 [[deploy-caveat]]
-=== Caveats
+=== 警告
 
-By default, Defender utilizes the `CREATE` opcode to deploy contracts. This method creates a new contract instance and assigns it a unique address. This address is determined by the transaction's nonce and sender's address.
+默认情况下，Defender 利用 `CREATE` 操作码来部署合约。此方法创建一个新的合约实例，并为其分配一个唯一的地址。此地址由交易的 nonce 和发送者的地址决定。
 
-Defender also offers an advanced deployment option using the `CREATE2` opcode. When a deployment request includes a `salt`, Defender switches to using the `CREATE2` opcode. This opcode allows you to deploy contracts to a deterministic address based on a combination of the sender's `address`, `salt`, and contract `bytecode`.
+Defender 还提供使用 `CREATE2` 操作码的高级部署选项。当部署请求包含 `salt` 时，Defender 会切换为使用 `CREATE2` 操作码。此操作码允许你根据发送者的 `address`、`salt` 和合约 `bytecode` 的组合将合约部署到确定性地址。
 
-WARNING: While `CREATE2` offers deterministic contract addresses, it alters `msg.sender` behavior. In `CREATE2` deployments, `msg.sender` in the constructor or initialization code refers to the factory address, not the deploying address as in standard `CREATE` deployments. This distinction can impact contract logic, so careful testing and consideration are advised when opting for `CREATE2`
+[WARNING]
+====
+虽然 `CREATE2` 提供了确定性的合约地址，但它会改变 `msg.sender` 的行为。在 `CREATE2` 部署中，构造函数或初始化代码中的 `msg.sender` 指的是工厂地址，而不是标准 `CREATE` 部署中的部署地址。这种区别会影响合约逻辑，因此在选择 `CREATE2` 时，建议进行仔细的测试和考虑。
+====
 
 [[upgrade]]
-== 3. Upgrade
+== 3. 升级
 
-Upgrading a smart contract allows changing its logic while maintaining the same address and storage.
+升级智能合约允许更改其逻辑，同时保持相同的地址和存储。
 
-. Create a file called `BoxV2.sol` inside the `contracts` or `src` directory and add the following code:
+. 在 `contracts` 或 `src` 目录中创建一个名为 `BoxV2.sol` 的文件，并添加以下代码：
 +
 [source,jsx]
 ----
@@ -342,15 +354,15 @@ contract BoxV2 is Box {
 }
 ----
 +
-This is a contract adds two new functions to your box:
+这是一个向你的 box 添加两个新功能的合约：
 +
-* `addObject()`: Increases the number of objects in the box by adding one.
-* `boxVersion()`: Returns the version of the box implementation.
+* `addObject()`: 通过添加一个来增加 box 中的对象数量。
+* `boxVersion()`: 返回 box 实现的版本。
 
 [[foundry-upgrade]]
 === Foundry
 
-. Create a file called `Upgrade.s.sol` inside the `script` directory and paste the following code. Make sure to replace the `<PROXY ADDRESS>` with the address of the proxy you copied before.
+. 在 `script` 目录中创建一个名为 `Upgrade.s.sol` 的文件并粘贴以下代码。确保将 `<PROXY ADDRESS>` 替换为你之前复制的代理的地址。
 +
 [source,jsx]
 ----
@@ -378,7 +390,7 @@ contract DefenderScript is Script {
 }
 ----
 
-. Create the upgrade proposal using the upgrade script with the the following command:
+. 使用以下命令使用升级脚本创建升级提案：
 +
 ```
 forge script script/Upgrade.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com
@@ -387,7 +399,7 @@ forge script script/Upgrade.s.sol --force --rpc-url https://ethereum-sepolia.pub
 [[hardhat-upgrade]]
 === Hardhat
 
-. Create a file called `upgrade.ts` inside the `scripts` directory and paste the following code. Make sure to replace the `<PROXY ADDRESS>` with the address of the proxy you copied before.
+. 在 `scripts` 目录中创建一个名为 `upgrade.ts` 的文件并粘贴以下代码。确保将 `<PROXY ADDRESS>` 替换为你之前复制的代理的地址。
 +
 [source,jsx]
 ----
@@ -409,33 +421,36 @@ main().catch((error) => {
 });
 ----
 
-. Create the upgrade proposal using the upgrade script with the the following command:
+. 使用以下命令使用升级脚本创建升级提案：
 +
 ```
 npx hardhat run --network sepolia scripts/upgrade.ts
 ```
 
 [[approve-upgrade]]
-=== Approve
+=== 批准
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/deploy/environment/test[Defender test environment] and click on the upgrade proposal, which expands a modal on the right side of the screen.
-. Click on *View Transaction Proposal* and click on *Approve and Execute* on the top right corner of the page. Sign and execute the transaction with your wallet that you used to create the Safe Wallet.
+. 导航到 https://defender.openzeppelin.com/v2/#/deploy/environment/test[Defender 测试环境] 并点击升级提案，这会在屏幕右侧展开一个模态框。
+. 点击 *查看交易提案*，然后点击页面右上角的 *批准并执行*。使用你用于创建 Safe 钱包的钱包签署并执行交易。
 
-Your box should now be upgraded to the new version! The upgrade proposal in your test environment page shold now be marked as *Executed*.
+你的 box 现在应该已升级到新版本! 你测试环境页面中的升级提案现在应标记为 *已执行*。
 
-image::tutorial-deploy-executed-upgrade.png[Uprade proposal executed]
+image::tutorial-deploy-executed-upgrade.png[已执行的升级提案]
 
 [[next-steps]]
-== Next steps
+== 下一步
 
-Congratulations! You can now deploy and upgrade other contracts using the same environment. In case you are interested in advanced use cases, we are working on deploy-related guides.
+恭喜! 你现在可以使用相同的环境部署和升级其他合约。如果你对高级用例感兴趣，我们正在编写与部署相关的指南。
 
-NOTE: After deploying a contract, we recommended using Defender to monitor its state and transactions. Learn how to use Monitor xref::tutorial/monitor.adoc[here].
+[NOTE]
+====
+部署合约后，我们建议使用 Defender 监控其状态和交易。了解如何使用 Monitor xref::tutorial/monitor.adoc[here]。
+====
 
 [[references]]
-== References
+== 参考
 
-* xref::module/deploy.adoc[Deploy Documentation]
-* https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry Upgrades Package, window=_blank]
-* https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat Upgrades Package, window=_blank]
-* https://www.npmjs.com/package/@openzeppelin/upgrades-core[Upgrades Core Package, window=_blank]
+* xref::module/deploy.adoc[部署文档]
+* https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry Upgrades 包, window=_blank]
+* https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat Upgrades 包, window=_blank]
+* https://www.npmjs.com/package/@openzeppelin/upgrades-core[Upgrades Core 包, window=_blank]

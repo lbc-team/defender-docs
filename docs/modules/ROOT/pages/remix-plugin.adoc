@@ -1,88 +1,86 @@
 [[remix-plugin]]
-= Remix Plugin
+= Remix 插件
 
-When coding and compiling contracts from https://remix.ethereum.org/[Remix IDE, window=_blank], you can use Defender Plugin to deploy your contracts by configuring a xref:module/deploy.adoc[Deployment Environment] and using an Approval Process as deployer.
+从 https://remix.ethereum.org/[Remix IDE, window=_blank] 编码和编译合约时，你可以使用 Defender 插件，通过配置 xref:module/deploy.adoc[部署环境] 并使用审批流程作为部署者来部署你的合约。
 
 [[installation]]
-== Installation
+== 安装
 
-1. Go to https://remix.ethereum.org/[Remix IDE, window=_blank] and click on Plugin manager (bottom left corner).
-2. Search *Defender Deploy* from the Modules list, and click "Activate".
-3. A new tab in the left nav bar with the OpenZeppelin icon should be displayed.
+1. 前往 https://remix.ethereum.org/[Remix IDE, window=_blank] 并点击插件管理器（左下角）。
+2. 从模块列表中搜索 *Defender Deploy*，并点击“激活”。
+3. 应该在左侧导航栏中显示一个带有 OpenZeppelin 图标的新标签。
 
-image::remix-plugin-install.png[Install Defender Remix Plugin,330,500]
+image::remix-plugin-install.png[安装 Defender Remix 插件,330,500]
 
 [[usage]]
-== Usage
-
+== 用法
 
 [[api-key-generation]]
-=== API Key generation
-In your Defender dashboard, go to *Settings -> API Keys* and click *Create API Key*, you only need _Manage Deployments_ permission.
+=== API 密钥生成
+在你的 Defender 仪表盘中，进入 *设置 -> API 密钥* 并点击 *创建 API 密钥*，你只需要 _Manage Deployments_ 权限。
 
-WARNING: We also recommend to set an expiration for the API Key, considering that is going to be used from an external site.
+WARNING: 我们还建议为 API 密钥设置过期时间，因为它将从外部站点使用。
 
-image::remix-plugin-api-key.png[Defender Remix Plugin Api Key, 400, 400]
+image::remix-plugin-api-key.png[Defender Remix 插件 Api 密钥, 400, 400]
 
 [[deploying-from-remix]]
-=== Deployment from Remix
+=== 从 Remix 部署
 
-Go to Remix IDE site, and open Defender plugin (see Installation step).
+前往 Remix IDE 站点，并打开 Defender 插件（参见安装步骤）。
 
 [[setup]]
-==== Setup
-Set your *API Key* and *API Secret* and press "Authenticate". If the keys are valid, you should see a green tick in at the right indicating that you were succesfully authenticated, also a message in the Remix terminal.
+==== 设置
+设置你的 *API 密钥* 和 *API Secret* 并按下 “认证”。如果密钥有效，你应该在右侧看到一个绿色勾号，表明你已成功通过身份验证，同时 Remix 终端中会显示一条消息。
 
-image::remix-plugin-setup.png[Defender Remix Plugin Setup]
+image::remix-plugin-setup.png[Defender Remix 插件设置]
 
 [[network]]
-==== Network
-Select any of the supported networks. This also includes private and fork networks configured in your tenant.
+==== 网络
+选择任何支持的网络。 这也包括在你的租户中配置的私有和 Fork 网络。
 
-image::remix-plugin-network.png[Defender Remix Plugin Network]
+image::remix-plugin-network.png[Defender Remix 插件网络]
 
 [[approval-process]]
-==== Approval Process
-Here you have 3 options:
+==== 审批流程
+这里你有 3 个选项：
 
-- Select an existing approval process from your *Deployment Environment* configured for the selected network.
+- 从为所选网络配置的 *部署环境* 中选择现有的审批流程。
 
-NOTE: If you have an existing deployment environment in the selected network, this is the only option allowed.
+NOTE: 如果你在所选网络中已存在部署环境，则这是唯一允许的选项。
 
-- If the *Deployment Envoronment* does not exist for the selected network, then you can create a new one. 
+- 如果所选网络不存在 *部署环境*，则可以创建一个新的。
 
-NOTE: If the Approval Process to be created is a Relayer, the API Key must include _Manage Relayers_ permission.
+NOTE: 如果要创建的审批流程是一个 Relayer，则 API 密钥必须包含 _Manage Relayers_ 权限。
 
-- Additionally, you can use the *injected provider* from Remix (a browser wallet) to deploy the contract, this will create a Defender *Deployment Environment* under the hood after deploying the contract.
+- 此外，你可以使用 Remix 中的 *注入的 provider*（浏览器钱包）来部署合约，这将在部署合约后在后台创建一个 Defender *部署环境*。
 
-image::remix-plugin-approval-process.png[Defender Remix Plugin Approval Process]
+image::remix-plugin-approval-process.png[Defender Remix 插件审批流程]
 
 [[deploy]]
-==== Deploy
-You should see the latest compiled contract along with the constructor inputs.
+==== 部署
+你应该看到最新的已编译合约以及构造函数输入。
 
-NOTE: In case you don't see it, compile the target contract again, the Defender plug-in should detect the compilation and display the contructor inputs.
+NOTE: 如果你没有看到它，请再次编译目标合同，Defender 插件应检测到编译并显示构造函数输入。
 
-WARNING: Upgradable contracts are not yet fully supported. This action will only deploy the implementation contract without initializing. For safe upgrades, we strongly recommend usign https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank].
+WARNING: 尚未完全支持可升级合约。 此操作只会部署实现合约，而不会进行初始化。 为了安全升级，我们强烈建议使用 https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank]。
 
-image::remix-plugin-deploy.png[Defender Remix Plugin Deploy]
-
+image::remix-plugin-deploy.png[Defender Remix 插件部署]
 
 [[deterministic-deployments]]
-==== Deterministic Deployments
+==== 确定性部署
 
-Defender Deploy supports a `salt` value to create deployments to deterministic addresses using `create2`. Click on `Deterministic` checkbox and set the salt field to any arbitrary value.
+Defender Deploy 支持使用 `salt` 值，以使用 `create2` 创建到确定性地址的部署。单击 `Deterministic` 复选框并将 salt 字段设置为任何任意值。
 
-image::remix-plugin-deploy-deterministic.png[Defender Remix Plugin Deploy Deterministic]
+image::remix-plugin-deploy-deterministic.png[Defender Remix 插件部署确定性]
 
 [[further-steps]]
-==== Further Steps
+==== 后续步骤
 
-Once the contract deployment was submitted to Defender, in some cases you will need to complete the deployment from Defender Dashboard, you should see a green banner indicating that the contract was submitted and a link to your Deployment in Defender.
+将合约部署提交到 Defender 后，在某些情况下，你需要从 Defender 仪表板完成部署，你应该看到一个绿色横幅，指示合约已提交，并且有一个指向 Defender 中部署的链接。
 
-image::remix-plugin-deploy-completed.png[Defender Remix Plugin Deploy Completed]
+image::remix-plugin-deploy-completed.png[Defender Remix 插件部署已完成]
 
 [[feedback]]
-== Feedback
+== 反馈
 
-The Defender Remix Plugin is open source, for feedback related to the plugin, please submit an issue in the https://github.com/OpenZeppelin/defender-deploy-plugin[Github Repository, window=_blank] or send an email to `defender-support@openzeppelin.com`.
+Defender Remix 插件是开源的，有关该插件的反馈，请在 https://github.com/OpenZeppelin/defender-deploy-plugin[Github 存储库, window=_blank] 中提交问题，或发送电子邮件至 `defender-support@openzeppelin.com`。

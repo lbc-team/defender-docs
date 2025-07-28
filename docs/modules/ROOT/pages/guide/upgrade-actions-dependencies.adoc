@@ -1,21 +1,20 @@
+:page-title: 升级 Actions 依赖
 
-# Upgrading Actions Dependencies
-
-Actions must be kept updated with the latest Node.js runtime and dependencies versions to ensure they run in an up-to-date and secure environment. Occasionally, Node.js and dependencies versions get deprecated on Defender, which means that the Actions running on those Node.js versions (and related dependencies) must be upgraded to the latest ones to ensure they continue to function as expected.
+Actions 必须使用最新的 Node.js 运行时和依赖版本进行更新，以确保它们在最新的安全环境中运行。有时，Node.js 和依赖版本会在 Defender 上被弃用，这意味着在这些 Node.js 版本（和相关依赖）上运行的 Actions 必须升级到最新的版本，以确保它们继续按预期运行。
 
 [[upgrade-process]]
-== Upgrade Process
+== 升级过程
 
-When there is a major Node.js version deprecation, the Defender team notifies users about this event and sets a deadline for upgrading actions to the latest dependency versions. If no action is taken by the deadline, Defender automatically upgrades the actions on behalf of users. 
+当 Node.js 出现重大版本弃用时，Defender 团队会通知用户有关此事件，并设定将 actions 升级到最新依赖版本的时间限制。如果在截止日期前未采取任何措施，Defender 会代表用户自动升级 actions。
 
-WARNING: We encourage users to make the upgrade process by themselves as the automatic upgrade might introduce breaking changes in dependencies.
+WARNING: 我们鼓励用户自己完成升级过程，因为自动升级可能会在依赖项中引入重大更改。
 
 [[how-to-upgrade-actions-runtimes]]
-== How to Upgrade Actions Runtimes
+== 如何升级 Actions 运行时
 
-1. Check the Action https://docs.openzeppelin.com/defender/module/actions#environment[dependencies latest versions, window=_blank] and search for any breaking changes in your Action code.
-2. Make any necessary code changes.
-3. Test the Action code. A safe approach to do this:
-  a. Create a new Action with the same code using the target dependencies version and run it to verify that it works as expected.
-  b. If your action sends relayer transactions using https://docs.openzeppelin.com/defender/sdk[defender-sdk, window=_blank] (or any other Defender legacy package), validate that it works by connecting a testnet relayer with your action.
-4. Once you have verified that the code and dependencies are compatible, upgrade the Action dependencies to the latest version.
+1. 检查 Action 的 https://docs.openzeppelin.com/defender/module/actions#environment[依赖项最新版本, window=_blank]，并在您的 Action 代码中搜索任何重大更改。
+2. 进行任何必要的代码更改。
+3. 测试 Action 代码。一个安全的方法是：
+  a. 使用目标依赖版本创建一个具有相同代码的新 Action，并运行它以验证它是否按预期工作。
+  b. 如果您的 action 使用 https://docs.openzeppelin.com/defender/sdk[defender-sdk, window=_blank]（或任何其他 Defender 遗留包）发送 relayer 交易，请通过将测试网 relayer 连接到您的 action 来验证它是否有效。
+4. 验证代码和依赖项兼容后，将 Action 依赖项升级到最新版本。

@@ -1,8 +1,8 @@
 [[address-book]]
-= Address Book
+= 地址簿
 
-The Address Book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire Address Book in the dedicated section. Defender automatically creates Address Book entries for you when you import accounts and contracts in other modules.
+地址簿允许你为你的账户或合约创建一个用户友好的共享名称仓库。你可以在 Defender 中看到地址的任何地方设置这些名称，只需点击它，或者你可以在专用部分管理你的整个地址簿。当你从其他模块导入账户和合约时，Defender 会自动为你创建地址簿条目。
 
-When working with products in Defender, account and contract information will be directly sourced from the Address Book whenever you are required to enter an address, so you can easily fetch addresses from your Address Book when configuring monitors and actions.
+当在 Defender 中使用产品时，在需要你输入地址时，账户和合约信息将直接从地址簿中获取，因此你可以在配置监视器和操作时轻松地从你的地址簿中获取地址。
 
-image::manage-address-book.png[Manage Address Book]
+image::manage-address-book.png[管理地址簿]

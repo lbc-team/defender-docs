@@ -1,60 +1,60 @@
 [[settings]]
-= Settings
+= 设置
 
-Manage everything related to the configuration of Defender, including notifications, addresses, team members, API keys, and more.
+管理与 Defender 配置相关的所有内容，包括通知、地址、团队成员、API 密钥等。
 
 [[approval-processes]]
-== Approval Processes
+== 审批流程
 
-Approval processes act as a wrapper for transactions to be executed on-chain. They currently wrap the following:
+审批流程充当链上执行交易的包装器。它们目前包含以下内容：
 
-* Multisigs
-* EOAs (outside Defender)
-* Relayers (inside Defender)
-* Governor contracts
-* Timelock contracts
+* 多重签名
+* EOA（Defender 外部）
+* 中继器（Defender 内部）
+* Governor 合约
+* Timelock 合约
 * Fireblocks
 
-They are defined per network, and are used throughout Defender to execute transactions, such as in the xref:module/deploy.adoc[Deploy] wizard, xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
+它们是按网络定义的，并在整个 Defender 中用于执行交易，例如在 xref:module/deploy.adoc[部署] 向导、xref:module/actions.adoc[动作] 和 xref:module/actions.adoc#workflows[工作流] 中。
 
-image::manage-approvals.png[Manage Approval Processes]
+image::manage-approvals.png[管理审批流程]
 
 [[notifications]]
-== Notifications
+== 通知
 
-When triggered, Defender can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
+当触发时，Defender可以将通知传递到一个或多个配置的通知渠道，这些渠道可以包括 Slack、电子邮件、Telegram、Discord、Datadog、PagerDuty、OpsGenie 或自定义 Webhooks。这些通知渠道可以在监视器、动作和工作流中使用。
 
-image::manage-notify-channels.png[Manage Notifications]
+image::manage-notify-channels.png[管理通知]
 
-=== Slack Configuration
+=== Slack 配置
 
-Please see https://api.slack.com/messaging/webhooks[Slack webhook documentation, window=_blank] to configure a Slack webhook. Once Slack is configured, enter the webhook URL in Defender.
+请参阅 https://api.slack.com/messaging/webhooks[Slack webhook 文档, window=_blank] 以配置 Slack webhook。 配置 Slack 后，在 Defender 中输入 webhook URL。
 
-* *Alias* is the name for this Slack configuration. For instance, you might name it after the name of the channel.
+* *别名* 是此 Slack 配置的名称。 例如，您可以将其命名为渠道名称。
 
-* *Webhook URL* is the URL from your Slack management console to use for notification. 
+* *Webhook URL* 是来自您的 Slack 管理控制台的 URL，用于发送通知。
 
-=== Email Configuration
+=== 电子邮件配置
 
-* *Alias* is the name for this email list. (e.g., Developers)
+* *别名* 是此电子邮件列表的名称。（例如，开发者）
 
-* *Emails* is the list of emails you wish to notify. These can be comma or semicolon-delimited.
+* *电子邮件* 是您希望通知的电子邮件列表。 这些可以是逗号或分号分隔的。
 
-=== Discord Configuration
+=== Discord 配置
 
-Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks[Discord webhook documentation, window=_blank] to configure a webhook for your Discord channel.
+请参阅 https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks[Discord webhook 文档, window=_blank] 以配置 Discord 频道的 webhook。
 
-* *Alias* is the name for this Discord configuration.
+* *别名* 是此 Discord 配置的名称。
 
-* *Webhook URL* is the URL from your Discord channel to use for notification. 
+* *Webhook URL* 是来自您的 Discord 频道的 URL，用于发送通知。
 
-=== Telegram Configuration
+=== Telegram 配置
 
-Please see https://core.telegram.org/bots#6-botfather[Telegram bot documentation, window=_blank] to configure a Telegram Bot using the BotFather.
+请参阅 https://core.telegram.org/bots#6-botfather[Telegram 机器人文档, window=_blank] 以使用 BotFather 配置 Telegram 机器人。
 
-NOTE: The Telegram Bot must be added to your channel and have the rights to post messages.
+注意：必须将 Telegram 机器人添加到您的频道并具有发布消息的权限。
 
-To find the Chat ID of the channel, execute the following curl (with your bot token value) and extract the `id` value of the chat.  If you do not receive any entries in the response, send a test message to your chat first.
+要查找频道的聊天 ID，请执行以下 curl 命令（使用您的机器人令牌值）并提取聊天的 `id` 值。 如果您在响应中未收到任何条目，请先向您的聊天发送测试消息。
 
 [source,shell]
 ----
@@ -84,35 +84,35 @@ $ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
 }
 ----
 
-* *Alias* is the name for this Telegram configuration.
+* *别名* 是此 Telegram 配置的名称。
 
-* *Chat ID* is the ID of the Telegram Chat. 
+* *聊天 ID* 是 Telegram 聊天的 ID。
 
-* *Bot Token* is the token you receive from the BotFather when creating the Telegram Bot.
+* *机器人令牌* 是您在创建 Telegram 机器人时从 BotFather 收到的令牌。
 
-=== Datadog Configuration
+=== Datadog 配置
 
-Datadog configurations let Defender forward custom metrics to your Datadog account. For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/[Datadog metrics documentation, window=_blank]
+Datadog 配置允许 Defender 将自定义指标转发到您的 Datadog 帐户。 有关自定义指标的更多信息，请参阅 https://docs.datadoghq.com/developers/metrics/[Datadog 指标文档, window=_blank]
 
-The metric we send is a COUNT metric, which represents the number of transactions that triggered the notification. We do not send zeros, so a lack of data should be expected if there is no trigger. With each metric, we send two tags:  `network` (rinkeby, mainnet,...) and when a monitor has triggered the notification then `monitor` (name of the monitor)
+我们发送的指标是 COUNT 指标，它表示触发通知的交易数量。 我们不发送零，因此如果没有触发器，则应预期缺少数据。 对于每个指标，我们发送两个标签：`network` (rinkeby, mainnet,...)，当监视器触发通知时，则发送 `monitor`（监视器的名称）
 
-NOTE: It can take several minutes for a new custom metric to show up in the Datadog console
+注意：新的自定义指标可能需要几分钟才能显示在 Datadog 控制台中
 
-* *Alias* is the name for this Datadog configuration.
+* *别名* 是此 Datadog 配置的名称。
 
-* *Api Key* is the API key from your Datadog management.
+* *Api Key* 是来自您的 Datadog 管理的 API 密钥。
 
-* *Metric Prefix* will precede all metric names. For instance, with a prefix of `openzeppelin.`, monitors will send a metric called `openzeppelin.monitor`.
+* *指标前缀* 将位于所有指标名称之前。 例如，如果前缀为 `openzeppelin.`，则监视器将发送一个名为 `openzeppelin.monitor` 的指标。
 
-=== Webhook Configuration
+=== Webhook 配置
 
-To configure a custom webhook notification channel, you just need to provide the webhook endpoint URL and an alias for display purposes. 
+要配置自定义 webhook 通知渠道，您只需提供 webhook 端点 URL 和一个用于显示目的的别名。
 
-* *Alias* is the name for this webhook endpoint.
+* *别名* 是此 webhook 端点的名称。
 
-* *Webhook URL* is the URL where notifications will be sent. 
+* *Webhook URL* 是将发送通知的 URL。
 
-To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Defender sends a JSON object with an `events` containing an array with all the matching events found in a block.
+为了避免在大量匹配的情况下，大量并发请求淹没接收 webhook，Defender 发送一个 JSON 对象，其中包含一个 `events`，其中包含一个数组，其中包含在一个区块中找到的所有匹配事件。
 
 [source,js]
 ----
@@ -121,99 +121,99 @@ To avoid overwhelming the receiving webhook with many concurrent requests under 
 }
 ----
 
-For more information on the event schema see the documentation on xref:module/monitor.adoc[Monitor] or xref:module/actions.adoc[Actions].
+有关事件模式的更多信息，请参阅 xref:module/monitor.adoc[监视器] 或 xref:module/actions.adoc[动作] 上的文档。
 
-=== OpsGenie Configuration
+=== OpsGenie 配置
 
-Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-integration/[OpsGenie integration documentation, window=_blank] to configure an OpsGenie API integration that can create alerts.
+请参阅 https://support.atlassian.com/opsgenie/docs/create-a-default-api-integration/[OpsGenie 集成文档, window=_blank] 以配置可以创建警报的 OpsGenie API 集成。
 
-* *API Key* Integration API key that can be found in the integration settings
+* *API Key* 集成 API 密钥，可以在集成设置中找到
 
-* *Instance Location* Location where the OpsGenie instance server is located
+* *Instance Location* OpsGenie 实例服务器所在的位置
 
-* *Responders* Teams, users, escalations and schedules that the alert will be routed to send notifications. The type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided. You can refer below for example values (50 teams, users, escalations or schedules)
+* *Responders* 将把警报发送到通知的团队、用户、升级和计划。 type字段对于每个项目都是强制性的，可能的值是team，user，escalation和schedule。如果API Key属于团队集成，则此字段将被所有者团队覆盖。应提供每个响应者的id或name。您可以参考以下示例值（50个团队、用户、升级或计划）
 
-* *Visible To* Teams and users that the alert will become visible to without sending any notification. The type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note: that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values (50 teams or users in total)
+* *Visible To* 警报将变为可见而无需发送任何通知的团队和用户。 type字段对于每个项目都是强制性的，可能的值是team和user。除了type字段之外，还应该为团队提供id或name，并为用户提供id或username。请注意：默认情况下，警报对于响应者字段中指定的团队都是可见的，因此无需在visibleTo字段中重新指定它们。您可以参考以下示例值（总共50个团队或用户）
 
-* *Alias* Client-defined identifier of the alert, that is also the key element of https://support.atlassian.com/opsgenie/docs/what-is-alert-de-duplication/[Alert De-Duplication, window=_blank] (512 max characters)
+* *Alias* 警报的客户端定义标识符，也是 https://support.atlassian.com/opsgenie/docs/what-is-alert-de-duplication/[警报去重, window=_blank] 的关键要素 (最大 512 个字符)
 
-* *Priority* Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
+* *Priority* 警报的优先级。 可能的值为 P1、P2、P3、P4 和 P5。 默认值为 P3
 
-* *Entity* Entity field of the alert that is generally used to specify which domain alert is related to (512 max characters)
+* *Entity* 警报的实体字段，通常用于指定警报与哪个域相关 (最大 512 个字符)
 
-* *Actions* Custom actions that will be available for the alert (10 x 50 max characters)
+* *Actions* 可用于警报的自定义操作 (10 x 50 个最大字符)
 
-* *Note* Additional note that will be added while creating the alert (25000 max characters)
+* *Note* 在创建警报时将添加的附加说明 (最大 25000 个字符)
 
-* *Details* Map of key-value pairs to use as custom properties of the alert (8000 max characters)
+* *Details* 用作警报自定义属性的键值对映射 (最大 8000 个字符)
 
-* *Tags* Tags of the alert (20 x 50 max characters)
+* *Tags* 警报标签 (20 x 50 个最大字符)
 
-=== PagerDuty Configuration
+=== PagerDuty 配置
 
-Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDuty integration documentation, window=_blank] to configure an PagerDuty API v2 integration that can create change and alert events.
+请参阅 https://support.pagerduty.com/docs/services-and-integrations[PagerDuty 集成文档, window=_blank] 以配置可以创建更改和警报事件的 PagerDuty API v2 集成。
 
-* *Event Type* Event type for PagerDuty categorization (alert or change)
-* *Routing Key* Integration Key for an integration on a service or on a global ruleset (32 characters)
-* *Event Action* The action type of event (trigger, acknowledge or resolve)
-* *Dedup Key* Deduplication key for correlating triggers and resolves (255 max characters)
-* *Severity* The perceived severity of the status the event is describing with respect to the affected system (critical, error, warning or info)
-* *Component* Component of the source machine that is responsible for the event
-* *Group* Logical grouping of components of a service
-* *Class* The class/type of the event
-* *Custom_detail* Map of key-value pairs to provide additional details about the event and affected system
+* *Event Type* PagerDuty 分类的事件类型（alert 或 change）
+* *Routing Key* 服务或全局规则集上集成的集成密钥（32 个字符）
+* *Event Action* 事件的操作类型（trigger、acknowledge 或 resolve）
+* *Dedup Key* 用于关联触发器和解决的重复数据删除键（最大 255 个字符）
+* *Severity* 状态事件描述的受影响系统的感知严重性（critical、error、warning 或 info）
+* *Component* 负责该事件的源计算机的组件
+* *Group* 服务的组件的逻辑分组
+* *Class* 事件的类/类型
+* *Custom_detail* 键值对映射，用于提供有关事件和受影响系统的其他详细信息
 
 [[team-members]]
-== Team Members
+== 团队成员
 
-You can invite, manage access for, and remove team members from your Defender account under the _Team Members_ section. 
+您可以在 _团队成员_ 部分下邀请、管理访问权限以及从您的 Defender 帐户中删除团队成员。
 
-image::manage-team-invite.png[Manage Team Members]
+image::manage-team-invite.png[管理团队成员]
 
-NOTE: If you want to add a user to your team, make sure to invite them from the _Team Members_ section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, consider having your teammate delete their account, so you can re-send the invitation for your team. Alternatively, they can join your team using a different email address.
+注意：如果您想将用户添加到您的团队，请确保从 _团队成员_ 部分邀请他们。 如果他们直接注册到应用程序，他们将被添加到他们自己的新团队。 如果发生这种情况，请考虑让您的队友删除他们的帐户，以便您可以重新发送您的团队的邀请。 或者，他们可以使用其他电子邮件地址加入您的团队。
 
-=== Roles
+=== 角色
 
-Every team member has an assigned role. You can manage authorization to access, modify and execute across all Defender products through the role-based access control system.
+每个团队成员都分配有一个角色。 您可以通过基于角色的访问控制系统管理跨所有 Defender 产品的访问、修改和执行授权。
 
-When you invite a new user to your team, you will assign a role to them, determining their access permissions.
+当您邀请新用户加入您的团队时，您将为他们分配一个角色，确定他们的访问权限。
 
-To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage Address Book, and configure log forwarding. 
+要创建新角色，请单击 _创建角色_ 按钮。 系统会要求您输入角色名称和描述，并指定该角色中的用户将获得的每个产品的访问级别。 您还可以指定该角色将授予哪些管理权限：管理用户和角色、管理团队 API 密钥、管理 Fireblocks API 密钥、管理地址簿以及配置日志转发。
 
-image::manage-role-create.png[Manage Role Creation]
+image::manage-role-create.png[管理角色创建]
 
-After saving, the new role will be available to assign to new or existing team members. Naturally, if in the future you decide to modify the access level of a given role, all users who have that role will as a consequence see their access level change. 
+保存后，新角色将可用于分配给新的或现有的团队成员。 当然，如果在将来您决定修改给定角色的访问级别，则所有具有该角色的用户都将因此看到他们的访问级别发生变化。
 
-WARNING: Be careful when granting administrative permissions. A user with the rights to modify roles but not to access any other component can modify their own role to grant them access to any other parts of the application.
+警告：授予管理权限时要小心。 具有修改角色但无权访问任何其他组件的权限的用户可以修改自己的角色，以授予他们访问应用程序其他任何部分的权限。
 
 [[two-factor-authentication]]
-=== Two factor authentication (2FA)
+=== 双重身份验证 (2FA)
 
-We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP), window=_blank]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy, window=_blank] or Google Authenticator. Each user can enable 2FA under their profile, accessible from the top-right user menu. Defender will guide users through the necessary steps.
+我们强烈建议您启用 2FA 以提高您的 Defender 帐户安全性。 作为第二种身份验证因素，Defender 依赖 https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[基于时间的单次密码标准 (TOTP), window=_blank]。 要在 Defender 上启用 2FA，您需要一个符合 TOTP 标准的应用程序，例如 https://authy.com/[Authy, window=_blank] 或 Google Authenticator。 每个用户都可以在他们的个人资料下启用 2FA，可以从右上角的用户菜单访问。 Defender 将指导用户完成必要的步骤。
 
 [[two-factor-authentication-enforcement]]
-==== Enforcing 2FA
+==== 强制执行 2FA
 
-As an admin user, you can enforce 2FA for all users in your team. To do so, go to the settings under _Team Members_ section, and click on the _Enforce 2FA_ toggle. This will require all users to setup 2FA before they can access Defender again.
+作为管理员用户，您可以为团队中的所有用户强制执行 2FA。 为此，请转到 _团队成员_ 部分下的设置，然后单击 _强制执行 2FA_ 开关。 这将要求所有用户在再次访问 Defender 之前设置 2FA。
 
-NOTE: If you have users that are still accessing Defender 1.0, they will have to setup 2FA as well.
+注意：如果您有仍在访问 Defender 1.0 的用户，他们也必须设置 2FA。
 
 [[password-reset]]
-=== Password reset
+=== 密码重置
 
-To change your user password for Defender, follow the steps below.
+要更改 Defender 的用户密码，请按照以下步骤操作。
 
-* If you are logged in, sign out by opening the upper right corner menu and clicking on *Sign out*. You will be redirected to the landing page.
+* 如果您已登录，请打开右上角的菜单并单击 *Sign out* 退出。 您将被重定向到登陆页面。
 
-* From Defender landing page, click on *Sign in*. You will be redirected to the sign in page.
+* 从 Defender 登陆页面，单击 *Sign in*。 您将被重定向到登录页面。
 
-* From Defender sign in page, click on *Forgot your password?*.
+* 从 Defender 登录页面，单击 *Forgot your password?*。
 
-* Enter your email address and click on *Reset my password*. You will shortly receive an email with instructions on how to continue with the password reset process.
+* 输入您的电子邮件地址，然后单击 *Reset my password*。 您将很快收到一封电子邮件，其中包含有关如何继续密码重置过程的说明。
 
 [[secrets]]
-== Secrets
-Secrets are key-value case-sensitive pairs of strings, that can be accessed from any Action using the `event.secrets` object. You can define as many secrets as you need to be used by your Actions. Secrets are shared across all your Actions, and not specific to a single one.
+== 密钥
+密钥是区分大小写的字符串键值对，可以使用 `event.secrets` 对象从任何动作访问。 您可以定义任意数量的密钥供您的动作使用。 密钥在您的所有动作中共享，而不是特定于单个动作。
 
 [source,jsx]
 ----
@@ -222,111 +222,109 @@ exports.handler = async function(event) {
 }
 ----
 
-Secrets are encrypted and stored in a secure vault, only decrypted for injection in your actions runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read. 
+密钥经过加密并存储在安全保险库中，仅在您的动作运行时才解密以进行注入。 写入密钥后，只能从用户界面删除或覆盖密钥，但不能读取密钥。
 
-WARNING: An action may log the value of a secret, accidentally leaking it.
+警告：动作可能会记录密钥的值，从而意外泄漏密钥。
 
-image::manage-secrets.png[Defender Secrets]
+image::manage-secrets.png[Defender 密钥]
 
-You can use secrets for storing secure keys to access external APIs, or any other secret value that you do not want to expose in the Actions code.
+您可以使用密钥来存储安全密钥以访问外部 API，或您不想在动作代码中公开的任何其他密钥值。
 
-NOTE: While you can also use actions secrets to store private keys for signing messages or transactions, we recommend you use <<Relayers>> instead. Signing operations for relayers are executed within a secure vault, providing an extra level of security than loading the private key in an action run and signing there.
+注意：虽然您也可以使用动作密钥来存储用于签署消息或交易的私钥，但我们建议您改用 <<Relayers>>。 中继器的签名操作在安全保险库中执行，与在动作运行中加载私钥并在那里进行签名相比，提供了更高的安全性。
 
 [[manage-api-keys]]
-== API Keys
+== API 密钥
 
-In API Keys you can manage the keys used by clients to access the Defender API for your account, and also enter integration API keys if you are using Fireblocks for approvals. Note that relayers have their own API keys that are separate from these API keys and are configured directly in Manage Relayers.
+在 API 密钥中，您可以管理客户端用于访问您的帐户的 Defender API 的密钥，如果您使用 Fireblocks 进行审批，还可以输入集成 API 密钥。 请注意，中继器有自己的 API 密钥，这些密钥与这些 API 密钥分开，并且直接在“管理中继器”中配置。
 
-To add an API key, click on the Create API Key button. 
+要添加 API 密钥，请单击“创建 API 密钥”按钮。
 
-image::manage-new-api-key-v2.png[Manage Create Team API Key]
+image::manage-new-api-key-v2.png[管理创建团队 API 密钥]
 
-Select the API capabilities that you want associated with the API key:
+选择您想要与 API 密钥关联的 API 功能：
 
-* *Manage Transaciton Proposals and Contract* for creating and issuing actions and managing contracts.
-* *Manage Relayers* for creating relayers and changing relayer policies.
-* *Manage Automatic Actions* for creating and modifying automatic actions and their configurations.
-* *Manage Monitors* for creating and managing monitors and their configurations.
+* *管理交易提案和合约* 用于创建和发布操作以及管理合约。
+* *管理中继器* 用于创建中继器和更改中继器策略。
+* *管理自动操作* 用于创建和修改自动操作及其配置。
+* *管理监视器* 用于创建和管理监视器及其配置。
 
-Optionally, select the API Key expiration. You can specify the expiration time in minutes, hours or days.
+可以选择性地选择 API 密钥到期时间。 您可以以分钟、小时或天为单位指定到期时间。
 
-Once the API key is created, Defender will show you the details.
+创建 API 密钥后，Defender 将向您显示详细信息。
 
-image::manage-api-key-v2.png[Manage Team API Key]
+image::manage-api-key-v2.png[管理团队 API 密钥]
 
-Be sure to copy the secret key, it will be required for access and it will not be accessible again after the form is dismissed.
+请务必复制密钥，访问时需要它，并且在关闭表单后将无法再次访问。
 
-// NOTE: Defender integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
+// 注意：Defender 与 Fireblocks 集成！ 请查看我们的指南，了解如何 xref:guide/fireblocks.adoc[在此处] 使用 Fireblocks 进行审批。
 
 [[custom-networks]]
-== Custom Networks
-
+== 自定义网络
 
 [[forked-networks]]
 
-=== Forked Networks
+=== 分叉网络
 
-In the "Forked Networks" section, you can manage and oversee your forked networks. These networks let you test the efficiency of your security setup and offer a vital chance to identify and fix any problems before launching on testnets and mainnets.
+在“分叉网络”部分，您可以管理和监督您的分叉网络。 这些网络使您可以测试安全设置的效率，并提供在测试网和主网上启动之前识别和修复任何问题的重要机会。
 
-image::manage-forked-networks-create.png[Manage Forked Networks]
+image::manage-forked-networks-create.png[管理分叉网络]
 
-Setting up a forked network is accomplished by clicking the "Create Forked Network" button. This action prompts you to provide a name for the forked network and select the base network you intend to fork from. Your choice of forking can be made from any of the networks supported by Defender. The network's currency symbol will be automatically populated based on the network you select. Additionally, you will need to input the RPC URL for the forked network and, optionally, an API key if it is required for access.
+通过单击“创建分叉网络”按钮来完成分叉网络的设置。 此操作会提示您为分叉网络提供一个名称，并选择您打算从中分叉的基础网络。 您可以选择从 Defender 支持的任何网络进行分叉。 网络的货币符号将根据您选择的网络自动填充。 此外，如果访问需要，您还需要输入分叉网络的 RPC URL，并且可以选择输入 API 密钥。
 
-For an improved user experience, you also have the option to include the block explorer URL.
+为了改善用户体验，您还可以选择包含区块浏览器 URL。
 
-Once created, the network becomes accessible for utilization in any Defender module that necessitates network selection. This is particularly valuable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+创建后，该网络可用于需要网络选择的任何 Defender 模块。 这在执行诸如建立审批流程、配置中继器或部署合约等任务时尤其有价值。
 
-image::manage-forked-networks-selection.png[Select Forked Network]
+image::manage-forked-networks-selection.png[选择分叉网络]
 
-NOTE: Once you have created a Forked Network you cannot edit its name or RPC URL. If you need to change these settings you will need to delete and recreate the Forked Network. When a forked network is deleted, *all* associated resources will also be deleted. This includes approval processes, relayers, contracts, address book entries, etc.
-
+注意：创建分叉网络后，您无法编辑其名称或 RPC URL。 如果您需要更改这些设置，您需要删除并重新创建分叉网络。 删除分叉网络时，*所有* 关联的资源也将被删除。 这包括审批流程、中继器、合约、地址簿条目等。
 
 [[private-networks]]
 
-=== Private Networks
+=== 私有网络
 
-Navigate through the "Private Networks" section to effectively manage and oversee your private networks. These networks establish a restricted and controlled environment tailored for testing and validating network configurations. This controlled space empowers users to identify and resolve potential issues before deploying configurations to production environments, providing a secure venue to evaluate system functionality and security measures in isolation.
+浏览“私有网络”部分以有效地管理和监督您的私有网络。 这些网络建立了一个受限且受控的环境，专为测试和验证网络配置而定制。 这种受控空间使使用者能够在将配置部署到生产环境之前识别和解决潜在问题，从而提供了一个安全的场所来隔离评估系统功能和安全措施。
 
-image::manage-private-networks-create.png[Manage Private Networks]
+image::manage-private-networks-create.png[管理私有网络]
 
-To set up a private network, simply click the "Create Private Network" button.  This action prompts you to define a name for the private network and select the currency symbol ("ETH") for your network. Additionally, provide the RPC URL, and optionally, an API key if access requires it.
+要设置私有网络，只需点击“创建私有网络”按钮。此操作会提示您为私有网络定义一个名称，并为网络选择货币符号（“ETH”）。 此外，还需提供 RPC URL，以及（可选）访问所需的 API 密钥。
 
-NOTE: The chain ID of a private network must not conflict with the chain ID of an xref:index.adoc#networks[officially supported Defender network].
+注意：私有网络的链 ID 不得与 xref:index.adoc#networks[官方支持的 Defender 网络] 的链 ID 冲突。
 
-For an enhanced user experience, customize your setup by including the block explorer URL, Safe contract deployment addresses, and a subgraph URL.
+为了增强用户体验，通过包含区块浏览器 URL、Safe 合约部署地址和 subgraph URL 自定义您的设置。
 
-https://github.com/safe-global/safe-contracts[Safe Contracts, window=_blank] form a comprehensive collection of smart contracts designed for deploying, managing, and interacting with multi-signature wallets. Defender utilizes the following Safe contract deployments to enrich the user experience:
+https://github.com/safe-global/safe-contracts[Safe 合约, window=_blank] 形成了一套全面的智能合约集合，旨在部署、管理和交互多重签名钱包。Defender 使用以下 Safe 合约部署来丰富用户体验：
 
-- **Master**: Facilitates a Safe multisignature wallet deployment with support for confirmations using signed messages based on EIP-712.
-- **Proxy Factory**: Enables a Safe smart contract deployment to create a new proxy contract and execute a message call to the new proxy within a single transaction.
-- **Multi Send Call Only**: Allows a Safe smart contract deployment to batch multiple transactions into one, specifically for calls.
-- **Create Call**: Facilitates a Safe smart contract deployment to utilize different create opcodes for deploying a contract.
+- **Master**：促进 Safe 多重签名钱包部署，支持使用基于 EIP-712 的签名消息进行确认。
+- **Proxy Factory**：使 Safe 智能合约部署能够在单个事务中创建新的代理合约并执行对新代理的消息调用。
+- **Multi Send Call Only**：允许 Safe 智能合约部署将多个事务批量处理为一个，专门用于调用。
+- **Create Call**：促进 Safe 智能合约部署来利用不同的创建操作码来部署合约。
 
-You can https://github.com/safe-global/safe-deployments[deploy these contracts, window=_blank] on your private network, providing the contract addresses in the creation form to leverage them in Defender, especially when deploying using `CREATE2`.
+您可以在您的私有网络上 https://github.com/safe-global/safe-deployments[部署这些合约, window=_blank]，在创建表单中提供合约地址，以在 Defender 中利用它们，尤其是在使用 `CREATE2` 进行部署时。
 
-Defender utilizes Subgraph for GraphQL-based querying of blockchain data, primarily for the Access Control module. Create your own https://thegraph.com/docs/en/developing/creating-a-subgraph/[Subgraph, window=_blank], and input the endpoint in the creation form to activate this functionality in Defender. You can find an example configuration for the Access Control subgraph link:_attachments/oz-mainnet-graphql-config-example.zip[here].
+Defender 利用 Subgraph 对区块链数据进行基于 GraphQL 的查询，主要用于访问控制模块。 创建您自己的 https://thegraph.com/docs/en/developing/creating-a-subgraph/[Subgraph, window=_blank]，并在创建表单中输入端点以在 Defender 中激活此功能。 您可以在此处找到访问控制 subgraph 的示例配置 link:_attachments/oz-mainnet-graphql-config-example.zip[here]。
 
-Once created, the network becomes accessible for utilization in any Defender module requiring network selection. This proves invaluable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+创建后，该网络可用于需要网络选择的任何 Defender 模块。 这在执行诸如建立审批流程、配置中继器或部署合约等任务时被证明是无价的。
 
-image::manage-private-networks-selection.png[Select Private Network]
+image::manage-private-networks-selection.png[选择私有网络]
 
-NOTE: After creating a Private Network, you cannot edit its name, RPC URL, or symbol. To make changes, you must delete and recreate the Private Network. Deleting a private network will also delete *all* associated resources, including approval processes, relayers, contracts, address book entries, etc.
+注意：创建私有网络后，您无法编辑其名称、RPC URL 或符号。 若要进行更改，您必须删除并重新创建私有网络。 删除私有网络也将删除 *所有* 关联的资源，包括审批流程、中继器、合约、地址簿条目等。
 
-=== Limitations
+=== 局限性
 
-While custom networks serve as a great way to integrate EVM compatible networks into Defender or to test unique network conditions, they come with a some notable drawbacks that set them apart from officially supported Defender networks:
+虽然自定义网络是集成 EVM 兼容网络到 Defender 或测试独特网络条件的好方法，但它们也存在一些值得注意的缺点，使其与官方支持的 Defender 网络有所不同：
 
-- **RPC Bottlenecks**: Custom networks can only have a single RPC provider which becomes a single point of failure during periods of high traffic. 
-- **Limited Reliability**: Custom networks may return non-standard or unexpected responses which will not be handled by Defender. Thus, some services may not behave as expected.
-- **Slower Transaction Processing**: Custom networks require more RPC calls with every transaction request leading to slower transaction processing.
+- **RPC 瓶颈**：自定义网络只能有一个 RPC 提供商，这在流量高峰期会成为单点故障。
+- **有限的可靠性**：自定义网络可能会返回 Defender 不会处理的非标准或意外响应。 因此，某些服务可能无法按预期运行。
+- **较慢的交易处理速度**：自定义网络每次交易请求都需要更多的 RPC 调用，从而导致交易处理速度较慢。
 
-WARNING: High transaction volumes are only advised for custom networks with highly reliable RPC endpoints.
+警告：仅建议对于具有高度可靠的 RPC 端点的自定义网络使用高交易量。
 
 [[advanced-settings]]
-== Advanced
+== 高级
 
-In the Advanced tab, you can export the serverless configuration file from the current configuration for your Defender account.
+在“高级”选项卡中，您可以从当前 Defender 帐户配置导出 serverless 配置文件。
 
-This can be used to setup automated resource management for your account with configuration as code. Also, in Advanced, you can delete your Defender account. This action is non-reversible, all Defender configurations will be deleted, and all product functions will be canceled and removed.
+这可用于通过代码配置为您的帐户设置自动资源管理。 此外，在“高级”中，您可以删除您的 Defender 帐户。 此操作不可逆转，所有 Defender 配置都将被删除，并且所有产品功能都将被取消和删除。
 
-// NOTE: Interested in using the serverless plugin? Read its documentation page xref:serverless-plugin.adoc[here].
+// 注意：有兴趣使用 serverless 插件吗？ 在此处阅读其文档页面 xref:serverless-plugin.adoc[here]。

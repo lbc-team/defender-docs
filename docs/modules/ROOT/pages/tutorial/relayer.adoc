@@ -1,49 +1,49 @@
-# Using Relayer for Sending Transactions
+:page-title: 使用 Relayer 发送交易
 
-In this tutorial, we will explore how to use the xref:module/relayers.adoc[Relayers] to send transactions. We will cover:
+在本教程中，我们将探讨如何使用 xref:module/relayers.adoc[Relayers] 发送交易。我们将介绍：
 
-* Checking relayer information.
-* Sending a transaction.
-* Checking the relayer status.
+* 检查 relayer 信息。
+* 发送交易。
+* 检查 relayer 状态。
 
-By the end of this tutorial, you will have a basic understanding of how to use the Relayer to interact with smart contracts.
+在本教程结束时，您将对如何使用 Relayer 与智能合约交互有一个基本的了解。
 
 [[pre-requisites]]
-== Pre-requisites
+== 前提条件
 
-* OpenZeppelin Defender account.
-* https://nodejs.org/en[NodeJS and NPM, window=_blank]
-* https://www.npmjs.com/package/ts-node[Typescript for Node js, window=_blank]
-* Any IDE or text editor
+* OpenZeppelin Defender 账户。
+* https://nodejs.org/en[NodeJS 和 NPM, window=_blank]
+* https://www.npmjs.com/package/ts-node[用于 Node js 的 Typescript, window=_blank]
+* 任何 IDE 或文本编辑器
 
 [[Set-Up-Relayer]]
-== 1. Set Up Relayer
+== 1. 设置 Relayer
 
-Let's start by creating a Relayer:
+让我们从创建一个 Relayer 开始：
 
-* Open https://defender.openzeppelin.com/#/relayers[Defender Operate & Automate] in a web browser.
+* 在 Web 浏览器中打开 https://defender.openzeppelin.com/#/relayers[Defender Operate & Automate]。
 +
-image::tutorial-relayer-step1.png[Manage Relayer]
-* Click on *Create Relayer* with the name ETH Sepolia Relayer and Sepolia network.
+image::tutorial-relayer-step1.png[管理 Relayer]
+* 使用名称 ETH Sepolia Relayer 和 Sepolia 网络点击 *创建 Relayer*。
 +
-image::tutorial-relayer-step2.png[Create Relayer]
-* Fund it with some Sepolia ETH. This relayer will send and pay for the automated transactions.
-* To create an API key for a Relayer, click on the Relayer and then on the *More* button to expand the dropdown and select *Create API Key*
+image::tutorial-relayer-step2.png[创建 Relayer]
+* 用一些 Sepolia ETH 为其提供资金。此 relayer 将发送并支付自动交易的费用。
+* 要为 Relayer 创建 API 密钥，请点击 Relayer，然后点击 *更多* 按钮以展开下拉菜单并选择 *创建 API 密钥*
 +
-image::tutorial-relayer-step3.png[Create Relayer API]
-* Now you can set API key expiration in minutes, hours or days.
+image::tutorial-relayer-step3.png[创建 Relayer API]
+* 现在您可以以分钟、小时或天为单位设置 API 密钥过期时间。
 +
-image::tutorial-relayer-step3-1.png[Save Relayer API]
-* Once the API Key is created, make sure to write down the secret key. The API secret is only visible once during the creation — if you don’t write it down, it’s lost forever.
+image::tutorial-relayer-step3-1.png[保存 Relayer API]
+* 创建 API 密钥后，请务必写下密钥。API 密钥仅在创建期间可见一次——如果您不写下来，它将永远丢失。
 +
-image::tutorial-relayer-step4.png[Save Relayer API]
+image::tutorial-relayer-step4.png[保存 Relayer API]
 
 [[Check-Relayer-Information]]
-== 2. Check Relayer Information
+== 2. 检查 Relayer 信息
 
-*  Let's start by checking the information of our relayer.
-*  Add Relayer in `.env` File
-*  Edit `.env` file in your project root directory and add your Relayer API Key and Secret:
+*  让我们从检查我们的 relayer 的信息开始。
+*  在 `.env` 文件中添加 Relayer
+*  在您的项目根目录中编辑 `.env` 文件并添加您的 Relayer API 密钥和密钥：
 +
 [source,jsx]
 ----
@@ -51,8 +51,8 @@ RELAYER_API_KEY=your_api_key
 RELAYER_SECRET_KEY=your_api_secret
 ----
 
-* Create a file named `storeObject.ts` in the project. 
-* Now let’s add the following code:
+* 在项目中创建一个名为 `storeObject.ts` 的文件。
+* 现在让我们添加以下代码：
 +
 [source,jsx]
 ----
@@ -82,25 +82,25 @@ process.exitCode = 1;
 
 ----
 
-* Execute the script to check the relayer information:
+* 执行脚本以检查 relayer 信息：
 +
 [source,jsx]
 ----
 ts-node storeObject.ts
 ----
 
- Alternatively, if you want to use Node directly:
+ 或者，如果您想直接使用 Node：
 [source,jsx]
 ----
 node storeObject.js
 ----
 
 [[Send-Transaction]]
-== 3. Send Transaction
+== 3. 发送交易
 
-Next, we will send a transaction using the relayer. 
+接下来，我们将使用 relayer 发送交易。
 
-* Let’s edit the same file and add the following code:
+* 让我们编辑同一个文件并添加以下代码：
 +
 [source,jsx]
 ----
@@ -113,37 +113,37 @@ const tx = await client.relaySigner.sendTransaction({
 console.log('Transaction sent! Hash:', tx.hash);
 ----
 
-Here we are using the Sepolia https://sepolia.etherscan.io/address/0x1B9ec5Cc45977927fe6707f2A02F51e1415f2052[Box contract] as the target, which is:
+在这里，我们使用 Sepolia https://sepolia.etherscan.io/address/0x1B9ec5Cc45977927fe6707f2A02F51e1415f2052[Box 合约]作为目标，它是：
 [source,jsx]
 ----
 0x1B9ec5Cc45977927fe6707f2A02F51e1415f2052
 ----
 
-and data is the encoded version of the store() function with ‘10’ as input parameter.
+并且数据是带有 ‘10’ 作为输入参数的 store() 函数的编码版本。
 [source,jsx]
 ----
 0x6057361d000000000000000000000000000000000000000000000000000000000000000a
 ----
 
-* Execute the script to send a transaction:
+* 执行脚本以发送交易：
 +
 [source,jsx]
 ----
 ts-node storeObject.ts
 ----
 
- Alternatively, if you want to use Node directly:
+ 或者，如果您想直接使用 Node：
 [source,jsx]
 ----
 node storeObject.js
 ----
 
 [[Check-Transaction-Status]]
-== 4. Check Transaction Status
+== 4. 检查交易状态
 
-Finally, let's check the status of our transaction status.
+最后，让我们检查我们的交易状态。
 
-* Edit the file again and add the following code:
+* 再次编辑文件并添加以下代码：
 +
 [source,jsx]
 ----
@@ -151,22 +151,22 @@ const txUpdate = await client.relaySigner.getTransaction(tx.transactionId);
 console.log('Tx Status', JSON.stringify(txUpdate, null, 2));
 ----
 
-* Execute the script to check the relayer status:
+* 执行脚本以检查 relayer 状态：
 +
 [source,jsx]
 ----
 ts-node storeObject.ts
 ----
 
- Alternatively, if you want to use Node directly:
+ 或者，如果您想直接使用 Node：
 [source,jsx]
 ----
 node storeObject.js
 ----
 
 [[Next-Steps]]
-== 5. Next Steps
-Congratulations! You have successfully used the Relayer to check information, send transactions, and verify the transaction status. By following this tutorial, you have gained a fundamental understanding of how to interact with smart contracts using the Relayer.
+== 5. 下一步
+恭喜！您已成功使用 Relayer 来检查信息、发送交易和验证交易状态。通过遵循本教程，您已经对如何使用 Relayer 与智能合约交互有了基本的了解。
 
-* For more information on using Relayer, refer to the xref:/module/relayers.adoc[Relayers] documentation.
-* Explore the xref::tutorial/actions.adoc[Actions] to automate your smart contract operational tasks with easy integration with the rest of Defender.
+* 有关使用 Relayer 的更多信息，请参阅 xref:/module/relayers.adoc[Relayers] 文档。
+* 探索 xref::tutorial/actions.adoc[Actions] 以自动化您的智能合约运营任务，并轻松与 Defender 的其余部分集成。

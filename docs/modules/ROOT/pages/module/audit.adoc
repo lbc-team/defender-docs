@@ -1,84 +1,84 @@
 [[audit]]
-= Audit
+= 审计
 
-Audit allows you to summon our team of security experts to verify your system works as intended with the highest level of scrutiny. You can track issues and resolutions, and interact directly with auditors for faster and more efficient communication. 
+审计允许您召集我们的安全专家团队，以最高的审查级别来验证您的系统是否按预期工作。您可以跟踪问题和解决方案，并与审计员直接互动，以实现更快，更有效的沟通。
 
 [[use-cases]]
-== Use cases
+== 用例
 
-* Maintain a searchable repository of all smart contract audits and issues.
-* Streamline the interactions between auditors and developers.
-* Automate the fix-review process for all identified issues.
-* Track all issues identified in an audit to completion.
+* 维护所有智能合约审计和问题的可搜索存储库。
+* 简化审计员和开发人员之间的互动。
+* 自动化所有已识别问题的修复审查过程。
+* 跟踪审计中识别出的所有问题，直到完成。
 
 [[audit-reports]]
-== Auditors and Reports
+== 审计员和报告
 
-Auditors have special roles in Defender. Audit Managers are able to sync audit reports to Defender from GitHub and add the Auditors, which are able to read and track issues and questions. Audit Manager can also identify which members of your team have permission to read or comment on audits.
+审计员在 Defender 中扮演着特殊的角色。审计管理员能够从 GitHub 将审计报告同步到 Defender，并添加审计员，这些审计员能够读取和跟踪问题。审计管理员还可以确定您的团队的哪些成员有权读取或评论审计。
 
-Once an Audit Manager syncs and delivers an audit report to Defender, it will be visible to any team members who have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
+一旦审计管理员同步审计报告并将其发送到 Defender，任何被分配了审计读取或审计评论角色的团队成员都将可以看到它。所有活动和历史审计报告都将可见，团队成员可以单击任何审计报告以查看详细信息。
 
-image::audit-status.png[Audit Status Header]
+image::audit-status.png[审计状态标题]
 
-The Audit page initially includes the project's name, status, and date of report. Below this, you can find the executive summary of the audit, which provides an overview of the audit's findings and the overall security posture of the smart contract or project. It also includes links and information on the scope, timeline, and Auditors.
+审计页面最初包括项目的名称、状态和报告日期。在此之下，您可以找到审计的执行摘要，其中提供了审计发现的概述以及智能合约或项目的整体安全态势。它还包括有关范围、时间表和审计员的链接和信息。
 
-Below the executive summary, you can find the differente sections of the audit.
+在执行摘要下方，您可以找到审计的不同部分。
 
-=== Overview
+=== 概述
 
-The "Overview" section provides context and background information about the project or smart contract being audited. This section typically starts with a brief introduction to the project, including the project's name, purpose, and a general description of what it aims to achieve. It's followed by an overview of the architecture and key components of the project, supported by a high-level description of how the smart contract or blockchain application is structured and how different modules or components interact with each other. Information about the technology stack used in the project may be included. This can encompass the programming languages, libraries, frameworks, and blockchain platforms employed in the development.
+“概述”部分提供了关于被审计项目或智能合约的背景信息。本节通常以对项目的简要介绍开始，包括项目的名称、目的以及对其旨在实现的目标的一般描述。接下来是对项目架构和关键组件的概述，并辅以智能合约或区块链应用程序的结构以及不同模块或组件如何相互作用的高级描述。可以使用项目中使用的技术堆栈的信息。这可以包括开发中使用的编程语言、库、框架和区块链平台。
 
-Depending on the audit, this section may also contain additional information about the smart contract's privileged roles to explain its purpose and responsibilities within the project. This helps auditors and readers understand who has control over critical functions and what actions they can perform. Similarly, trust assumptions are commonly mentioned to outline implicit or explicit assumptions made by the project's developers about the security and reliability of external components, services, or entities that the project relies on. Lastly, the "Overview" section may include client-found vulnerabilities if provided by the client. These are vulnerabilities or issues that have been identified by the project's users or clients before the audit, helping the auditors understand the context and history of security concerns related to the project.
+根据审计的不同，本节可能还包含有关智能合约特权角色的其他信息，以解释其在项目中的目的和职责。这有助于审计员和读者了解谁可以控制关键功能以及他们可以执行哪些操作。类似地，通常会提到信任假设，以概述项目开发人员对项目依赖的外部组件、服务或实体的安全性和可靠性所做的隐式或显式假设。最后，“概述”部分可能包括客户端发现的漏洞（如果客户端提供）。这些是由项目的用户或客户端在审计之前识别出的漏洞或问题，有助于审计员了解与项目相关的安全问题的背景和历史。
 
-=== Issues
+=== 问题
 
-The "Issues" section provides an in-depth examination of security vulnerabilities, bugs, or concerns discovered during the audit process. Within this section, you can filter the issues by content, severity, or status. Filtering by content allows you to look for issues with specific titles or descriptions. Filtering by severity allows you to look for issues with a specific severity level, like Critical, High, Medium, Low, Note, or Client Reported. Filtering by status allows you to look for issues with a specific status, like Unresolved, No Response, Responded, Resolved, Partially Resolved, Acknowledged Not Resolved, or Acknowledged Will Resolve.
+“问题”部分提供了对审计过程中发现的安全漏洞、错误或问题的深入检查。在本节中，您可以按内容、严重性或状态过滤问题。按内容过滤允许您查找具有特定标题或描述的问题。按严重性过滤允许您查找具有特定严重性级别的问题，例如严重、高、中、低、“注意”或“客户端报告”。按状态过滤允许您查找具有特定状态的问题，例如未解决、未响应、已响应、已解决、部分解决、已确认未解决或已确认将解决。
 
-image::audit-filter.png[Audit Issue Filters]
+image::audit-filter.png[审计问题过滤器]
 
-Each issue within this section contains a title, description, date, and status. You can click on one to expand the information and be able to respond to it.
+本节中的每个问题都包含标题、描述、日期和状态。您可以单击一个问题来展开信息并能够对其进行回复。
 
-image::audit-side.png[Audit Side Page]
+image::audit-side.png[审计边页]
 
-The description explains the nature of the issue, its potential impact, and any technical details necessary for understanding the problem. The issue is also tagged with a severity assessment, helping to describe the impact, likelihood, and difficulty of an issue for prioritization and transparency.
+描述解释了问题的性质、潜在影响以及理解问题所需的任何技术细节。该问题还标有严重性评估，有助于描述问题的影响、可能性和难度，以便进行优先级排序和提高透明度。
 
-=== Recommendations
+=== 建议
 
-The "Recommendations" section offers actionable guidance to improve the security posture of the project based on the audit results. This section is often composed of mitigation strategies, monitor recommendations, incident response plans, potential pitfalls, and other technical and non-technical advice.
+“建议”部分基于审计结果提供可操作的指导，以提高项目的安全态势。本节通常由缓解策略、监控建议、事件响应计划、潜在陷阱和其他技术和非技术建议组成。
 
-Monitoring and incident response recommendations included in this section are crucial for ensuring the ongoing security and resilience of your blockchain project or smart contract. These recommendations focus on proactive measures to detect and respond to security incidents, breaches, or anomalies effectively. The information given will provide details on how to apply these recommendations with Defender xref:module/monitor.adoc[Monitors], xref:module/actions.adoc[Actions], and xref:module/actions.adoc#workflows[Workflows]. We recommend following the tutorials found in this documentation to learn how to use the Defender modules, like the xref:tutorial/monitor.adoc[Monitor], xref:tutorial/actions.adoc[Actions], and xref:tutorial/workflows.adoc[Workflow] tutorials.
+本节中包含的监控和事件响应建议对于确保您的区块链项目或智能合约的持续安全性和弹性至关重要。这些建议侧重于主动措施，以有效检测和响应安全事件、漏洞或异常。提供的信息将详细说明如何使用 Defender xref:module/monitor.adoc[监视器]、xref:module/actions.adoc[操作] 和 xref:module/actions.adoc#workflows[工作流] 应用这些建议。我们建议您按照本文档中的教程学习如何使用 Defender 模块，例如 xref:tutorial/monitor.adoc[监视器]、xref:tutorial/actions.adoc[操作] 和 xref:tutorial/workflows.adoc[工作流] 教程。
 
-Recommendations often include:
+建议通常包括：
 
-* *Event Monitoring*: event monitoring to track and analyze events emitted by your smart contracts. This is essential for identifying unusual or unexpected behavior that may indicate a security issue.
-* *Custom Alerts*: Custom alerts based on specific conditions or events. This aligns with the incident response recommendation to have alerting mechanisms in place.
-* *Automated Response*: Automated responses to specific events or conditions, enabling rapid incident mitigation. Combined with xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
-* *Threshold Monitoring*: Monitoring for unusual deviations from established thresholds is a common incident response practice. Defender can assist in setting up threshold-based monitoring with xref:module/monitor.adoc[Monitors] and to react with automatic xref:module/actions.adoc#workflows[Workflows].
-* *Deployment Considerations*: Minimize risk while avoiding unnecessary delays and post-deployment using Defender xref:module/deploy.adoc[Deploy]. Employ automatic analysis to avoid storage collisions or other issues and benefit from features like cross-chain deterministic deployments, bytecode verification, and more.
+* *事件监控*：事件监控，用于跟踪和分析您的智能合约发出的事件。这对于识别可能表明安全问题的异常或意外行为至关重要。
+* *自定义警报*：基于特定条件或事件的自定义警报。这与事件响应建议相符，即要有警报机制。
+* *自动响应*：对特定事件或条件的自动响应，从而实现快速事件缓解。与 xref:module/actions.adoc[操作] 和 xref:module/actions.adoc#workflows[工作流] 结合使用。
+* *阈值监控*：监控与已建立阈值的异常偏差是一种常见的事件响应实践。Defender 可以帮助使用 xref:module/monitor.adoc[监视器] 设置基于阈值的监控，并使用自动 xref:module/actions.adoc#workflows[工作流] 做出反应。
+* *部署注意事项*：在最大程度地降低风险的同时，避免不必要的延迟并使用 Defender xref:module/deploy.adoc[部署] 进行部署后部署。采用自动分析以避免存储冲突或其他问题，并受益于跨链确定性部署、字节码验证等功能。
 
-=== Conclusion
+=== 结论
 
-The "Conclusion" section summarizes the audit's findings and provides an overall assessment of the project's security posture. This section begins with a concise summary of the key findings from the audit, including a recap of critical security vulnerabilities, issues, or concerns discovered during the assessment with the security levels assigned to each identified issue, helping stakeholders understand which issues posed the highest risks. Depending on the issues found, the "Conclusion" section may also restate the high-priority recommendations for addressing issues, emphasizing the immediate actions needed to enhance security.
+“结论”部分总结审计的发现，并提供对项目安全态势的总体评估。本节首先简明扼要地总结审计的关键发现，包括在评估期间发现的关键安全漏洞、问题或疑虑的概括，以及分配给每个已识别问题的安全级别，从而帮助利益相关者了解哪些问题构成了最高的风险。根据发现的问题，“结论”部分可能还会重申解决问题的高优先级建议，从而强调增强安全性所需的立即行动。
 
-This section will also communicate the risks associated with the project's current security status to help project owners, investors, and users make informed decisions. Additional valuable insights may be provided to support certain decisions by stakeholders, such as deployment, further development, and improvements. If recommendations were provided, these will be restated in this section as a high-level overview.
+本节还将传达与项目当前安全状态相关的风险，以帮助项目所有者、投资者和用户做出明智的决策。可以提供其他有价值的见解，以支持利益相关者的某些决策，例如部署、进一步开发和改进。如果提供了建议，这些建议将在本节中以高级概述的形式重申。
 
 [[fix-review]]
-== Fix-Review process
+== 修复审查流程
 
-After an audit report is delivered, the individual issues within a report are open to response and comment until they are each finalized by an Audit Manager. Auditors and team members assigned the Audit Comment role are allowed to respond and comment. Team members may ask questions to Auditors or supply information.
+交付审计报告后，报告中的各个问题都可以进行回复和评论，直到审计管理员最终确定每个问题。被分配了审计评论角色的审计员和团队成员可以回复和评论。团队成员可以向审计员提问或提供信息。
 
-In order to initiate a response on an issue, click on the issue within the "Issues" section of the audit page and then click on "Reply to this issue".
+为了启动对问题的回复，请单击审计页面“问题”部分中的问题，然后单击“回复此问题”。
 
-image::audit-new-issue.png[Audit Issue Response]
+image::audit-new-issue.png[审计问题回复]
 
-Team members may leave comments for auditors. Specifically, team members can supply links to pull requests (PRs) or commits in their GitHub repository, which represent fixes associated with a specific issue. Multiple links may be added.
+团队成员可以为审计员留下评论。具体来说，团队成员可以提供指向其 GitHub 存储库中拉取请求 (PR) 或提交的链接，这些链接代表与特定问题相关的修复。可以添加多个链接。
 
-image::audit-reply-issue.png[Audit Issue Reply]
+image::audit-reply-issue.png[审计问题回复]
 
-Defender will keep and display a trail of all communications between the auditors and team members on each issue.
+Defender 将保留并显示审计员和团队成员之间关于每个问题的所有通信记录。
 
-image::audit-trail.png[Audit Trail]
+image::audit-trail.png[审计跟踪]
 
-Depending on the outcome of fixes and reviews, auditors may update the status of issues to Partially Resolved or Resolved. Once the fix-review process is complete for all issues, the Audit Manager will finalize the audit, after which the full trail of activity is visible, but no more responses or comments are allowed. At the end of the audit, the Audit Manager can also provide a PDF report of the audit, including the fix-review process.
+根据修复和审查的结果，审计员可能会将问题的状态更新为“部分解决”或“已解决”。一旦所有问题的修复审查过程完成，审计管理员将最终确定审计，之后可以看到完整的活动轨迹，但不再允许回复或评论。在审计结束时，审计管理员还可以提供审计的 PDF 报告，包括修复审查过程。
 
-For any questions regarding your audit process, please get in touch with your assigned Audit Manager. You can provide Defender feedback via xref:index.adoc#feedback[its feedback form] — your comments and suggestions will be instrumental in helping us shape the future of the Audit module!
+如果您对审计过程有任何疑问，请与您指定的审计管理员联系。您可以通过 xref:index.adoc#feedback[其反馈表]提供 Defender 反馈 — 您的意见和建议将有助于我们塑造审计模块的未来！

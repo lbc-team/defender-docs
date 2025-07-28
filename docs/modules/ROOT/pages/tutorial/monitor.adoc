@@ -1,81 +1,83 @@
-# Monitor a smart contract for on-chain activity 
+:page-title: 监控链上活动的智能合约
 
-Defender allows you to monitor smart contract transactions and events across chains. This tutorial shows how to build a customized Monitor template and use it in a real-world context to monitor a https://uniswap.org/[Uniswap V2, window=_blank] pool.
+# 监控链上活动的智能合约
+
+Defender 允许你跨链监控智能合约的交易和事件。本教程展示了如何构建一个自定义的监控模板，并在实际场景中使用它来监控一个 https://uniswap.org/[Uniswap V2，window=_blank] 池。
 
 [[pre-requisites]]
-== Pre-requisites
+== 前提条件
 
-* OpenZeppelin Defender account.
+* OpenZeppelin Defender 账户。
 
-NOTE: Learn to deploy contracts to monitor using Defender xref::tutorial/deploy.adoc[here]!
+NOTE: 学习如何使用 Defender xref::tutorial/deploy.adoc[在此] 部署要监控的合约！
 
 [[configure]]
-== 1. Configure the monitor
+== 1. 配置监控器
 
-You will monitor the `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc` contract in the Ethereum mainnet, which is the https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH pool, window=_blank]. This contract has constant activity, making it a good candidate to see how quick monitors are. To configure a monitor, follow these steps:
+你将监控 Ethereum 主网中的 `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc` 合约，它是 https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH 池，window=_blank]。该合约有持续的活动，使其成为查看监控器速度的好选择。要配置监控器，请按照以下步骤操作：
 
-. Open https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor, window=_blank] in a web browser.
-. Click on *Create Monitor*.
+. 在 Web 浏览器中打开 https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor，window=_blank]。
+. 点击 *创建监控器*。
 +
-image::tutorial-monitor-landing.png[Monitor landing page]
+image::tutorial-monitor-landing.png[监控器登录页面]
 
-. Name this monitor as `Uniswap V2: USDC-ETH Monitor`.
-. Select the `Financial` risk category.
-. Click the *Contracts* field and select to add a new address.
-. Fill the form with the following parameters and select it as contract to monitor:
-
-+
-* Name: `Uniswap V2: USDC-ETH Pool`
-* Network: `Mainnet`
-* Address: `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
-
-. Select `1 confirmation block`. Defender will automatically pick up the ABI, so we can select the transaction filters next.
+. 将此监控器命名为 `Uniswap V2: USDC-ETH Monitor`。
+. 选择 `Financial` 风险类别。
+. 点击 *合约* 字段，然后选择添加新地址。
+. 使用以下参数填写表单，并选择它作为要监控的合约：
 
 +
-image::tutorial-monitor-first.png[Monitor added contract]
+* 名称: `Uniswap V2: USDC-ETH Pool`
+* 网络: `Mainnet`
+* 地址: `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
 
-. Add the `status == "success"` parameter to *Transaction Properties* to filter by transaction-level data and confirm transactions are successfully confirmed and not reverted.
-
-+
-image::tutorial-monitor-transaction-filters.png[Monitor transaction filters]
-
-. Select the `Swap` event from the dropdown menu. This event is emitted every time a swap is made in the pool.
+. 选择 `1 confirmation block`。Defender 将自动拾取 ABI，因此我们可以接下来选择交易过滤器。
 
 +
-image::tutorial-monitor-event-filter.png[Monitor event filter]
+image::tutorial-monitor-first.png[监控器添加的合约]
 
-. Skip function-level filters as you are already tracking all `Swap` events emitted from the contract. 
-. Select a notification channel of your choice (such as email).
-. Click on *Save Monitor*.
+. 将 `status == "success"` 参数添加到 *交易属性*，以按交易级别的数据进行过滤，并确认交易已成功确认且未回滚。
 
 +
-image::tutorial-monitor-alerts.png[Monitor alerts]
+image::tutorial-monitor-transaction-filters.png[监控器交易过滤器]
 
-Your monitor is now running!
+. 从下拉菜单中选择 `Swap` 事件。每次在池中进行交换时都会发出此事件。
 
-image::tutorial-monitor-card.png[Monitor card]
++
+image::tutorial-monitor-event-filter.png[监控器事件过滤器]
+
+. 跳过函数级别的过滤器，因为你已经在跟踪从合约发出的所有 `Swap` 事件。
+. 选择你选择的通知通道（例如电子邮件）。
+. 点击 *保存监控器*。
+
++
+image::tutorial-monitor-alerts.png[监控器警报]
+
+你的监控器现在正在运行！
+
+image::tutorial-monitor-card.png[监控器卡片]
 
 [[receive-alerts]]
-== 2. Receive alerts
+== 2. 接收警报
 
-Alerts will start rolling in as long as the monitor is active. Your notifications should look like this if you selected email as the notification channel:
+只要监控器处于活动状态，警报就会开始滚动。如果选择电子邮件作为通知通道，你的通知应如下所示：
 
-image::tutorial-monitor-receive.png[Monitor Telegram alert]
+image::tutorial-monitor-receive.png[监控器 Telegram 警报]
 
-You can pause or delete monitors on the https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor, window=_blank] page. This one will trigger frequently so you will likely want to pause it using the toggle on the right after you receive a couple of alerts. You can also save a monitor as a template by clicking on the dotted icon of its card and `Save as Template`.
+你可以在 https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor，window=_blank] 页面上暂停或删除监控器。这个会频繁触发，因此在收到几个警报后，你可能需要使用右侧的切换按钮暂停它。你还可以通过单击其卡片的点状图标并选择“另存为模板”来将监控器另存为模板。
 
-image::tutorial-monitor-save-template.png[Monitor save template]
+image::tutorial-monitor-save-template.png[监控器保存模板]
 
 [[next-steps]]
-== Next steps
+== 下一步
 
-Congratulations! You can modify the monitor to filter for specific `Swap` data or target another pool. In case you are interested in advanced use cases, we are working on monitor-related guides.
+恭喜！你可以修改监控器以过滤特定的 `Swap` 数据或定位另一个池。如果你对高级用例感兴趣，我们正在研究与监控器相关的指南。
 
-NOTE: After setting up a monitor, we recommend creating Actions on Defender. Learn how to use Actions with its tutorial xref::tutorial/actions.adoc[here].
+NOTE: 设置监控器后，我们建议在 Defender 上创建 Actions。 学习如何使用 Actions 及其教程 xref::tutorial/actions.adoc[在此]。
 
 [[references]]
-== References
+== 参考
 
-* xref::module/actions.adoc[Actions Documentation]
-* xref::settings.adoc#notifications[Manage Notificacion Channels Documentation]
-* https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH Pool, window=_blank]
+* xref::module/actions.adoc[Actions 文档]
+* xref::settings.adoc#notifications[管理通知渠道文档]
+* https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH 池，window=_blank]

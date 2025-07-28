@@ -1,40 +1,40 @@
 [[actions]]
 = Actions
 
-Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/actions.adoc#workflows[Workflows] modules.
+Actions 允许你为链上和链下操作实现自定义的应用逻辑。你可以启用对 xref:module/monitor.adoc[Monitor] 和 xref:module/actions.adoc#workflows[Workflows] 模块检测到的威胁的自动响应。
 
 [[use-cases]]
-== Use cases
+== 使用场景
 
-* Automate smart contract operations
-* Execute actions as response to a xref:module/monitor.adoc[Monitor] alert
-* Automate xref:module/actions.adoc#workflows[Workflow] steps with Actions
-* Call external APIs and interact with other smart contracts
+* 自动化智能合约操作
+* 执行操作以响应 xref:module/monitor.adoc[Monitor] 警报
+* 使用 Actions 自动化 xref:module/actions.adoc#workflows[Workflow] 步骤
+* 调用外部 API 并与其他智能合约交互
 
 [[actions-reference]]
 == Actions
 
-Actions are automated Javascript pieces of code that can be executed via triggers.
+Actions 是自动化的 JavaScript 代码段，可以通过触发器执行。
 
-image::auto-action-general-info.png[Automatic Action]
+image::auto-action-general-info.png[自动操作]
 
 [[triggers]]
-=== Triggers
+=== 触发器
 
-The following triggers are supported:
+支持以下触发器：
 
-* *Schedule*: Choose a frequency, and Defender will invoke the function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of one run and the beginning of the next one. Alternatively, it's possible to specify when the action should run using https://crontab.cronhub.io/[cron expressions, window=_blank].
+* *计划*: 选择一个频率，Defender 将按指定的间隔调用该函数。请注意，指定的间隔是两个连续执行开始之间的时间间隔，_而不是_一个运行结束和下一个运行开始之间的时间间隔。或者，可以使用 https://crontab.cronhub.io/[cron 表达式, window=_blank] 指定操作的运行时间。
 
-* *Webhook*: Defender will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
+* *Webhook*: Defender 将为该操作创建一个 webhook URL，每当向该端点发送 HTTP POST 请求时，该 URL 将被执行。该 URL 可以随时重新生成。调用后，HTTP 请求信息将被注入到操作中，并且 HTTP 响应将包括操作运行信息以及从操作返回的任何数据。
 
-IMPORTANT: When sending requests to the webhook, make sure to include the `Content-Type: application/json` header. We have a strict requirement for this header to be present in the request. Otherwise you will see `415 Unsupported Media Type` error.
+重要提示: 当向 webhook 发送请求时，请确保包含 `Content-Type: application/json` 头部。我们严格要求请求中必须存在这个头部。否则，你将看到 `415 Unsupported Media Type` 错误。
 
-* *Monitor*: Triggered by a Defender xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
+* *Monitor*: 由 Defender xref:module/monitor.adoc[Monitor] 触发。它将包含一个 body 属性，其中包含触发事件的详细信息，你可以使用这些信息来运行自定义逻辑。
 
 [[environment]]
-=== Environment
+=== 环境
 
-Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment. The latest action dependenacy version `v2025-01-16` has the following dependencies:
+Actions 在一个具有 256mb RAM 和 5 分钟超时时间的 https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 环境, window=_blank]中运行。每个操作的代码大小必须小于 5mb。为了便于使用，环境中预安装了一组常用依赖项。最新的 action 依赖版本 `v2025-01-16` 具有以下依赖项：
 
 [source,jsx]
 ----
@@ -58,40 +58,41 @@ Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environm
 "web3": "1.9.0"
 ----
 
-WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated. Impacted dependencies are defender-admin-client, defender-autotask-client, defender-autotask-utils, defender-kvstore-client, defender-relay-client, defender-sentinel-client
+WARNING: 不在 `@openzeppelin` 命名空间下的 Defender 依赖项现在已被弃用。受影响的依赖项包括 defender-admin-client，defender-autotask-client，defender-autotask-utils，defender-kvstore-client，defender-relay-client，defender-sentinel-client
 
-NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-sdk/tree/main/examples/custom-ethers-pkg[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful!
+NOTE: 如果需要其他依赖项，则可以使用 JavaScript 模块打包器，例如 rollup 或 webpack。参考 https://github.com/OpenZeppelin/defender-sdk/tree/main/examples/custom-ethers-pkg[这个示例项目, window=_blank] 了解如何操作。请与我们联系，添加你认为其他用户会觉得有用的依赖项！
 
-NOTE: We love https://www.typescriptlang.org/[Typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[openzeppelin/defender-sdk-action-client, window=_blank] package for type definitions for the event payload.
+NOTE: 我们 OpenZeppelin 开发团队非常喜欢 https://www.typescriptlang.org/[Typescript, window=_blank]，我们也希望你也喜欢！如果你想用 TypeScript 编写你的 actions，你需要首先使用 `tsc` 或你选择的打包器编译它们，然后上传生成的 JavaScript 代码。不幸的是，我们不支持在用户界面中直接使用 TypeScript 编码。所有 `defender-sdk` 包都是用 TypeScript 编写的，并且打包了它们的类型声明。你也可以使用 https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[openzeppelin/defender-sdk-action-client, window=_blank] 包来获取事件负载的类型定义。
 
 [[runtime-upgrades]]
-=== Runtime Upgrades
+=== 运行时升级
 
-Actions must be kept updated with recent Node.js runtime versions to ensure they run in an up-to-date and secure environment. Occasionally, we enforce runtime upgrades to all Actions to a minimum runtime version. The process consists of:
+Actions 必须与最新的 Node.js 运行时版本保持同步，以确保它们在最新的安全环境中运行。有时，我们会强制对所有 Actions 进行运行时升级，以达到最低运行时版本。该过程包括：
 
-1. Sending email notifications before the automatic upgrade.
-2. Displaying a UI banner under the actions page to warn about the upcoming automatic upgrade.
-3. Making a forum announcement.
-4. On the automatic upgrade day, Defender automatically upgrades all action runtimes to the minimum required version.
+1. 在自动升级之前发送电子邮件通知。
+2. 在 actions 页面下显示 UI 横幅，以警告即将进行的自动升级。
+3. 发布论坛公告。
+4. 在自动升级当天，Defender 会自动将所有 action 运行时升级到最低要求的版本。
 
-WARNING: we suggest checking your Actions, making necessary changes, and upgrading in advance to prevent any breaking changes.
+WARNING: 我们建议你检查你的 Actions，进行必要的更改，并提前升级，以防止任何重大更改。
 
 [[defining-code]]
-=== Defining code
+=== 定义代码
 
 [[handler-function]]
-==== Handler function
+==== 处理函数
 
-Your code must export an async `handler` function that will be invoked on each execution of the action.
+你的代码必须导出一个异步 `handler` 函数，该函数将在每次执行 action 时被调用。
 
 [source,jsx]
 ----
 exports.handler = async function(event) {
   // Your code here
+  // 你的代码
 }
 ----
 
-The following interface contains the `event` types injected by Defender when invoking an Action:
+以下接口包含 Defender 在调用 Action 时注入的 `event` 类型：
 
 [source,typescript]
 ----
@@ -140,9 +141,9 @@ export interface ActionEvent {
 ----
 
 [[relayer-integration]]
-==== Relayer integration
+==== Relayer 集成
 
-If you connect your automatic action to a relayer, then Defender will automatically inject temporary credentials to access the relayer from the action code. Simply pass the event object to the relayer client in place of the credentials:
+如果将你的自动 action 连接到 relayer，则 Defender 将自动注入临时凭据，以便从 action 代码访问 relayer。只需将事件对象传递给 relayer 客户端，以代替凭据：
 
 [source,jsx]
 ----
@@ -152,12 +153,13 @@ exports.handler = async function(event) {
   const client = new Defender(event);
 
   // Use relayer for sending txs or querying the network...
+  // 使用 relayer 发送交易或查询网络...
 }
 ----
 
-This allows you to send transactions using the relayer from actions without having to set up any API keys or secrets. Furthermore, you can also use the relayer's JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
+这允许你从 actions 发送交易，而无需设置任何 API 密钥或密钥。此外，你还可以使用 relayer 的 JSON RPC 端点来查询任何 Ethereum 网络，而无需为外部网络提供商配置 API 密钥。
 
-We also support https://www.npmjs.com/package/@openzeppelin/defender-relay-client#ethersjs[`ethers.js`] for making queries or sending transactions via the relayer. To use ethers.js replace the above snippet with this:
+我们还支持 https://www.npmjs.com/package/@openzeppelin/defender-relay-client#ethersjs[`ethers.js`] 通过 relayer 进行查询或发送交易。要使用 ethers.js，请将以上代码段替换为以下代码：
 
 [source,jsx]
 ----
@@ -168,12 +170,13 @@ exports.handler = async function(event) {
   const provider = new DefenderRelayProvider(event);
   const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
   // Use provider and signer for querying or sending txs from ethers, for example...
+  // 使用 provider 和 signer 从 ethers 进行查询或发送交易，例如...
   const contract = new ethers.Contract(ADDRESS, ABI, signer);
   await contract.ping();
 }
 ----
 
-If you prefer https://www.npmjs.com/package/@openzeppelin/defender-relay-client#web3js[`web3.js`]:
+如果你喜欢 https://www.npmjs.com/package/@openzeppelin/defender-relay-client#web3js[`web3.js`]:
 
 [source,jsx]
 ----
@@ -184,19 +187,20 @@ exports.handler = async function(event) {
   const provider = new DefenderRelayProvider(event, { speed: 'fast' });
   const web3 = new Web3(provider);
   // Use web3 instance for querying or sending txs, for example...
+  // 使用 web3 实例进行查询或发送交易，例如...
   const [from] = await web3.eth.getAccounts();
   const contract = new web3.eth.Contract(ABI, ADDRESS, { from });
   await contract.methods.ping().send();
 }
 ----
 
-==== Monitor invocations
+==== Monitor 调用
 
-Actions triggered from a Monitor can have two types of body properties and scheme, depending what type of Monitor triggered the action:
+从 Monitor 触发的 Actions 可以有两种类型的 body 属性和 scheme，具体取决于触发 action 的 Monitor 类型：
 
-* In the case of a Defender monitor, the body will contain the xref:module/monitor.adoc#monitor_event_schema[monitor event schema].
+* 在 Defender monitor 的情况下，body 将包含 xref:module/monitor.adoc#monitor_event_schema[monitor 事件 schema]。
 
-If the action is written in TypeScript, `BlockTriggerEvent` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used.
+如果 action 是用 TypeScript 编写的，则可以使用 https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] 包中的 `BlockTriggerEvent` 类型。
 
 [source,jsx]
 ----
@@ -206,35 +210,41 @@ exports.handler = async function(params) {
   const sentinel = payload.sentinel;
 
   // if contract monitor
+  // 如果是合约 monitor
   const transaction  = payload.transaction;
   const abi = sentinel.abi;
 
   // custom logic...
+  // 自定义逻辑...
 }
 ----
 
-==== Webhook invocations
+==== Webhook 调用
 
-When an action is invoked via a webhook, it can access the HTTP request info as part of the `event` parameter injected in the handler. Likewise, the return value will be included in the `result` field of the HTTP response payload.
+当通过 webhook 调用 action 时，它可以访问 HTTP 请求信息，作为注入到 handler 中的 `event` 参数的一部分。同样，返回值将包含在 HTTP 响应负载的 `result` 字段中。
 
 [source,jsx]
 ----
 exports.handler = async function(event) {
   const {
     body,    // Object with JSON-parsed POST body
+              // 具有 JSON 解析的 POST body 的对象
     headers, // Object with key-values from HTTP headers
+              // 具有来自 HTTP header 的键值的对象
     queryParameters, // Object with key-values from query parameters
+              // 具有来自 query parameters 的键值的对象
   } = event.request;
 
   return {
     hello: 'world' // JSON-serialized and included in the `result` field of the response
+                   // JSON 序列化并包含在响应的 `result` 字段中
   };
 }
 ----
 
-At the moment only JSON payloads are supported, and only non-standard headers with the `X-` or `Stripe-` prefix are provided to the action.
+目前仅支持 JSON 负载，并且仅将带有 `X-` 或 `Stripe-` 前缀的非标准 header 提供给 action。
 
-A sample response from the webhook endpoint looks like the following, where `status` is one of `success` or `error`, `encodedLogs` has the base64-encoded logs from the run, and `result` has the JSON-encoded value returned from the execution.
+来自 webhook 端点的示例响应如下所示，其中 `status` 是 `success` 或 `error` 之一，`encodedLogs` 具有来自运行的 base64 编码的日志，`result` 具有从执行返回的 JSON 编码值。
 
 [source,json]
 ----
@@ -250,15 +260,15 @@ A sample response from the webhook endpoint looks like the following, where `sta
 }
 ----
 
-NOTE: Actions that take longer than 25 seconds to complete will return a response with a pending state. Nevertheless, the action will continue to run in the background and eventually complete (in less than 5 minutes).
+NOTE: 超过 25 秒才能完成的 Actions 将返回具有挂起状态的响应。但是，action 将继续在后台运行并最终完成（在 5 分钟内）。
 
-NOTE: If `{"message":"Missing Authentication Token"}` is the response to a Webhook HTTP request, double check that the request was actually a POST. This response occurs when issuing a GET.
+NOTE: 如果 `{"message":"Missing Authentication Token"}` 是对 Webhook HTTP 请求的响应，请仔细检查该请求实际上是否为 POST。发出 GET 请求时会发生此响应。
 
-NOTE: Webhook requests have strict content-type requirements. If the request does not have a `Content-Type: application/json` header, the action invocation will return a `415 Unsupported Media Type` error. Please make sure to include this header in your requests.
+NOTE: Webhook 请求具有严格的 content-type 要求。如果请求没有 `Content-Type: application/json` 头部，则 action 调用将返回 `415 Unsupported Media Type` 错误。请确保在你的请求中包含此头部。
 
-==== Secrets
-Defender secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +
-Action secrets are key-value case-sensitive pairs of strings, that can be accessed from action code using the `event.secrets` object. There is no limit to the number of secrets used by an action. Secrets are shared across all actions, and not specific to a single one.
+==== 密钥
+Defender 密钥允许你存储敏感信息，例如可以从 actions 安全访问的 API 密钥和密钥。+
+Action 密钥是字符串的键值区分大小写对，可以使用 `event.secrets` 对象从 action 代码访问。action 使用的密钥数量没有限制。密钥在所有 actions 之间共享，而不是特定于单个 action。
 
 [source,jsx]
 ----
@@ -267,18 +277,17 @@ exports.handler = async function(event) {
 }
 ----
 
-Secrets are encrypted and stored in a secure vault, only decrypted for injection when the action runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read.
+密钥经过加密并存储在安全存储库中，仅在 action 运行时解密以进行注入。写入后，密钥只能从用户界面删除或覆盖，而不能读取。
 
-WARNING: An action may log the value of a secret, accidentally leaking it.
+WARNING: action 可能会记录密钥的值，从而意外地泄漏它。
 
+NOTE: 虽然可以使用密钥来存储用于签署消息或交易的私钥，但我们建议改用 Defender relayer。与在 action 代码中加载私钥并在那里签名相比，Defender relayers 的签名操作提供了更高的安全性。
 
-NOTE: While it's possible to use secrets to store private keys for signing messages or transactions, we recommend to use a Defender relayer instead. Signing operations for Defender relayers provide an extra level of security over loading the private key in action code and signing there.
+==== 键值数据存储
 
-==== Key-value data store
+action 键值数据存储允许在 action 运行之间以及不同的 actions 之间持久保存简单数据。它可以用于存储交易标识符、哈希的用户电子邮件，甚至小型序列化对象。
 
-The action key-value data store allows to persist simple data across action runs and between different actions. It can be used to store transaction identifiers, hashed user emails, or even small serialized objects.
-
-You can interact with your key-value store through an instance of `Defender`, which is initialized with the payload injected in the your Action `handler` function. Once initialized, you can call `kvstore.get`, `kvstore.put`, or `kvstore.del`.
+你可以通过 `Defender` 实例与你的键值存储进行交互，该实例使用注入到你的 Action `handler` 函数中的负载进行初始化。初始化后，你可以调用 `kvstore.get`、`kvstore.put` 或 `kvstore.del`。
 
 [source,jsx]
 ----
@@ -293,17 +302,17 @@ exports.handler = async function (event) {
 };
 ----
 
-The key-value store allows to get, put, and delete key-value pairs, which must be strings that are limited to 1 KB and values to 300 KB.
+键值存储允许获取、放置和删除键值对，这些键值对必须是限制为 1 KB 的字符串，值限制为 300 KB。
 
-NOTE: Data stored is shared across all actions. To isolate the records managed by each action, prefixing the keys with a namespace unique to each action is recommended.
+NOTE: 存储的数据在所有 actions 之间共享。为了隔离每个 action 管理的记录，建议使用每个 action 唯一的命名空间为键添加前缀。
 
-WARNING: Each item expires 90 days after its last update. If long-lived data store is needed, we recommend setting up an external database and use action secrets to store the credentials for connecting to it.
+WARNING: 每个项目在上次更新后 90 天到期。如果需要长期存在的数据存储，我们建议设置一个外部数据库，并使用 action 密钥来存储连接到它的凭据。
 
-==== Notifications
+==== 通知
 
-Actions can send notifications through various channels already defined in the Defender Notifications settings. This integration allows you to quickly inform other connected systems about changes detected or made by actions.
+Actions 可以通过 Defender 通知设置中已定义的各种渠道发送通知。此集成允许你快速通知其他连接的系统关于 actions 检测或进行的更改。
 
-To send a notification, you should use `notificationClient.send()`, as shown in the following example:
+要发送通知，你应该使用 `notificationClient.send()`，如以下示例所示：
 [source,js]
 ----
 exports.handler = async function(credentials, context) {
@@ -321,7 +330,7 @@ exports.handler = async function(credentials, context) {
 }
 ----
 
-For email notifications, basic HTML tags are supported. Here's an example of how to generate an HTML message:
+对于电子邮件通知，支持基本的 HTML 标签。以下是如何生成 HTML 消息的示例：
 [source,js]
 ----
 
@@ -356,7 +365,7 @@ exports.handler = async function(event, context) {
 }
 ----
 
-To send a metric notification, use the `notificationClient.sendMetric()` method instead, as shown in the following example:
+要发送指标通知，请改用 `notificationClient.sendMetric()` 方法，如以下示例所示：
 
 [source,js]
 ----
@@ -375,27 +384,27 @@ exports.handler = async function(credentials, context) {
 }
 ----
 
-NOTE: If an invalid or paused notification channelAlias is passed, an error will be thrown.
+NOTE: 如果传递了无效或暂停的 notification channelAlias，则会抛出错误。
 
-NOTE: If a notification cannot be sent for any other reason, no error will be thrown, but a status message will be added to the action logs. For example, if a notification to a webhook channel that has an inactive URL is sent, a log entry will be added but no error will be thrown.
+NOTE: 如果由于任何其他原因无法发送通知，则不会抛出错误，但会将状态消息添加到 action 日志中。例如，如果发送到具有不活动 URL 的 webhook 渠道的通知，则会添加日志条目，但不会抛出错误。
 
-NOTE: If multiple notification channels are using the same alias, the notification will be sent to all of them.
+NOTE: 如果多个通知渠道使用相同的别名，则通知将发送给所有这些渠道。
 
-==== Error handling
+==== 错误处理
 
-Automatic action invocations that result in an error contain an `errorType` field in the action run response that will be set to an https://github.com/OpenZeppelin/defender-sdk/blob/340fce19e35cfed420c94369630ee8f70254c9ac/packages/action/src/models/action-run.res.ts#L6[ActionErrorType as defined in defender-sdk]. A user readable error will also appear in the Run History view.
+导致错误的自动 action 调用在 action 运行响应中包含一个 `errorType` 字段，该字段将设置为 https://github.com/OpenZeppelin/defender-sdk/blob/340fce19e35cfed420c94369630ee8f70254c9ac/packages/action/src/models/action-run.res.ts#L6[defender-sdk 中定义的 ActionErrorType]。用户可读的错误也会出现在“运行历史记录”视图中。
 
 [[local-development]]
-=== Local development
+=== 本地开发
 
-If you want to reproduce the behavior of an action locally for debugging or testing, follow these steps:
+如果想在本地重现 action 的行为以进行调试或测试，请按照下列步骤操作：
 
-* Initialize a new npm project (`npm init`)
-* Set the `dependencies` key in `package.json` to the packages indicated in the <<#environment,Environment>> section above
-* Download `yarn.lock`: 📎 link:{attachmentsdir}/yarn.lock[yarn.lock]
-* Run `yarn install --frozen-lockfile`.
+* 初始化一个新的 npm 项目 (`npm init`)
+* 将 `package.json` 中的 `dependencies` 键设置为上面 <<#environment,Environment>> 部分中指示的包
+* 下载 `yarn.lock`: 📎 link:{attachmentsdir}/yarn.lock[yarn.lock]
+* 运行 `yarn install --frozen-lockfile`。
 
-You can also use the following template for local development, which will run the action code when invoked using `node`. It will load the relayer credentials from environment variables, or use the injected credentials when run by Defender.
+你还可以使用以下模板进行本地开发，该模板将在使用 `node` 调用时运行 action 代码。它将从环境变量加载 relayer 凭据，或者在使用 Defender 运行时使用注入的凭据。
 
 [source,jsx]
 ----
@@ -403,12 +412,15 @@ const { Defender } = require('@openzeppelin/defender-sdk');
 
 
 // Entrypoint for the action
+// action 的入口点
 exports.handler = async function(event) {
   const client = new Defender(credentials);
   // Use client.relaySigner for sending txs
+  // 使用 client.relaySigner 发送 txs
 }
 
 // To run locally (this code will not be executed in actions)
+// 在本地运行（此代码不会在 actions 中执行）
 if (require.main === module) {
   const { RELAYER_API_KEY: apiKey, RELAYER_API_SECRET: apiSecret } = process.env;
   exports.handler({ apiKey, apiSecret })
@@ -417,45 +429,42 @@ if (require.main === module) {
 }
 ----
 
-Remember to send any other value that your action expects in the `event` object, such as secrets or monitor events.
+请记住在 `event` 对象中发送你的 action 期望的任何其他值，例如密钥或 monitor 事件。
 
 [[updating-code]]
-=== Updating code
+=== 更新代码
 
-You can edit an action's code via the Defender interface, or programmatically via API using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
+你可以通过 Defender 界面或使用 https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm 包通过 API 编程方式编辑 action 的代码。后者允许上传包含多个文件的代码包：
 
-NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and it must always include an `index.js` at the root of the zip file to act as the entrypoint.
+NOTE: 代码包在压缩和 base64 编码后的大小不得超过 5MB，并且必须始终在 zip 文件的根目录中包含一个 `index.js` 作为入口点。
 
 [[workflows]]
 == Workflows
 
-Workflows allow you to instantly detect, respond, and resolve threats and attacks with pre-defined actions and scenarios. You can conduct attack simulations and test real-world scenarios on forked networks too.
+Workflows 允许你通过预定义的操作和场景立即检测、响应和解决威胁和攻击。你还可以进行攻击模拟并在分叉网络上测试真实场景。
 
-Workflows are processes that combine automatic actions and transaction templates. Actions can be run in parallel or connected sequentially. Workflows can be triggered manually or via a xref:module/monitor.adoc[Monitor].
+Workflows 是结合了自动 actions 和事务模板的流程。可以并行运行 actions 或顺序连接 actions。可以通过 xref:module/monitor.adoc[Monitor] 手动或触发 Workflows。
 
+创建 workflows 是一种无缝体验，通过一个表单引导，该表单允许你轻松地在 workflow 过程中组织 actions 。
 
-Creating workflows is a seamless experience guided through a form that allows you to organize actions in the workflow process easily.
+image::actions-start-workflow.png[创建 Workflow]
 
-image::actions-start-workflow.png[Create Workflow]
+要填充 workflow，你必须将右侧列表中的现有 actions 拖到表单上。Actions 垂直执行，这意味着先前的 actions 必须成功完成才能开始执行新行。并行 actions 同时执行。但是，如果某个 action 退出并出现错误，workflow 将完全停止。
 
-To populate a workflow, you have to drag existing actions from the list on the right onto the form. Actions are executed vertically, meaning the previous actions must finish successfully to begin the execution of the new row. Parallel actions are executed at the same time. However, the workflow stops completely if an action exits with an error.
+image::actions-workflow.png[编辑 Workflow]
 
-image::actions-workflow.png[Edit Workflow]
+要并行运行多个 actions，请单击“添加并行序列”并将 actions 拖到可用的并排框中。
 
-To run multiple actions in parallel, click "Add Parallel Sequence" and drag actions into the available side-by-side boxes.
+image::actions-parallel-workflow.png[并行 Workflow]
 
-image::actions-parallel-workflow.png[Parallel Workflow]
+你可以将 actions 从 workflow 中拖回以删除它们，或者单击右上角可见的减号图标以删除空步骤。右上角的“保存”按钮使用其配置和名称保存 workflow。
 
-You can drag actions back off the workflow to remove them or click the visible minus icon in the upper right to remove an empty step. The "Save" button on the top right saves the workflow with its configuration and name.
-
-
-NOTE: We provide a quickstart tutorial to create and use Workflows. Check it out xref:tutorial/workflows.adoc[here]!
-
+NOTE: 我们提供了一个快速入门教程来创建和使用 Workflows。在此处查看 xref:tutorial/workflows.adoc[此处]！
 
 [[a-complete-example]]
-== A complete example
+== 一个完整的例子
 
-The following example uses ethers.js and the relayer integration to send a transaction calling `execute` on a given contract. Before sending the transaction, it checks a `canExecute` view function and validates if a parameter received via a webhook matches a local secret. If the transaction is sent, it returns the hash in the response, which is sent back to the webhook caller.
+以下示例使用 ethers.js 和 relayer 集成来发送调用给定合约上的 `execute` 的交易。在发送交易之前，它会检查 `canExecute` 视图函数，并验证通过 webhook 接收的参数是否与本地密钥匹配。如果发送了交易，它会在响应中返回哈希，该响应将发送回 webhook 调用者。
 
 [source,jsx]
 ----
@@ -463,18 +472,23 @@ const { ethers } = require("ethers");
 const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
 
 // Entrypoint for the action
+// action 的入口点
 exports.handler = async function(event) {
   // Load value provided in the webhook payload (not available in schedule or sentinel invocations)
+  // 加载 webhook 负载中提供的值（在计划或 sentinel 调用中不可用）
   const { value } = event.request.body;
 
   // Compare it with a local secret
+  // 将其与本地密钥进行比较
   if (value !== event.secrets.expectedValue) return;
 
   // Initialize relayer provider and signer
+  // 初始化 relayer 提供程序和签名者
   const provider = new DefenderRelayProvider(event);
   const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
 
   // Create contract instance from the signer and use it to send a tx
+  // 从签名者创建合约实例并使用它来发送交易
   const contract = new ethers.Contract(ADDRESS, ABI, signer);
   if (await contract.canExecute()) {
     const tx = await contract.execute();
@@ -484,11 +498,11 @@ exports.handler = async function(event) {
 }
 ----
 
-NOTE: The code does not need to wait for the transaction to be mined. Defender will take care of monitoring the transaction and resubmitting if needed. The action only needs to send the request and exit.
+NOTE: 代码不需要等待挖掘交易。Defender 将负责监视交易并在需要时重新提交。action 只需要发送请求并退出。
 
 [[security-considerations]]
-== Security considerations
+== 安全注意事项
 
-The code for each action is isolated in Defender, and actions are restricted via strict access controls to have zero access to other Defender internal infrastructure. The only exception is that an action may access its linked relayer, which is negotiated via temporary credentials injected by the action service upon each execution. Still, the action can only call the relayer's exposed methods and has no direct access to the backing private key or any other services.
+每个 action 的代码都隔离在 Defender 中，并且 actions 受到严格的访问控制限制，无法访问其他 Defender 内部基础结构。唯一的例外是 action 可能会访问其链接的 relayer，这是通过 action 服务在每次执行时注入的临时凭据协商的。尽管如此，action 只能调用 relayer 的公开方法，并且无法直接访问后备私钥或任何其他服务。
 
-NOTE: We provide a quickstart tutorial to create an automatic action for a smart contract using Defender. Check it out xref:tutorial/actions.adoc[here]!
+NOTE: 我们提供了一个快速入门教程，用于使用 Defender 为智能合约创建自动 action。在此处查看 xref:tutorial/actions.adoc[此处]！

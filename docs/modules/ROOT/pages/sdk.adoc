@@ -1,41 +1,40 @@
-= Defender SDK and API
+= Defender SDK 和 API
 
-https://www.npmjs.com/package/@openzeppelin/defender-sdk[Defender SDK, window=_blank] (Formerly defender-client packages) is a node package that allows developers to interact with Defender programatically using Javascript/Typescript.
+https://www.npmjs.com/package/@openzeppelin/defender-sdk[Defender SDK, window=_blank] （以前的 defender-client 软件包）是一个 node 软件包，允许开发者使用 Javascript/Typescript 以编程方式与 Defender 交互。
 
-See https://github.com/OpenZeppelin/defender-sdk[sdk repository, window=_blank] or https://www.api-docs.defender.openzeppelin.com/[SDK and API documentation, window=_blank] for more detailed information.
+有关更多详细信息，请参阅 https://github.com/OpenZeppelin/defender-sdk[sdk 仓库, window=_blank] 或 https://www.api-docs.defender.openzeppelin.com/[SDK 和 API 文档, window=_blank]。
 
-== Installation
+== 安装
 
-You can install the whole package using NPM or any of your favorite package managers
+您可以使用 NPM 或您喜欢的任何包管理器来安装整个软件包
 
 ```
 npm install @openzeppelin/defender-sdk
 ```
 
-or you can install single subpackages
+或者您可以安装单个子包
 
 ```
 npm install @openzeppelin/defender-sdk-deploy-client
 ```
 
-NOTE: For more information about setup, examples and usage, please visit https://github.com/OpenZeppelin/defender-sdk[Defender SDK, window=_blank] README file in Github.
+NOTE: 有关设置、示例和用法的更多信息，请访问 Github 中的 https://github.com/OpenZeppelin/defender-sdk[Defender SDK, window=_blank] README 文件。
 
+== API 密钥
 
-== API Keys
+为了使用 SDK 或 API 操作您的 Defender 帐户，Defender 需要在仪表板中生成的 API 密钥和密钥来验证请求。
 
-In order to operate your Defender account using the SDK or API, Defender requires API keys and secrets generated in the dashboard to authenticate requests. 
+创建 API 密钥时，您还可以指定以天、小时和分钟为单位的过期时间。
 
-When creating API keys, you can also specify the expiration in days, hours and minutes.
+image::api-key-expiration-config.png[Defender 中的 API 密钥过期配置]
 
-image::api-key-expiration-config.png[API Key expiration configuration in Defender]
+Defender 会在 API 密钥过期前 **3 天**和**过期时**发出通知。
 
-Defender notifies **3 days** before and **at expiration time** about the API keys expiration. 
+WARNING: 一旦密钥过期，发送到 Defender API 的任何请求都将抛出 `API Key is either expired or invalid` 错误。
 
-WARNING: Once the key is expired, any request sent to Defender API will throw `API Key is either expired or invalid` error.
+=== Relayer API 密钥
 
-=== Relayer API Keys
-
-Relayers API Keys are generated in Relayer details page, and are exclusively used for managing the signer operations for that Relayer, e.g. send or query transactions, get the nonce or sign data.
+Relayer API 密钥在 Relayer 详细信息页面中生成，专门用于管理该 Relayer 的签名者操作，例如发送或查询交易、获取 nonce 或签名数据。
 
 ```js
 const creds = {
@@ -52,11 +51,11 @@ const txResponse = await client.relaySigner.sendTransaction({
 });
 ```
 
-NOTE: Only `client.relaySigner` package is available when authenticating using `relayerApiKey` and `relayerApiSecret`.
+NOTE: 使用 `relayerApiKey` 和 `relayerApiSecret` 进行身份验证时，只有 `client.relaySigner` 包可用。
 
-=== Admin API Keys
+=== Admin API 密钥
 
-Admin API Keys are generated in **Manage -> API Keys**, and they are used to operate all other resources in Defender, including relayers CRUD operations.
+Admin API 密钥在 **管理 -> API 密钥**中生成，用于操作 Defender 中的所有其他资源，包括 relayers 的 CRUD 操作。
 ```js
 const creds = {
   apiKey: <API_KEY>,
@@ -69,4 +68,3 @@ const proposals = await client.proposal.list({
   next: undefined,
 });
 ```
-

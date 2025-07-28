@@ -1,917 +1,904 @@
 = Changelog
 
 [[release-2025-07-14]]
-== July 14th, 2025
+== 2025年7月14日
 
-* *General*
-- Sei network support.
-- Bug fixes.
+* *通用*
+- 支持Sei网络。
+- 缺陷修复。
 
 [[release-2025-06-18]]
-== June 18th, 2025
+== 2025年6月18日
 
-* *General*
-- Bug fixes.
-- Monitor UI improvement.
+* *通用*
+- 缺陷修复。
+- 监控UI改进。
 
 [[release-2025-05-07]]
-== May 7th, 2025
+== 2025年5月7日
 
-* *General*
-- Remove Forta related documentation.
-- Minor bug fix.
+* *通用*
+- 移除Forta相关文档。
+- 轻微缺陷修复。
 
 [[release-2025-04-10]]
-== April 10th, 2025
+== 2025年4月10日
 
-* *General*
-- Bug Fix: Issue with ABI retrieval on Sophon network.
-- Bug Fix: Hide networks on wizard not available on deploy.
-- Deprecate flaky rpc endpoints on Fantom network.
-- Audit UI bug fixes.
+* *通用*
+- 缺陷修复：Sophon网络上ABI检索问题。
+- 缺陷修复：隐藏部署向导中不可用的网络。
+- 弃用Fantom网络上不稳定的rpc端点。
+- 审计UI缺陷修复。
 
 [[release-2025-03-27]]
-== March 27th, 2025
+== 2025年3月27日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-03-20]]
-== March 20th, 2025
+== 2025年3月20日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-03-11]]
-== March 11th, 2025
+== 2025年3月11日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
-- Fix deploy Block Explorer verification
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
+- 修复部署区块浏览器验证
 
 [[release-2025-03-06]]
-== March 06th, 2025
+== 2025年3月6日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
-- Stop Meld network support.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
+- 停止Meld网络支持。
 
 [[release-2025-02-25]]
-== February 25th, 2025
+== 2025年2月25日
 
-* *General*
-- Add support for Abstract network.
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 增加对Abstract网络的支持。
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-02-20]]
-== February 20th, 2025
+== 2025年2月20日
 
-* *General*
-- Add support for Peaq network.
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 增加对Peaq网络的支持。
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-02-12]]
-== February 12th, 2025
+== 2025年2月12日
 
-* *General*
-- Add support for Unichain network.
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 增加对Unichain网络的支持。
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-02-05]]
-== February 5th, 2025
+== 2025年2月5日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-01-21]]
-== January 21st, 2025
+== 2025年1月21日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-01-16]]
-== January 16th, 2025
+== 2025年1月16日
 
-* *General*
-- Minor bug fixes.
-- Minor UI improvements.
+* *通用*
+- 轻微缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-01-13]]
-== January 13th, 2025
+== 2025年1月13日
 
-* *General*
-- Bug fixes.
-- Minor UI improvements.
+* *通用*
+- 缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-01-07]]
-== January 7th, 2025
+== 2025年1月7日
 
-* *General*
-- Bug fixes.
-- Minor UI improvements.
+* *通用*
+- 缺陷修复。
+- 轻微UI改进。
 
 [[release-2025-01-02]]
-== January 2nd, 2025
+== 2025年1月2日
 
-* *General*
-- Fix: Error message when invalid network is accessed from sdk.
-- Fix: Fix Audit title alignment.
-- Feature: Allow Billing endpoint to return for all users.
-- Minor security & UI bug fixes and improvements.
+* *通用*
+- 修复：从sdk访问无效网络时出错消息。
+- 修复：修复审计标题对齐。
+- 功能：允许计费端点返回给所有用户。
+- 轻微安全和UI缺陷修复以及改进。
 
 [[release-2024-12-18]]
-== December 18th, 2024
+== 2024年12月18日
 
-* *General*
-- Feature: Add support for Geist network.
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 功能：增加对Geist网络的支持。
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-12-17]]
-== December 17th, 2024
+== 2024年12月17日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: Transaction stats optimisation.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：交易统计优化。
+- 功能：UI/UX改进。
 
 [[release-2024-12-12]]
-== December 12th, 2024
+== 2024年12月12日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: Deployment page performance optimisation.
+* *通用*
+- 修复：缺陷修复。
+- 功能：部署页面性能优化。
 
 [[release-2024-12-09]]
-== December 09th, 2024
+== 2024年12月9日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-12-04]]
-== December 04th, 2024
+== 2024年12月4日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-11-28]]
-== November 28th, 2024
+== 2024年11月28日
 
-* *General*
-- Feature: Introduce sync for the proposals list page.
-- Feature: Integrate relayer groups with Actions.
-- Feature: UI/UX improvement.
+* *通用*
+- 功能：引入提案列表页面的同步。
+- 功能：将中继器组与Actions集成。
+- 功能：UI/UX改进。
 
 [[release-2024-11-25]]
-== November 25th, 2024
+== 2024年11月25日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
-- Feature: Addressbook optimisation.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
+- 功能：地址簿优化。
 
 [[release-2024-11-18]]
-== November 18th, 2024
+== 2024年11月18日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-11-13]]
-== November 13th, 2024
+== 2024年11月13日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-11-11]]
-== November 11th, 2024
+== 2024年11月11日
 
-* *General*
-- Fix: Bug fixes.
-- Feature: UI/UX improvement.
+* *通用*
+- 修复：缺陷修复。
+- 功能：UI/UX改进。
 
 [[release-2024-11-06]]
-== November 6th, 2024
+== 2024年11月6日
 
-* *General*
-- Feature: Support API for updating deployments.
-- Feature: Improve transactions filtering from actions.
-- Feature: Use monitor ABI to find signature if contract is not found.
-- Fix: Bug fixes.
+* *通用*
+- 功能：支持API更新部署。
+- 功能：改进Actions中的事务过滤。
+- 功能：如果找不到合约，使用监控ABI查找签名。
+- 修复：缺陷修复。
 
 [[release-2024-10-30]]
-== October 30th, 2024
+== 2024年10月30日
 
-* *General*
-- Fix: Ability to use EOA for upgrading a deployment
-- Feature: Support ABI updates for monitors.
-- Fix: Notification template parsing and custom message subject.
-- Feature: Optimize monitor details page.
-- Fix: Bug in approval process with EOA for contract addresses.
-- Minor bug fixes and UI performance optimizations.
-
+* *通用*
+- 修复：能够使用EOA升级部署
+- 功能：支持监控的ABI更新。
+- 修复：通知模板解析和自定义消息主题。
+- 功能：优化监控详细信息页面。
+- 修复：使用EOA进行合约地址审批流程中的错误。
+- 轻微的错误修复和UI性能优化。
 
 [[release-2024-10-24]]
-== October 24th, 2024
+== 2024年10月24日
 
-* *General*
-** Feature: Create SDK API for the address book entries.
-** Fix: Bug fixes.
-** UI/UX improvements.
+* *通用*
+** 功能：为地址簿条目创建SDK API。
+** 修复：缺陷修复。
+** UI/UX改进。
 
 [[release-2024-10-21]]
-== October 21st, 2024
+== 2024年10月21日
 
-* *General*
-** Feature: Display Fireblocks transaction ID in proposal page for cross-referencing.
-** Fix: Improve error messaging for wrong viaType.
-** Fix: Bug in Monitor filters.
-** Feature: Support unichain-sepolia network with defender-as-code.
-** UI/UX improvements.
+* *通用*
+** 功能：在提案页面中显示Fireblocks交易ID，以便交叉引用。
+** 修复：改进错误消息，以便更正viaType。
+** 修复：Monitor过滤器中的错误。
+** 功能：支持使用defender-as-code的unichain-sepolia网络。
+** UI/UX改进。
 
 [[release-2024-10-16]]
-== October 16th, 2024
+== 2024年10月16日
 
-* *General*
-** Feature: Enable high frequency actions.
-** Fix: Updating action filters on monitors.
-** UI improvements.
+* *通用*
+** 功能：启用高频操作。
+** 修复：更新监视器上的操作过滤器。
+** UI改进。
 
 [[release-2024-10-14]]
-== October 14th, 2024
+== 2024年10月14日
 
-* *General*
-** Feature: Integrate relayer groups with approval process and deploy.
-** Fix: Bug fixes.
-** UI optimisation.
+* *通用*
+** 功能：将中继器组与审批流程和部署集成。
+** 修复：缺陷修复。
+** UI优化。
 
 [[release-2024-10-10]]
-== October 10th, 2024
+== 2024年10月10日
 
-* *General*
-** Feature: Add Unichain-Sepolia support.
-** Feature: Warn users when notification channels attached to monitors are paused.
-** Fix: Bug fixes.
-** UI/UX improvements.
-** Feature: Add an option to submit fireblocks info manually.
+* *通用*
+** 功能：添加Unichain-Sepolia支持。
+** 功能：在连接到监视器的通知通道暂停时向用户发出警告。
+** 修复：缺陷修复。
+** UI/UX改进。
+** 功能：添加手动提交fireblocks信息的选项。
 
 [[release-2024-10-07]]
-== October 7th, 2024
+== 2024年10月7日
 
-* *General*
-** Feature: Introduce relayer groups.
-** Feature: Remove toggles in dialog when cloning a relayer.
-** Fix: Minor bugs fixes.
+* *通用*
+** 功能：引入中继器组。
+** 功能：克隆中继器时，删除对话框中的切换。
+** 修复：次要错误修复。
 
 [[release-2024-10-02]]
-== October 2nd, 2024
+== 2024年10月2日
 
-* *General*
-** Fix: Minor bugs
-** UI/UX improvements.
+* *通用*
+** 修复：小错误
+** UI/UX改进。
 
 [[release-2024-09-25]]
-== September 25th, 2024
+== 2024年9月25日
 
-* *General*
-** Fix: Issue where the ERC20 transfer event was not correctly identified in simulation results.
-** UI/UX improvements.
-** Feature: Add standards for code inspector.
+* *通用*
+** 修复：在模拟结果中未正确识别ERC20传输事件的问题。
+** UI/UX改进。
+** 功能：添加代码检查器的标准。
 
 [[release-2024-09-24]]
-== September 24th, 2024
+== 2024年9月24日
 
-* *General*
-** Fix: Bug in retrieving action logs.
-** Fix: Bug in logo displays in the emails.
-** Feature: Allow integration with datadog across different regions.
-** Feature: Allow users to hide Code Inspector report issues.
-** UI/UX improvements. 
+* *通用*
+** 修复：检索操作日志中的错误。
+** 修复：电子邮件中徽标显示中的错误。
+** 功能：允许与不同区域的数据狗集成。
+** 功能：允许用户隐藏代码检查器报告问题。
+** UI/UX改进。
 
 [[release-2024-09-19]]
-== September 19th, 2024
+== 2024年9月19日
 
-* *General*
-** Fix: UI/UX improvements.
-** Feature: Add a form to request an admin to share the reason for canceling/downgrading.
+* *通用*
+** 修复：UI/UX改进。
+** 功能：添加一个表格，以请求管理员分享取消/降级的原因。
 
 [[release-2024-09-18]]
-== September 18th, 2024
+== 2024年9月18日
 
-* *General*
-** Fix: Update the base Sepolia safe transaction service url.
-** Fix: Whitelist Taiko RPC endpoints.
-** Feature: Allow users to send feedback for contract inspector issues.
-** Feature: Add Multisig or EOA addresses used for transaction proposals to the table view.
+* *通用*
+** 修复：更新基本Sepolia安全交易服务URL。
+** 修复：白名单Taiko RPC端点。
+** 功能：允许用户发送有关合约检查器问题的反馈。
+** 功能：将用于交易提案的Multisig或EOA地址添加到表视图中。
 
 [[release-2024-09-16]]
-== September 16th, 2024
+== 2024年9月16日
 
-* *General*
-** Feature: Allow users to submit feedback on code app report issue.
-** Feature: API keys UI improvements.
-** Fix: Fixed CORS errors when inspecting private network deployments.
-** Fix: Bug in notification channels.
-** Feature: Better notification when quotas reached.
+* *通用*
+** 功能：允许用户提交有关代码应用程序报告问题的反馈。
+** 功能：API密钥UI改进。
+** 修复：修复了检查专用网络部署时的CORS错误。
+** 修复：通知通道中的错误。
+** 功能：配额达到时更好的通知。
 
 [[release-2024-09-12]]
-== September 12th, 2024
+== 2024年9月12日
 
-* *General*
-** Fix: Address Book improvements.
-** Fix: Gas price estimation to improve avalanche transactions.
-** Feature: Allow users to change their password.
-** Feature: Show settings tab for all plans.
-
+* *通用*
+** 修复：地址簿改进。
+** 修复：Gas价格估算以改善雪崩交易。
+** 功能：允许用户更改其密码。
+** 功能：显示所有计划的设置选项卡。
 
 [[release-2024-09-11]]
-== September 11th, 2024
+== 2024年9月11日
 
-* *General*
-** Feature: Support Linea Sepolia.
-** Feature: Display warning when creating a Multisig proposal without signatures.
-** Feature: Add commit hash to the deploy module.
-** Chore: Deprecate defender legacy app.
-** Fix: Add backend validation for multisig networks.
-** Fix: Fixed View Transaction Proposal button link.
-** Fix: Bug in deploy test environments.
-** Fix: Bug in access control contracts using relayers.
-** Feature: Improve relayer transaction submission mechanism.
-** Several UI bug fixes & security improvements.
+* *通用*
+** 功能：支持Linea Sepolia。
+** 功能：创建没有签名的Multisig提案时显示警告。
+** 功能：将提交哈希添加到部署模块。
+** Chore：弃用defender legacy app。
+** 修复：为多重签名网络添加后端验证。
+** 修复：修复了查看交易提案按钮链接。
+** 修复：部署测试环境中的错误。
+** 修复：使用中继器的访问控制合约中的错误。
+** 功能：改进中继器交易提交机制。
+** 几个UI错误修复和安全改进。
 
 [[release-2024-09-05]]
-== September 5th, 2024
+== 2024年9月5日
 
-* *General*
-** Feature: UI redesign and improvements for the Defender dashboard.
-** Feature: Add support for the proposals pagination.
-** Feature: Allow EOAs to be used for upgrade approval process.
-** Refactor: Change MATIC token symbol to POL token according to changes on Polygon network.
-** Feature: Add support for EIP 1559 for Fuse network.
-** Feature: Improve resiliency of the relayers by retrying transactions with specific error responses from providers.
-** Fix: Bug in rendering Monitor card.
-** Fix: Bug in proposal filters.
-** Fix: Bug in repeat transaction proposals flow.
-** Fix: Bug in view transaction proposal button link.
-** Minor bug fixes and improvements in UI/UX.
+* *通用*
+** 功能：Defender仪表板的UI重新设计和改进。
+** 功能：添加对提案分页的支持。
+** 功能：允许使用EOA进行升级审批流程。
+** Refactor：根据Polygon网络上的更改，将MATIC令牌符号更改为POL令牌。
+** 功能：为Fuse网络添加对EIP 1559的支持。
+** 功能：通过使用来自提供程序的特定错误响应重试交易来提高中继器的弹性。
+** 修复：渲染Monitor卡中的错误。
+** 修复：提案过滤器中的错误。
+** 修复：重复交易提案流程中的错误。
+** 修复：查看交易提案按钮链接中的错误。
+** UI/UX中的小错误修复和改进。
 
 [[release-2024-08-21]]
-== August 21st, 2024
+== 2024年8月21日
 
-* *General*
-** Feature: Ability to authenticate/login using your github account.
-** Feature: Provide expiration date option for api keys.
-** Feature: Remove blacklisted filter methods (`eth_newFilter`, `eth_newBlockFilter`, `eth_getFilterChanges` & `eth_uninstallFilter`) and allow access to all methods.
-** Minor bug fixes & security improvements throughout the codebase.
+* *通用*
+** 功能：可以使用您的github帐户进行身份验证/登录。
+** 功能：为api密钥提供到期日期选项。
+** 功能：删除黑名单过滤器方法（`eth_newFilter`，`eth_newBlockFilter`，`eth_getFilterChanges`和`eth_uninstallFilter`）并允许访问所有方法。
+** 代码库中的一些错误修复和安全改进。
 
 [[release-2024-08-05]]
-== August 5th, 2024
+== 2024年8月5日
 
-* *General*
-** Initialise tenant networks for tx iterator.
-** Migrate all subgraphs from hosted service to subgraph studio.
-** Disable the aggressive error when proposal signing fails.
-** Allow functionality to only show status dialog loader when state machine is active.
-** Fix Actions dependencies version UI selector.
-** https://docs.openzeppelin.com/defender/settings/notification-channels#additional-configurations[Add support to webhook signing of notifications].
+* *通用*
+** 为tx迭代器初始化租户网络。
+** 将所有子图从托管服务迁移到子图工作室。
+** 当提案签署失败时，禁用激进的错误。
+** 允许仅在状态机激活时显示状态对话框加载程序的功能。
+** 修复Actions依赖项版本UI选择器。
+** https://docs.openzeppelin.com/defender/settings/notification-channels#additional-configurations[为通知添加webhook签名支持]。
 
 [[release-2024-07-10]]
-== July 10th, 2024
+== 2024年7月10日
 
-* *General*
-** Allow users to send multisig proposals without signature.
-** Fix transaction filter expression validation for monitors.
-** Optimise tx list calls by using optimised queries and indexes.
-** Reduce txs in flight when relayer is processing slowly.
-** Allow users to disable code inspector auto-runs.
+* *通用*
+** 允许用户在没有签名的情况下发送多重签名提案。
+** 修复监视器的交易过滤器表达式验证。
+** 通过使用优化的查询和索引来优化tx列表调用。
+** 当中继器处理缓慢时，减少飞行中的tx。
+** 允许用户禁用代码检查器自动运行。
 
 [[release-2024-06-27]]
-== June 27th, 2024
+== 2024年6月27日
 
-* *General*
-** Allow creating EOA proposals for non-owned accounts.
-** Bring back the option to sign and execute multisig requests.
+* *通用*
+** 允许为非拥有的帐户创建 EOA 提案。
+** 恢复签署和执行多重签名请求的选项。
 
 [[release-2024-06-13]]
-== June 13th, 2024
+== 2024年6月13日
 
-* *General*
-** Add ability to rename relayers.
-** Fix Access control reactivity issues for disabled state banner.
-** Initialise tenant networks for proposals.
+* *通用*
+** 增加重命名中继器的功能。
+** 修复已禁用状态横幅的访问控制React性问题。
+** 为提案初始化租户网络。
 
 [[release-2024-06-03]]
-== June 3rd, 2024
+== 2024年6月3日
 
-* *General*
-** Add support for flashbots fast endpoints.
-** Add support for EIP 1559 in Mantle.
-** Add fantom opera safe transaction service.
-** Deprecate zksync goerli & linea goerli networks.
-** Add support for safe transaction sanitization service in private networks.
-** Deploy subgraph for polygon amoy.
-** Add infura gas tracker api to fetch better gas prices on mainnet.
+* *通用*
+** 增加对 flashbots 快速端点的支持。
+** 增加对 Mantle 中 EIP 1559 的支持。
+** 增加 fantom opera 安全交易服务。
+** 弃用 zksync goerli 和 linea goerli 网络。
+** 增加对私有网络中安全交易清理服务的支持。
+** 为 polygon amoy 部署子图。
+** 增加 infura gas 跟踪器 api，以在主网上获取更好的 gas 价格。
 
-* *Code Inspector*
-** Fix correct types in the backend for code inspector runs.
+* *代码检查器*
+** 修复代码检查器运行后端中的正确类型。
 
-* *Monitors*
-** Enhance test monitor functionality.
-
+* *监视器*
+** 增强测试监视器功能。
 
 [[release-2024-05-20]]
-== May 20th, 2024
+== 2024年5月20日
 
-* *General*
-** Show legacy plan in feedback form.
-** Prevent users from deleting their account if any prod relayers have a balance.
-** Enable simulation for moonbeam networks.
-** Deprecate goerli (+ zksync, base, arbitrum, optimism).
-** Upgrade Node 16.x to Node 20.x.
+* *通用*
+** 在反馈表单中显示旧版计划。
+** 如果任何生产中继器有余额，则阻止用户删除其帐户。
+** 启用月亮光束网络的模拟。
+** 弃用 goerli（+ zksync、base、arbitrum、optimism）。
+** 将 Node 16.x 升级到 Node 20.x。
 
-* *Code Inspector*
-** Enable Code Assets Monitoring.
-
+* *代码检查器*
+** 启用代码资产监视。
 
 [[release-2024-04-17]]
-== April 17th, 2024
+== 2024年4月17日
 
-* *General*
-** Replace Gnosis chain explorer to Etherscan-based.
-** Support lower maximum gas price for Optimism Relayers.
-** Update the subscription page to show that the Builder tier is free and perpetual.
-** Add new field for account name on onboarding.
-** Allow monitors to work with EOAs and Relayers.
+* *通用*
+** 将 Gnosis 链浏览器替换为基于 Etherscan 的浏览器。
+** 支持 Optimism Relayers 的较低的最大 Gas 价格。
+** 更新订阅页面以显示构建器层级是免费且永久的。
+** 在入门注册时添加新字段以输入帐户名称。
+** 允许监视器与 EOA 和 Relayers 一起使用。
 
 [[release-2024-03-28]]
-== March 28th, 2024
+== 2024年3月28日
 
-* *General*
-** Update feature lock props on empty screen.
-** Fix billing usage/account usage/contract create endpoints.
-** Add new switcher component for subscription cards.
-** Prevent scheduling metered subscription cancelation on downgrade to builder request.
-** Increase Code report timeout, resources and eliminate retries.
-** Collect billing address in checkout flow.
+* *通用*
+** 更新空屏幕上的功能锁定属性。
+** 修复计费使用情况/帐户使用情况/合约创建端点。
+** 为订阅卡添加新的切换器组件。
+** 阻止计划计量订阅取消到Builder的降级请求。
+** 增加代码报告的超时时间、资源并消除重试。
+** 在结帐流程中收集账单地址。
 
-* *Private Networks*
-** Add support for Holesky testnet.
-** Deprecate Base and Arbitrum Goerli network.
+* *私有网络*
+** 增加对 Holesky 测试网的支持。
+** 弃用 Base 和 Arbitrum Goerli 网络。
 
 [[release-2024-03-20]]
-== March 20th, 2024
+== 2024年3月20日
 
-* *General*
-** Make sure Action condition logs are being displayed for Monitors.
-** Obfuscate secret fields from logger.
-** Automatically collect metered subscription invoice.
-** Fix the selection of branch and commit for Code Inspector manual trigger report modal.
+* *通用*
+** 确保操作条件日志正在为监视器显示。
+** 从记录器中混淆秘密字段。
+** 自动收集计量的订阅发票。
+** 修复代码检查器手动触发报告模式的分支和提交的选择。
 
 [[release-2024-03-12]]
-== March 12th, 2024
+== 2024年3月12日
 
-* *General*
-** Add support for Professional custom plan and custom overage prices.
-** Open public pricing page for Enterprise plan requests.
-** Deprecate Optimism Goerli.
+* *通用*
+** 添加对 Professional 自定义计划和自定义超额价格的支持。
+** 为 Enterprise 计划请求打开公共定价页面。
+** 弃用 Optimism Goerli。
 
-* *Access Control*
-** Allow users to hide address book contracts.
+* *访问控制*
+** 允许用户隐藏地址簿合约。
 
-* *Private Networks*
-** Prevent removing signing policy from relayer when linked to approval process.
-** Fix relayer redirection to the sidedrawer after creation.
-
+* *私有网络*
+** 防止从中继器删除签名策略，如果该策略已链接到审批流程。
+** 修复创建后中继器重定向到侧面抽屉的问题。
 
 [[release-2024-03-05]]
-== March 5th, 2024
+== 2024年3月5日
 
-* *General*
-** Enable onboarding guide for all Defender 2.0 users.
+* *通用*
+** 为所有 Defender 2.0 用户启用入门指南。
 
-* *Private Networks*
-** Bug fix in private network initialization when using SDK.
+* *私有网络*
+** 使用 SDK 时，修复私有网络初始化中的错误。
 
-* *Audit*
-** Fix formatting for audit invite emails.
+* *审计*
+** 修复审计邀请电子邮件的格式。
 
-* *Monitors*
-** Update monitor transaction filter property.
-** Bug fix when customizing notification template for monitors.
+* *监视器*
+** 更新监视器事务过滤器属性。
+** 自定义监视器的通知模板时，修复错误。
 
-* *Transaction Proposals*
-** Fix timelock gas estimation for proposals.
+* *事务提案*
+** 修复提案的时间锁 Gas 估算。
 
-* *Relayers*
-** Bug fix in relayer redirection from Workflows.
-
+* *中继器*
+** 修复从工作流程中继器重定向中的错误。
 
 [[release-2024-02-27]]
-== February 27th, 2024
+== 2024年2月27日
 
-* *General*
-** Improve logic to hide billing menu option.
-** Prevent account deletion if there is active subscription.
-** Update display of yearly price in subscription confirmation.
-** Enforce deployment quotas to Defender 1.0 users.
-** Fix session reloads after upgrade migration.
-** Bug fix: Update references to scenarios and broken doc links.
-** Bug fix: Prevent user without customerId from accessing settings.
-** Improve empty section upgrade button text.
+* *通用*
+** 改进隐藏计费菜单选项的逻辑。
+** 如果存在活动的订阅，则阻止帐户删除。
+** 更新订阅确认中年度价格的显示。
+** 将部署配额强制应用于 Defender 1.0 用户。
+** 修复升级迁移后的会话重新加载。
+** 错误修复：更新对场景的引用和损坏的文档链接。
+** 错误修复：阻止没有 customerId 的用户访问设置。
+** 改进空部分升级按钮文本。
 
-* *Private Networks*
-** Allow private networks to use RPC urls from public networks.
-** Enable zkevm networks.
+* *私有网络*
+** 允许私有网络使用来自公共网络的 RPC URL。
+** 启用 zkevm 网络。
 
-* *Monitors*
-** Count only active monitors for usage and quota.
-** Count only active monitors when reporting MonitorsMaxCount.
+* *监视器*
+** 仅计算使用情况和配额的活动监视器。
+** 仅在报告 MonitorsMaxCount 时计算活动监视器。
 
 [[release-2024-02-20]]
-== February 20th, 2024
+== 2024年2月20日
 
-* *General*
-** Add migration assistant to allow Defender 1.0 users to migrate to Defender 2.0.
-** Rename Incident Response to Workflows.
+* *通用*
+** 添加迁移助手，以允许 Defender 1.0 用户迁移到 Defender 2.0。
+** 将事件响应重命名为工作流程。
 
-* *Private Networks*
-** Add support to allow Private Networks to use RPC URLs from public networks.
+* *私有网络*
+** 添加支持以允许私有网络使用来自公共网络的 RPC URL。
 
-* *Monitors*
-** Bug fix in usage quotas for active monitors.
-
+* *监视器*
+** 活动监视器的使用配额中的错误修复。
 
 [[release-2024-02-08]]
-== February 8th, 2024
+== 2024年2月8日
 
-* *General*
-** Display upgrade proposals in Defender 2.0.
+* *通用*
+** 在 Defender 2.0 中显示升级提案。
 
-* *Audit*
-** UI fixes with overflow text.
+* *审计*
+** UI 修复，包含溢出文本。
 
-* *Deploy*
-** Fail gracefully when deploying to zkSync networks
+* *部署*
+** 部署到 zkSync 网络时正常失败
 
 * *Monitor*
-** Enforce monitor quota limits to Defender 1.0 users.
-** UI bug fix in Monitor starter templates.
+** 将监视器配额限制强制应用于 Defender 1.0 用户。
+** Monitor 启动器模板中的 UI 错误修复。
 
 * *Forked Networks*
-** Fix Forked Network guide to point tutorial link correctly.
-
+** 修复 Forked Network 指南以正确指向教程链接。
 
 [[release-2024-01-31]]
-== January 31st, 2024
+== 2024年1月31日
 
-* *General*
-** Disable *Polygon zkEVM networks* due to a bug in `eth_getLogs` method on Polygon side.
-** Bug fix in feedback form.
-** Minor UI & security improvements.
+* *通用*
+** 由于 Polygon 侧 `eth_getLogs` 方法中的错误，禁用 *Polygon zkEVM 网络*。
+** 反馈表单中的错误修复。
+** 轻微的UI和安全改进。
 
 [[release-2024-01-24]]
-== January 24th, 2024
+== 2024年1月24日
 
-* *General*
-** Support zkSync Era Sepolia.
-** Bug fix in feedback form.
+* *通用*
+** 支持 zkSync ERA Sepolia。
+** 反馈表单中的错误修复。
 
-* *Audit*
-** Design improvements for audit report.
+* *审计*
+** 审计报告的设计改进。
 
-* *Relayers*
-** Deploy Polygon zkEVM subgraphs.
+* *中继器*
+** 部署 Polygon zkEVM 子图。
 
 * *Actions*
-** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
+** 更改 `defender-sdk` 中的参数 `autotaskCondition` 和 `autotaskTrigger`。
 
-* *Code Inspector*
-** Ability to allow users to choose what rules to run on by using adding "include" and "exclude" rules in the `defender.config.json` file.
-
+* *代码检查器*
+** 通过在 `defender.config.json` 文件中添加“include”和“exclude”规则，允许用户选择运行哪些规则。
 
 [[release-2024-01-18]]
-== January 18th, 2024
+== 2024年1月18日
 
-* *General*
-** Support for *Polygon zkEVM Mainnet* and *Polygon zkEVM Testnet*.
+* *通用*
+** 支持 *Polygon zkEVM Mainnet* 和 *Polygon zkEVM Testnet*。
 
-* *Relayers*
-** Fix Flashbots RPC URL calls when retrieving transaction status.
+* *中继器*
+** 修复检索交易状态时 Flashbots RPC URL 调用。
 
-* *Access Control*
-** Add Access Manager banner on top of contracts list and embed Access Manager explorer UI for easier navigation.
+* *访问控制*
+** 在合约列表顶部添加访问管理器横幅，并嵌入访问管理器资源管理器UI以便于导航。
 
 * *Actions*
-** Upgrade Fireblocks SDK version and its dependencies.
+** 升级Fireblocks SDK版本及其依赖项。
 
-* *Code Inspector*
-** Feature to allow users to specify settings and configuration of a repository via a file called "defender.config.json" on the root directory.
-
+* *代码检查器*
+** 该功能允许用户通过在根目录下的名为“defender.config.json”的文件中指定存储库的设置和配置。
 
 [[release-2024-01-10]]
-== January 10th, 2024
+== 2024年1月10日
 
-* *General*
-** Minor bug fixes and security improvements across all components.
+* *通用*
+** 所有组件中的次要错误修复和安全改进。
 
-* *Authorization*
-** Allow team members to re-send an invitation for pending users.
+* *授权*
+** 允许团队成员重新发送待处理用户的邀请。
 
 * *Monitor*
-** Forta monitors added support for Optimism and Fantom networks.
+** Forta 监视添加了对 Optimism 和 Fantom 网络的支持。
 
 * *Forked Networks*
-** Access to forked networks with read-only permissions.
+** 具有只读权限的派生网络的访问。
 
-* *Private Networks*
-** Apply restrictions on the usage of specific chain ids.
+* *私有网络*
+** 对特定链ID的使用施加限制。
 
 * *Audit*
-** Audit report logo and code block spacing styling improvements.
+** 审计报告徽标和代码块间距样式改进。
 
 * *Deploy*
-** Fix deployment status when the deploy request fails.
+** 修复部署请求失败时的部署状态。
 
-* *Code Inspector*
-** Allow users to directly request an audit if there are reports with more than 10 findings.
-
+* *代码检查器*
+** 如果有超过10个发现的报告，则允许用户直接请求审核。
 
 [[release-2023-12-20]]
-== December 20th, 2023
+== 2023年12月20日
 
-* *General*
-** Fix menu button visibility issue.
-** Add base chain to allowed assets for fireblocks.
-** Fix the order of tabs in the navbar.
+* *通用*
+** 修复菜单按钮可见性问题。
+** 将基本链添加到Fireblocks允许的资产中。
+** 修复导航栏中Tab的顺序。
 
-* *Audit*
-** Add ability to finalize an audit with no auditor comments.
+* *审计*
+** 增加在没有审计员评论的情况下完成审计的能力。
 
 * *Monitor*
-** Update Forta Monitor required fields — We have updated the logic to require only a contract or an agent ID instead of requiring both. When using Forta monitor, you can subscribe to an agent without specifying a contract.
-** Added Access Control Monitor template — We have added a new Monitor template that allows you to easily monitor when changes are applied to your access control. For example, when assigning an address to a role.
-** Added Account Activity Monitor template — We have added a new Monitor template that allows you to monitor the activity of an account easily. For example, it will monitor for any transaction where the specified address is involved, both as origin or destination.
+** 更新了Forta Monitor必填字段 - 我们更新了逻辑，仅需要合约或代理ID，而不是两者都需要。当使用Forta监视器时，您可以订阅代理，而无需指定合约。
+** 添加了访问控制监视器模板 - 我们添加了一个新的监视器模板，使您可以轻松地监视对访问控制应用更改的时间。例如，当将地址分配给角色时。
+** 添加了帐户活动监视器模板 - 我们添加了一个新的监视器模板，使您可以轻松地监视帐户的活动。例如，它将监视指定地址参与的任何交易，包括作为来源或目的地。
 
 * *API/SDK*
-** Added an ABI option for the list contract API endpoint — We have added an option to include a contract's ABI when using our https://www.api-docs.defender.openzeppelin.com/#list-contracts[API or SDK, window=_blank]. The flag is set to false by default, but when set to true, the response will include the ABIs of the list of contracts.
+** 为列表合约API端点添加了ABI选项 - 我们添加了一个选项，在使用我们的 https://www.api-docs.defender.openzeppelin.com/#list-contracts[API或SDK，window=_blank]时，包含合约的ABI。默认情况下，该标志设置为false，但设置为true时，响应将包含合约列表的ABI。
 
 [[release-2023-12-12]]
-== December 12th, 2023
+== 2023年12月12日
 
 * *Auth*
-** Bug fixes in reset password flow.
+** 修复密码重置流程中的错误。
 
-* *Code Inspector*
-** Ability to trigger a code inspector report through Defender by specifying the repository and a commit.
+* *代码检查器*
+** 通过指定存储库和提交，通过Defender触发代码检查器报告的能力。
 
-* *Relayers*
-** Bug fix on gas estimation for relayers in mainnet.
-** Bug fix stuck page when deleting a relayer.
+* *中继器*
+** 修复主网中继器Gas估算错误。
+** 修复删除中继器时停滞页面。
 
 * *Monitors*
-** Disable monitor action filters and monitor action notifications for free trial.
+** 禁用免费试用版的监视器操作过滤器和监视器操作通知。
 
-* *General*
-** Minor bug fix in quotas.
+* *通用*
+** Quota 中的细微错误修复。
 
 [[release-2023-12-07]]
-== December 7th, 2023
+== 2023年12月7日
 
 * *Auth*
-** Enable access to Defender 2.0 for Defender 1.0 users.
-** Minor bug fixes in quotas and sign ups.
+** 为Defender 1.0用户启用对Defender 2.0的访问权限。
+** Quota 和注册方面的细微错误修复。
 
-* *Relayers*
-** Bug fix in ability in cancelling pending private(flashbot) transactions.
-** Bug fix in updating gas prices across multiple networks.
+* *中继器*
+** 修复了取消待处理的私有(flashbot)交易的能力。
+** 修复了跨多个网络更新Gas价格的问题。
 
-* *General*
-** Add support for *Optimism Sepolia*.
-** Add support for *Base Sepolia*.
-** Add support for yearly subscriptions.
-** UI improvements.
-
+* *通用*
+** 增加对 *Optimism Sepolia* 的支持。
+** 增加对 *Base Sepolia* 的支持。
+** 增加对年度订阅的支持。
+** UI 改进。
 
 [[release-2023-12-04]]
-== December 4th, 2023
+== 2023年12月4日
 
 * *Monitor*
-** Add support for link:https://docs.forta.network/en/latest/attack-detector-bot/[new Attack Detector forta bot] in monitor templates.
+** 在监视器模板中增加对link:https://docs.forta.network/en/latest/attack-detector-bot/[新的攻击检测器forta Bot]的支持。
 
-* *General*
-** Add support for createCall contracts for scroll mainnet.
-** Bug fixes across all components.
+* *通用*
+** 增加对scroll主网的createCall合约的支持。
+** 跨所有组件的Bug 修复。
 
 [[release-2023-11-30]]
-== November 30th, 2023
+== 2023年11月30日
 
-* *Defender 2.0 is now in public beta*
-** Defender 2.0 is now in public beta and users can now sign up link:https://defender.openzeppelin.com/v2/#/auth/sign-in[using this link] without the need for an invite/being on the waitlist.
+* *Defender 2.0现在处于公开测试阶段*
+** Defender 2.0现在处于公开测试阶段，用户现在可以使用link:https://defender.openzeppelin.com/v2/#/auth/sign-in[此链接]注册，而无需邀请/在等待列表中。
 * *Auth*
-** Ability to self sign up for defender 2.0 without the need for an invite.
-** Ability to use google auth for signin.
-* *Relayers*
-** Ability to see error message on relayer withdraw funds page.
-** Ability to delete pending transactions in relayers.
+** 能够自我注册defender 2.0，而无需邀请。
+** 能够使用google auth进行登录。
+* *中继器*
+** 能够在中继器提取资金页面上看到错误消息。
+** 能够删除中继器中的待处理交易。
 * *Deploy*
-** Restricting deploy environment creation to only admins.
-** Minor bug fixes with size limitations & deployment history.
+** 限制部署环境创建仅限于管理员。
+** 大小限制和部署历史记录方面的细微错误修复。
 * *Audit*
-** Fix readability of audit issues.
-* *Code Inspector*
-** Modify name in navbar.
-* *General*
-** Minor backend fixes.
-** Minor UI/UX fixes.
-** Security fixes.
-
+** 修复审计问题的可读性。
+* *代码检查器*
+** 在导航栏中修改名称。
+* *通用*
+** 次要后端修复。
+** 次要的UI/UX修复。
+** 安全修复。
 
 [[release-2023-11-27]]
-== November 27th, 2023
+== 2023年11月27日
 
-* Add support for arbitrum sepolia.
-* Deploy & Actions bug fixes.
-* Show stats for code module.
-* Other misc bug fixes.
+* 增加对 arbitrum sepolia 的支持。
+* Deploy 和 Actions 错误修复。
+* 显示代码模块的统计信息。
+* 其他杂项Bug 修复。
 
 [[release-2023-11-22]]
-== November 22nd, 2023
+== 2023年11月22日
 
-* Add safe tx service url for scroll.
-* Audit pages bug fixes.
-* Patch several security vulnerabilities.
-* Minor bug fixes.
+* 为 scroll 添加安全交易服务 URL。
+* 审计页面 Bug 修复。
+* 修复多个安全漏洞。
+* 次要 Bug 修复。
 
 [[release-2023-11-14]]
-== November 14th, 2023
+== 2023年11月14日
 
-* Support meld network.
-* Enforced MFA for V1.
-* Markdown support for audit client comments.
-* Optimize address book page.
-* Minor bug fixes.
+* 支持 meld 网络。
+* 对 V1 强制执行 MFA。
+* 审计客户评论的 Markdown 支持。
+* 优化了地址簿页面。
+* 次要 Bug 修复。
 
 [[release-2023-11-09]]
-== November 9th, 2023
+== 2023年11月9日
 
-* Support for EOA and Safe backend functions and model changes.
-* Support for environment variables in defender-as-code (DaC)
-* Minor bug fixes in code, audit module and address book
-* Fixes several security vulnerabilities in dependencies
-* Pagination feature for transaction proposals
+* 支持 EOA 和 Safe 后端功能和模型更改。
+* 支持 defender-as-code (DaC) 中的环境变量
+* 代码、审计模块和地址簿中的小错误修复
+* 修复了依赖关系中的几个安全漏洞
+* 交易提案的分页功能
 
 [[release-2023-11-07]]
-== November 7th, 2023
+== 2023年11月7日
 
-* Fix approval process deletion in configuration view.
-* Remove check for block explorer keys in deployments.
-* Feature/enable tx send retries on nonce too high.
-* Use system block explorer API keys by default.
-* Add back button on deposit and withdraw.
-* Align contracts v5 changes with upgrade api.
-* Add support for scroll network mainnet.
-* Bugfix/add missing policy to read audit ssm map on user invite.
+* 修复了配置视图中的审批流程删除。
+* 删除部署中检查区块浏览器密钥的步骤。
+* 功能/启用在 nonce 过高时进行交易发送重试。
+* 默认使用系统区块浏览器 API 密钥。
+* 在存款和取款上添加后退按钮。
+* 使合约 v5 更改与升级 api 对齐。
+* 添加对 scroll 网络主网的支持。
+* Bugfix/在用户邀请时添加缺少阅读审计 ssm Map 的策略。
 
 [[release-2023-10-23]]
-== October 23rd, 2023
+== 2023年10月23日
 
-* Add support on boarding to defender audit.
-* Add ability for monitor to look for an ABI in the address rules when not present in contract.
-* Allow selecting an approval process from UI for deploy.
-* Add actionRunId and actionId attributes to action run response.
-* Improve UI/UX for monitor templates.
-* Update code app installation repos when users change them.
-* Add support to split secret entries into multiple encypted chunks.
-* Return hash of correct bytecode in verification result.
+* 增加对defender审计的加入支持。
+* 增加允许monitor在合约中不存在时在地址规则中查找ABI的功能。
+* 允许从UI中选择审批流程进行部署。
+* 将actionRunId和actionId属性添加到操作运行响应中。
+* 改进监视器模板的UI/UX。
+* 当用户更改代码应用程序安装仓库时，更新它们。
+* 增加对将密钥条目拆分为多个加密块的支持。
+* 在验证结果中返回正确的字节码哈希。
 
 [[release-2023-10-12]]
-== October 12th, 2023
+== 2023年10月12日
 
-* Add index for monitor to track active forked network monitors
-* Add support for mantle network 
-* Add X-Flashbots-Signature header to Flashbots requests
-* Support for scroll network
-* Fix condition for displaying delete pending txs button
-* Reuse contract-inspector newly added generated github links
+* 增加用于监视器跟踪活动分支网络监视器的索引
+* 增加对mantle network的支持
+* 添加X-Flashbots-Signature标头到Flashbots请求
+* 支持scroll网络
+* 修复用于显示删除待处理交易按钮的条件
+* 重用contract-inspector新添加的生成的github链接
 
 [[release-2023-10-5]]
-== October 5th, 2023
+== 2023年10月5日
 
-* Introduce feature flag for forked networks in backend 
-* Fix V1 autotask page
-* Monitors list page stuck rendering massive lists
-* Forked Networks Monitors
-* Improve DX for running v2 user invite scripts
-* UI updates
+* 在后端为Forked Networks引入功能标志
+* 修复V1自动任务页面
+* 监视器列表页面卡在渲染大量列表
+* Forked Networks监视器
+* 改进运行v2用户邀请脚本的DX
+* UI更新
 
 [[release-2023-09-25]]
-== September 25th, 2023
+== 2023年9月25日
 
-* Partial Hedera mainnet support for relayers
-* Codeapp fixes
-* Fix cache policies
-* Load store sequentialy
+* 为中继器提供部分Hedera主网支持
+* Codeapp错误修复
+* 修复缓存策略
+* 顺序加载存储
 
 [[release-2023-09-11]]
-== September 11th, 2023
+== 2023年9月11日
 
-* Add gnosisSafeTxService key to celo definition
-* Forgot password improvements
-* Defender-as-Code docs link fix
-* Bunch of UI & email bug fixes and improvements
+* 将gnosisSafeTxService密钥添加到celo定义
+* 忘记密码改进
+* Defender-as-Code文档链接修复
+* 一堆UI和电子邮件错误修复和改进
 
 [[release-2023-08-29]]
-== August 29th, 2023
+== 2023年8月29日
 
-* Defender 2.0 improvements across all components.
-* defender-sdk client packages for 2.0 improvements
-* Update optimism goerli block explorer URL.
-* Bug fixes in Audit, Incident Response & Code App.
+* 所有组件的Defender 2.0改进。
+* defender-sdk client package，用于2.0改进
+* 更新optimism goerli 区块浏览器URL。
+* 审计、事件响应和代码App中的Bug修复。
 
 [[release-2023-08-16]]
-== August 16th, 2023
+== 2023年8月16日
 
-* Provide intuitive navigation order for Defender 2.0
-* Revamp sign-in page UX
-* Resolve permissions issues in Incident Response
+* 为Defender 2.0提供直观的导航顺序
+* 改进登录页面用户体验
+* 解决事件响应中的权限问题
 
 [[release-2023-08-09]]
-== August 9th, 2023
+== 2023年8月9日
 
-* Release Github Code App feature
-* Add support for https://linea.build/[*Linea Mainnet*,window=_blank]
-* Expose Relayer pausing capabilities in Defender 2.0
+* 发布 Github代码 App 功能
+* 增加对https://linea.build/[*Linea Mainnet*,window=_blank]的支持
+* 在 Defender 2.0 中公开中继器暂停功能
 
 [[release-2023-08-03]]
-== August 3rd, 2023
+== 2023年8月3日
 
-* Add EIP-1559 support for Bedrock networks (Optimism/Base)
-* Fix Bedrock transaction repricing logic
-* Implement API Key for Forta Monitors
+* 为Bedrock 网络（Optimism/Base）增加 EIP-1559 支持
+* 修复 Bedrock 交易重新定价逻辑
+* 为 Forta 监视器实施 API 密钥
 
 [[release-2023-07-27]]
-== July 27th, 2023
+== 2023年7月27日
 
-* Add support for https://base.org/[Base Mainnet,window=_blank]
-* Expose endpoint to list networks
-* Enable users to skip ABI validation on monitor creation/update
+* 增加对 https://base.org/[Base Mainnet,window=_blank] 的支持
+* 公开列出网络的端点
+* 允许用户在监视器创建/更新时跳过 ABI 验证
 
 [[release-2023-07-19]]
-== July 19th, 2023
+== 2023年7月19日
 
-* Add monitoring recommendations to Audit product
-* Enable export of Platform as Code
+* 将监视建议添加到审核产品中
+* 允许导出平台即代码
 
 [[release-2023-07-11]]
-== July 11th, 2023
+== 2023年7月11日
 
-* Build dedicated sign-in page for OpenZeppelin Platform
-* Optimize UX for monitors with multiple contracts
-* Improve browser performance and load times
+* 为 OpenZeppelin 平台构建专用登录页面
+* 优化具有多个合约的监视器的 UX
+* 提高浏览器性能并缩短加载时间
 
 [[release-2023-06-22]]
-== June 22nd, 2023
+== 2023年6月22日
 
-* Support timelocks in Incident Response product
-* Audit UX imnprovements - status designation, severity filter, UI bugs
-* Make signature optional for Gnosis Safe proposals
+* 支持事件响应产品中的时间锁
+* 审计 UX 改进 - 状态指定、严重性过滤器、UI 错误
+* 签署对于 Gnosis 安全提案是可选的
 
 [[release-2023-06-07]]
-== June 7th, 2023
+== 2023年6月7日
 
-* Add support for https://linea.build/[Linea Goerli,window=_blank]
-* Integrate Timelocks in Upgrade approval processes
-* Add summary of Deploy and Access Control activity to Overview page
+* 增加对 https://linea.build/[Linea Goerli,window=_blank] 的支持
+* 在升级授权过程中集成时间锁
+* 将部署和访问控制活动摘要添加到概述页面
 
 [[release-2023-05-31]]
-== May 31st, 2023
+== 2023年5月31日
 
-* Enable users to unsubscribe from system emails
-* Support Governor in global approval processes
-* Implement additional filter capabilities in Audit
+* 启用用户取消订阅系统电子邮件
+* 在全局授权过程中支持 Governor
+* 在审计中实施额外的过滤功能
 
 [[release-2023-05-15]]
-== May 15th, 2023
+== 2023年5月15日
 
-* Add support for Sepolia testnet
-* Improve numerous UX flows
+* 增加对 Sepolia 测试网的支持
+* 改进了大量 UX 流程
 
 [[release-2023-05-05]]
-== May 5th, 2023
+== 2023年5月5日
 
-* Optimize Auditor/Client fix-review flow in Audit product
-* Enable creation of Deploy environments and expose Upgrade endpoints
-* Support global approval processes in Access Control
-* Show Deployment log details
+* 优化审计产品中的审计员/客户端修复审核流程
+* 启用部署环境的创建并公开升级端点
+* 在访问控制中支持全局授权流程
+* 显示部署日志详细信息

@@ -1,83 +1,82 @@
 [[contracts-wizard-deploy-plugin]]
 = Contracts Wizard Deploy Plugin
 
-When configuring contracts from https://wizard.openzeppelin.com/[Contracts Wizard, window=_blank], you can directly deploy the configured Smart Contract using your Defender account.
-
+当从 https://wizard.openzeppelin.com/[Contracts Wizard, window=_blank] 配置合约时，你可以直接使用你的 Defender 账户部署配置好的 Smart Contract。
 
 [[usage]]
-== Usage
+== 使用方法
 
 [[api-key-generation]]
-=== API Key generation
-In your Defender dashboard, go to *Settings -> API Keys* and click *Create API Key*, you only need _Manage Deployments_ permission.
+=== API Key 生成
+在你的 Defender 仪表盘中，进入 *设置 -> API Keys* 并点击 *创建 API Key*，你只需要 _管理部署_ 权限。
 
-WARNING: We also recommend to set an expiration for the API Key, considering that is going to be used from an external site.
+WARNING: 我们也建议为 API Key 设置一个过期时间，考虑到它将从外部网站使用。
 
 image::remix-plugin-api-key.png[Defender Remix Plugin Api Key, 400, 400]
 
 [[deploying-from-wizard]]
-=== Deployment from Contracts Wizard
+=== 从 Contracts Wizard 部署
 
-Go to https://wizard.openzeppelin.com/[Contracts Wizard, window=_blank] site, and after editing your contract, click on "Deploy with Defender".
+前往 https://wizard.openzeppelin.com/[Contracts Wizard, window=_blank] 站点，并在编辑完你的合约后，点击 "Deploy with Defender"。
 
 image::wizard-plugin-start.png[Defender Wizard Plugin Getting Started, 500, 220]
 
 [[configure]]
-==== Configure
-Set your *API Key* and *API Secret* and press "Authenticate". You should see a message below the button indicating that the credentials are valid.
+==== 配置
+设置你的 *API Key* 和 *API Secret* 并点击 "Authenticate"。你应该在按钮下方看到一条消息，表明凭据有效。
 
 image::wizard-plugin-configure.png[Defender Wizard Plugin Configure]
 image::wizard-plugin-configure-2.png[Defender Wizard Plugin API keys]
 
 [[network]]
-==== Network
-Select any of the supported networks. This also includes private and forked networks configured in your tenant.
+==== 网络
+选择任何受支持的网络。 这也包括在你的租户中配置的私有和派生网络。
 
 image::wizard-plugin-network-2.png[Defender Wizard Plugin Network]
 
 [[approval-process]]
-==== Approval Process
-Here you have 3 options:
+==== 审批流程
+这里你有 3 个选项：
 
-- Select an existing approval process from your *Deployment Environment* configured for the selected network.
+- 从为所选网络配置的 *Deployment Environment* 中选择现有的审批流程。
 
-NOTE: If you have an existing deployment environment in the selected network, this is the only option allowed.
+NOTE: 如果你在所选网络中有一个现有的部署环境，则这是唯一允许的选项。
 
-- If the *Deployment Envoronment* does not exist for the selected network, then you can create a new one. 
+- 如果所选网络不存在 *Deployment Envoronment*，则你可以创建一个新的。
 
-NOTE: If the Approval Process to be created is a Relayer, the API Key must include _Manage Relayers_ permission.
+NOTE: 如果要创建的审批流程是 Relayer，则 API Key 必须包含 _管理 Relayers_ 权限。
 
-- Additionally, you can use the *injected provider* from Remix (a browser wallet) to deploy the contract, this will create a Defender *Deployment Environment* under the hood after deploying the contract.
+- 此外，你可以使用来自 Remix（浏览器钱包）的 *注入提供程序* 来部署合约，这将在部署合约后创建一个 Defender *Deployment Environment*。
 
 image::wizard-plugin-approval-process.png[Defender Wizard Plugin Approval Process]
 
 [[deploy]]
-==== Deploy
-In this step, you should see the constructor inputs of your configured contract (if any), and the option to create a deterministic deployment.
+==== 部署
+在这一步，你应该看到你配置的合约的构造函数输入（如果有），以及创建确定性部署的选项。
 
-NOTE: This step is reactive, if you modify the contract you will see the new constructor arguments updated right after.
+NOTE: 这一步是响应式的，如果你修改了合约，你将立即看到更新后的新构造函数参数。
 
-WARNING: Upgradable contracts are not yet fully supported. This action will only deploy the implementation contract without initializing. For safe upgrades, we strongly recommend usign https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank].
+WARNING: 尚未完全支持可升级合约。 此操作只会部署实现合约而不进行初始化。 为了安全升级，我们强烈建议使用 https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank]。
 
 image::wizard-plugin-deploy.png[Defender Wizard Plugin Deploy]
 
 [[deterministic-deployments]]
-==== Deterministic Deployments
+==== 确定性部署
 
-Defender Deploy supports a `salt` value to create deployments to deterministic addresses using `CREATE2`. Click on `Deterministic` checkbox and set the salt field to any arbitrary value.
+Defender Deploy 支持使用 `salt` 值来使用 `CREATE2` 创建到确定性地址的部署。 点击 `Deterministic` 复选框，并将 salt 字段设置为任何任意值。
 
-NOTE: If the approval process selected is a Multisig, the `salt` is required as Defender only support deterministic deployments when using Multisigs.
+NOTE: 如果所选的审批流程是 Multisig，则 `salt` 是必需的，因为 Defender 仅在使用 Multisig 时支持确定性部署。
 
 image::wizard-plugin-deterministic.png[Defender Wizard Plugin Deterministic Deployments]
 
 [[further-steps]]
-==== Further Steps
+==== 后续步骤
 
-Once the contract deployment is submitted to Defender, in some cases you may need to complete the deployment from Defender Dashboard. You will see message indicating that the contract was submitted and a button that redirects to your Deployment in Defender.
+一旦合约部署被提交到 Defender，在某些情况下你可能需要从 Defender 仪表盘完成部署。 你将看到一条消息，表明合约已提交，以及一个将你重定向到 Defender 中部署的按钮。
 
 image::wizard-deploy-further-steps.png[Defender Wizard Plugin Further Steps, 440, 400]
 
 [[feedback]]
-== Feedback
+== 反馈
 
-The Defender Deploy Plugin is open source, for feedback related to the plugin, please submit an issue in the https://github.com/OpenZeppelin/defender-deploy-plugin[Github Repository, window=_blank] or send an email to `defender-support@openzeppelin.com`.
+Defender Deploy Plugin 是开源的，有关插件的反馈，请在 https://github.com/OpenZeppelin/defender-deploy-plugin[Github Repository, window=_blank] 中提交问题或发送电子邮件至 `defender-support@openzeppelin.com`。

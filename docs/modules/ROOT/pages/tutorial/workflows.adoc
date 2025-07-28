@@ -1,69 +1,69 @@
-# Create an Action Workflow to decrease the number of objects in a Box contract
+:page-title: 创建一个 Action Workflow 来减少 Box 合约中的对象数量
 
-Defender allows you to target and activate on-chain activity using Action Workflow quickly. This tutorial shows how to create a workflow that monitors the number of objects in a Box contract and executes an action when an object is added to it.
+Defender 允许你使用 Action Workflow 快速定位并激活链上活动。本教程展示了如何创建一个工作流，该工作流监控 Box 合约中的对象数量，并在向其添加对象时执行一个 action。
 
 [[pre-requisites]]
-== Pre-requisites
+== 先决条件
 
-* OpenZeppelin Defender account.
+* OpenZeppelin Defender 账户。
 
 [[action]]
-== 1. Action setup
+== 1. Action 设置
 
-In this tutorial, you will monitor https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[this, window=_blank] contract in Sepolia, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
+在本教程中，你将监控 https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Sepolia 中的这个合约, window=_blank]，该合约存储了多个对象，同时允许任何人分别使用 `addObject()` 和 `removeObject()` 函数来添加或删除对象。对于添加的每个对象，你的工作流将执行一个 action，该 action 会删除一个对象并将总数减少一。要设置该 action，请按照下列步骤操作：
 
-. Open https://defender.openzeppelin.com/v2/#/relayers/new[Defender Relayers, window=_blank] in a web browser.
-. Fill the form with the following parameters and click on *Create*:
+. 在 web 浏览器中打开 https://defender.openzeppelin.com/v2/#/relayers/new[Defender Relayers, window=_blank]。
+. 使用以下参数填写表单，然后单击 *Create*：
 +
 * *Name*: `Relayer Sepolia`
 * *Network*: `Sepolia`
 
-. Transfer some Sepolia ETH to the relayer address created in the previous step.
-. Navigate to https://defender.openzeppelin.com/v2/#/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
-. Fill the form with the following parameters and click on *Create*:
+. 将一些 Sepolia ETH 转移到上一步中创建的中继器地址。
+. 导航到 https://defender.openzeppelin.com/v2/#/address-book/new[Defender Address Book, window=_blank] 以导入 `BoxV2` 合约。
+. 使用以下参数填写表单，然后单击 *Create*：
 +
 * *Name*: `BoxV2`
 * *Network*: `Sepolia`
 * *Address*: `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074`
 
-. Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender Workflows Transaction Template creation page, window=_blank].
-. Fill the **General Information** section with the following parameters:
+. 导航到 https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender Workflows Transaction Template 创建页面, window=_blank]。
+. 使用以下参数填写 **General Information** 部分：
 +
 * *Name*: `Remove object`
 * *Contract*: `BoxV2`
 
-. Select the `removeObject` function from the dropdown menu in the **Function** section.
-. Expand the dropdown on the **Approval Process** section and click on `Create Approval Process`.
-. Fill the form with the following parameters and click on *Save Changes*:
+. 从 **Function** 部分的下拉菜单中选择 `removeObject` 函数。
+. 展开 **Approval Process** 部分的下拉菜单，然后单击 `Create Approval Process`。
+. 使用以下参数填写表单，然后单击 *Save Changes*：
 +
 * *Name*: `BoxV2 IR Sender`
-* *Relayer*: `Relayer Sepolia` (created in the first step)
+* *Relayer*: `Relayer Sepolia`（在第一步中创建）
 
-. Select `BoxV2 IR Sender` as the approval process and click on `Save Transaction Template`
+. 选择 `BoxV2 IR Sender` 作为审批流程，然后单击 `Save Transaction Template`
 
 +
-image::tutorial-workflow-first-action.png[Workflow page with Transaction Template]
+image::tutorial-workflow-first-action.png[带有 Transaction Template 的工作流页面]
 
 [[workflow]]
-== 2. Workflow setup
+== 2. Workflow 设置
 
-With the action configured, you now need to create the workflow. To do so, follow these steps:
+配置好 action 后，现在需要创建工作流。为此，请按照下列步骤操作：
 
-. Open the https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender Workflows creation page, window=_blank].
-. Rename the workflow `Remove from BoxV2 if Object is Added`.
-. Drag the `Remove object` action to the first row.
-. Click on *Save*.
+. 打开 https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender Workflows 创建页面, window=_blank]。
+. 将工作流重命名为 `Remove from BoxV2 if Object is Added`。
+. 将 `Remove object` action 拖到第一行。
+. 单击 *Save*。
 
 +
-image::tutorial-workflow-scenario.png[BoxV2 workflow]
+image::tutorial-workflow-scenario.png[BoxV2 工作流]
 
 [[monitor]]
-== 3. Monitor setup
+== 3. Monitor 设置
 
-After creating the workflow, you need to configure a monitor that keeps track of the number of objects in the BoxV2 contract to trigger the workflow. To do so, follow these steps:
+创建工作流后，你需要配置一个 monitor，以跟踪 BoxV2 合约中的对象数量以触发该工作流。为此，请按照下列步骤操作：
 
-. Open the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender Monitor creation page, window=_blank].
-. Fill the **General Information** section with the following parameters:
+. 打开 https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender Monitor 创建页面, window=_blank]。
+. 使用以下参数填写 **General Information** 部分：
 +
 * *Name*: `BoxV2 Objects Monitor`
 * *Risk Category*: `Suspicious Activity`
@@ -71,55 +71,55 @@ After creating the workflow, you need to configure a monitor that keeps track of
 * *Confirmation Blocks*: `Confirmed (1 blocks)`
 
 +
-image::tutorial-ir-first-monitor.png[Workflow Monitor General Information]
+image::tutorial-ir-first-monitor.png[工作流 Monitor 常规信息]
 
-. In the **Transaction Filters** section, add `status == "success"` for the `Transaction properties` field.
-. In the **Function** section, select `addObject()`
-. Within the **Alerts** section, select the `Remove from BoxV2 if Object is Added` workflow for the `Execute a Workflow` option.
+. 在 **Transaction Filters** 部分，为 `Transaction properties` 字段添加 `status == "success"`。
+. 在 **Function** 部分，选择 `addObject()`
+. 在 **Alerts** 部分中，为 `Execute a Workflow` 选项选择 `Remove from BoxV2 if Object is Added` 工作流。
 
 +
-image::tutorial-ir-monitor.png[Workflow BoxV2 Objects monitor]
+image::tutorial-ir-monitor.png[工作流 BoxV2 Objects monitor]
 
-. Click on *Save Monitor*, which will start running.
+. 单击 *Save Monitor*，这将开始运行。
 
 [[in-action]]
-== 4. Seeing it in action
+== 4. 实际应用
 
-While the monitor runs, it will detect any transaction that matches the `addObject()` function to trigger the workflow. To manually execute such a transaction, follow these steps:
+当 monitor 运行时，它将检测任何与 `addObject()` 函数匹配的交易以触发工作流。要手动执行此类交易，请按照下列步骤操作：
 
-. Open the https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Defender Transaction Proposal creation page, window=_blank].
-. Fill the form with the following parameters:
+. 打开 https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Defender Transaction Proposal 创建页面, window=_blank]。
+. 使用以下参数填写表单：
 +
 * *Name*: `BoxV2 Add Object Trigger`
 * *Contract*: `BoxV2`
 * *Function*: `addObject`
 * *Approval Process*: `BoxV2 IR Sender`
 
-. Click on *Submit Transaction Proposal*.
+. 单击 *Submit Transaction Proposal*。
 
 +
-image::tutorial-ir-proposal-action.png[Transaction Proposal Trigger]
+image::tutorial-ir-proposal-action.png[Transaction Proposal 触发器]
 
-. Click on the transaction proposal to open its page.
-. Click on the top-right button *Approve and Execute* to execute the transaction, which will trigger the workflow through the monitor.
-. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/actions/workflows[Defender Workflows page, window=_blank].
-
-+
-image::tutorial-workflow-active-scenario.png[Active Workflow]
-
-. Click on *View Active Run* and check the details of your workflow response.
-. After the run is executed successfully, you can verify the response by checking the activity of the contract on https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan, window=_blank]. It should look like this:
+. 单击交易提案以打开其页面。
+. 单击右上角的 *Approve and Execute* 按钮以执行交易，这将通过 monitor 触发工作流。
+. 等待交易执行完毕并打开 https://defender.openzeppelin.com/v2/#/actions/workflows[Defender Workflows 页面, window=_blank]。
 
 +
-image::tutorial-ir-etherscan.png[Workflow Etherscan Response]
+image::tutorial-workflow-active-scenario.png[活动工作流]
+
+. 单击 *View Active Run* 并检查工作流响应的详细信息。
+. 成功执行运行后，你可以通过检查 https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan, window=_blank] 上的合约活动来验证响应。它应该看起来像这样：
+
++
+image::tutorial-ir-etherscan.png[工作流 Etherscan 响应]
 
 [[next-steps]]
-== Next steps
+== 下一步
 
-Congratulations! You now have a complete workflow that will be running and checking every confirmed block. Workflows can be expanded with parallel actions for more technical combinations. In case you are interested in advanced use cases, we are working on Workflow-related guides.
+恭喜！你现在有了一个完整的工作流，它将运行并检查每个已确认的区块。工作流可以通过并行 action 进行扩展，以实现更多技术组合。如果你对高级用例感兴趣，我们正在编写与 Workflow 相关的指南。
 
 [[references]]
-== References
+== 参考
 
-* xref::module/actions.adoc#workflows[Workflow Documentation]
+* xref::module/actions.adoc#workflows[Workflow 文档]
 * https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2, window=_blank]

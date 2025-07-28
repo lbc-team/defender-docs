@@ -1,42 +1,42 @@
-= Defender as Code Plugin
+= Defender 即代码插件
 
-Defender as Code (DaC) is a Serverless Framework plugin for automated resource management and configuration as code.
+Defender 即代码 (DaC) 是一个 Serverless Framework 插件，用于自动化资源管理和配置即代码。
 
-WARNING: This plugin is under development and behavior might change. Handle with care.
+警告: 该插件正在开发中，行为可能会发生变化。谨慎使用。
 
-== Prerequisites
+== 前提条件
 
-Serverless Framework: https://www.serverless.com/framework/docs/getting-started/
+Serverless Framework: https://www.serverless.com/framework/docs/getting-started/[入门]
 
-== Installation
+== 安装
 
-You can initialise your Serverless project directly using our pre-configured template:
+您可以直接使用我们预配置的模板初始化您的 Serverless 项目：
 
 ```
 sls install --url https://github.com/OpenZeppelin/defender-as-code/tree/main/template -n my-service
 ```
 
-NOTE: For the command above to work correctly you need access to this repo.
+NOTE: 为了使以上命令能够正确运行，您需要有权访问此 repo。
 
-Alternatively, you can install it directly into an existing project with:
+或者，您可以直接将其安装到现有项目中：
 
 `yarn add @openzeppelin/defender-as-code`
 
-## Setup
+## 设置
 
-There are a few ways you can set up the `serverless.yml` configuration:
+您可以通过几种方式设置 `serverless.yml` 配置：
 
-- Create it from scratch;
-- Use Defender's 2.0 Serverless export capability;
-- Leverage the example https://github.com/OpenZeppelin/defender-as-code/blob/main/template/serverless.yml[template, window=_blank] provided in the `defender-as-code` repository.
+- 从头开始创建；
+- 使用 Defender 的 2.0 Serverless 导出功能；
+- 利用 https://github.com/OpenZeppelin/defender-as-code/blob/main/template/serverless.yml[`defender-as-code` 仓库中提供的模板, window=_blank]。
 
-If you already have resources such as contracts, notifications, relayers, actions, etc. in Defender, you can export a `serverless.yml` configuration file containing these resources from the manage → advanced page.
+如果您已经在 Defender 中拥有诸如合约、通知、Relayer、Action 等资源，您可以从管理 → 高级页面导出一个包含这些资源的 `serverless.yml` 配置文件。
 
-image::manage-advanced-export-serverless.png[Defender Export Serverless]
+image::manage-advanced-export-serverless.png[Defender 导出 Serverless]
 
-NOTE: If you have previously deployed with `defender-as-code` to the same account and subsequently created new resources through the Defender user interface, the export function will automatically assign a `stackResourceId` to the new resources based on the name of your latest deployment stack. If you have not deployed using `defender-as-code` before, a default stack name of `mystack` will be used.
+NOTE: 如果您之前使用 `defender-as-code` 部署到同一帐户，并且随后通过 Defender 用户界面创建了新资源，则导出功能将根据您最新的部署堆栈的名称自动为新资源分配一个 `stackResourceId`。如果您以前未使用 `defender-as-code` 进行部署，则将使用默认堆栈名称 `mystack`。
 
-This plugin allows you to define Actions, Monitors, Notifications, Block Explorer API Keys, Relayers, Contracts, Policies, and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
+此插件允许您从 `serverless.yml` 中以声明方式定义 Action、Monitor、通知、区块浏览器 API 密钥、Relayer、合约和密钥，并通过 CLI 使用 `serverless deploy` 来配置它们。以下是一个示例模板，其中定义了一个 Action、一个 Relayer、一个策略和一个 Relayer API 密钥：
 
 ```yaml
 service: defender-as-code-template
@@ -88,29 +88,29 @@ plugins:
   - '@openzeppelin/defender-as-code'
 ```
 
-This requires setting the `key` and `secret` under the `defender` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.
+这需要在 YAML 文件的 `defender` 属性下设置 `key` 和 `secret`。我们建议使用环境变量或安全的（git 忽略的）配置文件来检索这些值。相应地修改 `serverless.yml`。
 
-Ensure the Defender Team API Keys are setup with all appropriate API capabilities.
+确保 Defender Team API 密钥已配置所有相应的 API 功能。
 
-The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same tenant.
+`stackName` (例如 mystack) 与资源键 (例如 relayer-1) 结合使用，以唯一标识每个资源。此标识符称为 `stackResourceId` (例如 mystack.relayer-1)，允许您在同一租户中管理多个部署。
 
-You may also reference existing Defender resources directly by their unique ID (e.g. `2cbc3f58-d962-4be8-a158-1035be4b661c`). These resources will not be managed by the plugin and will be ignored during the deploy process. However, you may reference them in other resources to update their configuration accordingly.
-A list of properties that support direct referencing:
+您还可以通过它们的唯一 ID (例如 `2cbc3f58-d962-4be8-a158-1035be4b661c`) 直接引用现有的 Defender 资源。这些资源将不受插件管理，并且在部署过程中将被忽略。但是，您可以在其他资源中引用它们，以相应地更新它们的配置。
+以下是支持直接引用的属性列表：
 
-- `relayer` may reference a `relayerId` in Actions
-- `action-trigger` may reference an `actionid` in Monitor
-- `action-condition` may reference an `actionId` in Monitor
-- `address-from-relayer` may reference a `relayerId` in Relayer
-- `notify-config.channels` may reference multiple `notificationId` in Monitor
-- `contracts` may be used over `addresses` and reference multiple `contractId` in Monitor
-  The following is an example of how a direct reference to a Defender contract and relayer can be used in monitor and action respectively:
+- `relayer` 可以在 Action 中引用 `relayerId`
+- `action-trigger` 可以在 Monitor 中引用 `actionid`
+- `action-condition` 可以在 Monitor 中引用 `actionId`
+- `address-from-relayer` 可以在 Relayer 中引用 `relayerId`
+- `notify-config.channels` 可以在 Monitor 中引用多个 `notificationId`
+- `contracts` 可以取代 `addresses`，并在 Monitor 中引用多个 `contractId`
+  以下示例展示了如何在 Monitor 和 Action 中分别使用对 Defender 合约和 Relayer 的直接引用：
 
 ```yaml
 ...
 contracts:
-  contract-1: 'sepolia-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+  contract-1: 'sepolia-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # Defender 中现有资源的 contractId
 relayers:
-  relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
+  relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # Defender 中现有 Relayer 的 relayerId
 actions:
   action-example-1:
     name: 'Hello world from serverless'
@@ -134,83 +134,83 @@ monitors:
 ```
 
 [[ssot-mode]]
-=== SSOT mode
+=== SSOT 模式
 
-Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
-This means that all resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
+在 `serverless.yml` 文件中的 `provider` 属性下，您可以选择添加一个 `ssot` 布尔值。SSOT 或单一数据源，确保您在 Defender 中的堆栈状态与 `serverless.yml` 模板完全同步。
+这意味着，所有未在您当前模板文件中定义的资源，在部署时都会从 Defender 中删除，Relayer 除外。如果 SSOT 未在模板中定义，它将默认为 `false`。
 
-Any resource removed from the `serverless.yml` file does _not_ get automatically deleted in order to prevent inadvertent resource deletion. For this behaviour to be anticipated, SSOT mode must be enabled.
+从 `serverless.yml` 文件中删除的任何资源都_不会_自动删除，以防止意外删除资源。要预期此行为，必须启用 SSOT 模式。
 
-=== Secrets (Actions)
+=== 密钥 (Action)
 
-Action secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that <<#ssot-mode, SSOT mode>> is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
+Action 密钥可以全局定义，也可以按堆栈定义。在 `global` 下定义的密钥不受 `stackName` 更改的影响，并在新堆栈下重新部署时保留。当堆栈在新 `stackName` 下重新部署时，在 `stack` 下定义的密钥将被删除（前提是启用了 <<#ssot-mode, SSOT 模式>>）。要引用在 `stack` 下定义的密钥，请使用以下格式：`<stackname>_<secretkey>`，例如 `mystack_test`。
 
 ```yaml
 secrets:
-  # optional - global secrets are not affected by stackName changes
+  # optional - 全局密钥不受 stackName 更改的影响
   global:
     foo: ${self:custom.config.secrets.foo}
     hello: ${self:custom.config.secrets.hello}
-  # optional - stack secrets (formatted as <stackname>_<secretkey>)
+  # optional - 堆栈密钥（格式为 <stackname>_<secretkey>）
   stack:
     test: ${self:custom.config.secrets.test}
 ```
 
 [[types-and-schema-validation]]
-=== Types and Schema validation
+=== 类型和模式验证
 
-We provide auto-generated documentation based on the JSON schemas:
+我们提供基于 JSON 模式自动生成的文档：
 
-- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/defender.md[Defender Property]
-- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/provider.md[Provider Property]
-- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/resources.md[Resources Property]
+- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/defender.md[Defender 属性]
+- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/provider.md[Provider 属性]
+- https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs/resources.md[Resources 属性]
 
-More information on types can be found https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/index.ts[here]. Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs-schemas[docs-schema] folder.
+有关类型的更多信息可以在 https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/index.ts[此处]找到。具体而言，是以 `Y` 开头的类型（例如 YRelayer）。对于模式，您可以查看 https://github.com/OpenZeppelin/defender-as-code/blob/main/src/types/docs-schemas[docs-schema] 文件夹。
 
-Additionally, an https://github.com/OpenZeppelin/defender-as-code/blob/main/examples/defender-test-project/serverless.yml[example project] is available which provides majority of properties that can be defined in the `serverless.yml` file.
+此外，还提供了一个 https://github.com/OpenZeppelin/defender-as-code/blob/main/examples/defender-test-project/serverless.yml[示例项目]，该项目提供了可以在 `serverless.yml` 文件中定义的大多数属性。
 
-== Commands
+== 命令
 
-=== Deploy
+=== 部署
 
-You can use `sls deploy` to deploy your current stack to Defender.
+您可以使用 `sls deploy` 将当前堆栈部署到 Defender。
 
-The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above.
+部署采用一个可选的 `--stage` 标志，该标志在从以上模板安装时默认为 `dev`。
 
-Moreover, the `serverless.yml` may contain an `ssot` property. More information can be found in the <<#ssot-mode, SSOT mode>> section.
+此外，`serverless.yml` 可能包含一个 `ssot` 属性。更多信息可以在 <<#ssot-mode, SSOT 模式>> 部分找到。
 
-This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
+此命令将在当前工作目录的 `.defender` 文件夹中附加一个日志条目。此外，如果创建了任何新的 Relayer 密钥，这些密钥将作为 JSON 对象存储在 `.defender/relayer-keys` 文件夹中。
 
-WARNING: When installed from the template, we ensure the `.defender` folder is ignored from any git commits. However, when installing directly, make sure to add this folder in your `.gitignore` file.
+警告: 从模板安装时，我们确保从任何 git 提交中忽略 `.defender` 文件夹。但是，当直接安装时，请确保将此文件夹添加到您的 `.gitignore` 文件中。
 
-=== Info
+=== 信息
 
-You can use `sls info` to retrieve information on every resource defined in the `serverless.yml` file, including unique identifiers, and properties unique to each component.
+您可以使用 `sls info` 来检索在 `serverless.yml` 文件中定义的每个资源的信息，包括唯一标识符和每个组件独有的属性。
 
-=== Remove
+=== 移除
 
-You can use `sls remove` to remove all resources defined in the `serverless.yml` file from Defender.
+您可以使用 `sls remove` 从 Defender 中删除在 `serverless.yml` 文件中定义的所有资源。
 
-NOTE: To avoid potential loss of funds, Relayers can only be deleted from the Defender UI directly.
+NOTE: 为了避免潜在的资金损失，只能直接从 Defender UI 中删除 Relayer。
 
-=== Logs
+=== 日志
 
-You can use `sls logs --function <stack_resource_id>` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds.
+您可以使用 `sls logs --function <stack_resource_id>` 来检索给定操作标识符（例如 mystack.action-example-1）的最新操作日志。此命令将持续运行，并每 2 秒检索一次日志。
 
-=== Invoke
+=== 调用
 
-You can use `sls invoke --function <stack_resource_id>` to manually run an action, given its identifier (e.g. mystack.action-example-1).
+您可以使用 `sls invoke --function <stack_resource_id>` 手动运行一个 Action，给定其标识符（例如 mystack.action-example-1）。
 
-NOTE: Each command has a standard output to a JSON object.
+NOTE: 每个命令都有一个到 JSON 对象的标准输出。
 
-== Caveats
+== 注意事项
 
-Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
+在 `deploy` 过程中抛出的错误不会回滚任何先前的更改。常见的错误是：
 
-- Not having set the API key and secret
-- Insufficient permissions for the API key
-- Validation error of the `serverless.yml` file (see <<types-and-schema-validation, Types and Schema Validation>>)
+- 未设置 API 密钥和 secret
+- API 密钥的权限不足
+- `serverless.yml` 文件的验证错误（请参阅 <<types-and-schema-validation, 类型和模式验证>>）
 
-Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+通常，修复错误并重试部署应该足够了，因为任何现有资源都将属于部署的 `update` 子句。但是，如果不确定，您可以随时调用 `sls remove` 来删除整个堆栈，然后重试。
 
-Action secrets are encrypted key-value pairs and injected at runtime into the lambda environment. Secrets are scoped to all actions automatically. Alternatively, you may use environment-variables to define key-value pairs that are scoped to the individual action, and available at runtime through `process.env`. Note that these values are not encrypted.
+Action 密钥是加密的键值对，并在运行时注入到 lambda 环境中。密钥自动限定于所有 Action。或者，您可以使用 environment-variables 来定义限定于单个 Action 的键值对，并通过 `process.env` 在运行时可用。请注意，这些值未加密。

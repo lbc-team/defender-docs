@@ -1,30 +1,30 @@
-# Automatic monitoring for factory clones
+:page-title: 用于工厂克隆的自动监控
 
-The factory-clone pattern can be advantageous for minimizing gas costs. However, since each clone gets deployed to a new address, it may be a challenge to efficiently track and monitor each of these contracts.
+工厂克隆模式在最小化 gas 成本方面可能是有利的。然而，由于每个克隆都被部署到一个新的地址，因此有效地跟踪和监控这些合约可能是一个挑战。
 
-This guide shows how to use Defender to monitor a factory contract as well as the clone contracts created by it. Monitor automation is achieved through the following structure of Defender modules:
+本指南展示了如何使用 Defender 来监控工厂合约以及由它创建的克隆合约。监控自动化是通过以下 Defender 模块结构实现的：
 
-* A Monitor watches for successful event emitted by the factory contract that creates a clone. If detected, it triggers an xref:module/actions.adoc[Action] and xref:module/actions.adoc#monitor_invocations[passes along information] about the transaction.
-* The Action makes use of the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] to add the address of the newly created contract to the xref:module/address-book.adoc[address book] for easier monitoring.
-* Aditionally, the Action uses the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] to add the clone address to the list of addresses watched by a Monitor.
+* 一个 Monitor 监视由创建克隆的工厂合约发出的成功事件。如果检测到，它会触发一个 xref:module/actions.adoc[Action] 并 xref:module/actions.adoc#monitor_invocations[传递关于交易的信息]。
+* 该 Action 利用 https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`，window=_blank] 将新创建的合约地址添加到 xref:module/address-book.adoc[地址簿] 中，以便更轻松地进行监控。
+* 此外，该 Action 使用 https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`，window=_blank] 将克隆地址添加到 Monitor 正在监视的地址列表中。
 
-In this case, the contract ABI can be pre-supplied since clone contracts will have identical ABIs. Alternatively, you may be able to dynamically retrieve the ABI from a verified contract at a given address using https://docs.etherscan.io/api-endpoints/contracts[Etherscan's API, window=_blank].
+在这种情况下，可以预先提供合约 ABI，因为克隆合约将具有相同的 ABI。或者，您可以使用 https://docs.etherscan.io/api-endpoints/contracts[Etherscan 的 API，window=_blank] 从给定地址的已验证合约动态检索 ABI。
 
 [[generate-api-key]]
-== Generate API Key
+== 生成 API 密钥
 
-To programmatically add a contract to the address book, the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`sdk`, window=_blank] requires credentials in the form of an API key and secret. Create and copy the credentials in the https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API keys page, window=_blank].
+要以编程方式将合约添加到地址簿，https://www.npmjs.com/package/@openzeppelin/defender-sdk[`sdk`，window=_blank] 需要 API 密钥和密钥形式的凭据。在 https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API 密钥页面，window=_blank] 中创建并复制凭据。
 
-image::guide-factory-api.png[Create API credentials]
+image::guide-factory-api.png[创建 API 凭据]
 
-Now, navigate to the https://defender.openzeppelin.com/v2/#/settings/secrets[Secrets, window=_blank] page in Defender and create a new secret with the name `API_KEY` and paste in the API key. Create another secret with the name `API_SECRET` and paste in the API secret. These secrets will be used by the Action securely.
+现在，导航到 Defender 中的 https://defender.openzeppelin.com/v2/#/settings/secrets[Secrets，window=_blank] 页面，创建一个名为 `API_KEY` 的新密钥，然后粘贴 API 密钥。创建另一个名为 `API_SECRET` 的密钥，然后粘贴 API 密钥。这些密钥将由 Action 安全地使用。
 
-image::guide-factory-secrets.png[Save API credentials]
+image::guide-factory-secrets.png[保存 API 凭据]
 
 [[create-action]]
-== Create the Action
+== 创建 Action
 
-Navigate to the https://defender.openzeppelin.com/v2/#/actions/automatic/new?[Action creation page, window=_blank], enter a name, and select `Webhook` as trigger. Then, paste the following Action code and save it:
+导航到 https://defender.openzeppelin.com/v2/#/actions/automatic/new?[Action 创建页面，window=_blank]，输入名称，然后选择 `Webhook` 作为触发器。然后，粘贴以下 Action 代码并保存它：
 
 [source,jsx]
 ----
@@ -94,7 +94,7 @@ exports.handler = async function (event) {
       "type": "function"
     }
   ]`
-  // Add new clone contract
+  // 添加新的克隆合约
   await client.proposal.addContract({
     network: 'sepolia',
     address: newCloneAddress,
@@ -104,53 +104,53 @@ exports.handler = async function (event) {
 }
 ----
 
-image::guide-factory-create-action.png[Create Action]
+image::guide-factory-create-action.png[创建 Action]
 
-The Action is now ready to be triggered by a Monitor.
+该 Action 现在已准备好被 Monitor 触发。
 
-NOTE: Manually triggering this Action will be raise an error, since the Action relies on data supplied by a Monitor (such as the address of the newly deployed clone contract address).
+NOTE: 手动触发此 Action 将引发错误，因为 Action 依赖于 Monitor 提供的数据（例如新部署的克隆合约地址）。
 
 [[create-monitor]]
-== Create the Monitor
+== 创建 Monitor
 
-This Monitor will watch for an event emitted by the factory contract signaling that a new clone has been created. Navigate to the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Monitor creation page, window=_blank], choose a name, risk category, and select the Factory contract (add the factory if it's not already added).
+此 Monitor 将监视工厂合约发出的指示已创建新克隆的事件。导航到 https://defender.openzeppelin.com/v2/#/monitor/new/custom[Monitor 创建页面，window=_blank]，选择一个名称、风险类别，然后选择 Factory 合约（如果尚未添加，则添加工厂）。
 
-image::guide-factory-monitor-general-information.png[Monitor General Information]
+image::guide-factory-monitor-general-information.png[Monitor 常规信息]
 
-Leave `Transaction Filters` as it is, and continue to the `Events` tab. Here, select the event name for clone creation and leave the event parameters blank to catch all emitted events.
+保留 `Transaction Filters` 不变，然后继续到 `Events` 选项卡。在此处，选择用于克隆创建的事件名称，并将事件参数留空以捕获所有发出的事件。
 
-image::guide-factory-monitor-events.png[Monitor Events]
+image::guide-factory-monitor-events.png[Monitor 事件]
 
-Lastly, open the `Alerts` section and select the Action created in the previous step within the `Execute an Action` dropdown. Feel free to add any other setting, like notifications, and save the Monitor.
+最后，打开 `Alerts` 部分，然后在 `Execute an Action` 下拉列表中选择在上一步中创建的 Action。随意添加任何其他设置（如通知），然后保存 Monitor。
 
-image::guide-factory-monitor-alerts.png[Monitor Alerts]
+image::guide-factory-monitor-alerts.png[Monitor 警报]
 
-As with any action, the triggering of this Monitor will be recorded in the xref:logs.adoc[Logs].
+与任何 action 一样，此 Monitor 的触发将记录在 xref:logs.adoc[日志] 中。
 
 [[test-run]]
-== Test run
+== 测试运行
 
-To test the set up, navigate to https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposals, window=_blank] to manually create a clone through the factory. Select the factory contract, and call the function that creates a clone with any parameters needed.
+要测试设置，请导航到 https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposals，window=_blank] 以通过工厂手动创建克隆。选择工厂合约，然后调用使用任何所需参数创建克隆的函数。
 
-image::guide-factory-create-clone.png[Transaction Proposal to create clone]
+image::guide-factory-create-clone.png[用于创建克隆的 Transaction Proposal]
 
-Then, execute this this transaction with your preferred approval process, like a Relayer or EOA wallet. Head over to run history of the Action to verify it was triggered by the Monitor, adding the clone contract address to Defender.
+然后，使用您喜欢的审批流程（如 Relayer 或 EOA 钱包）执行此交易。转到 Action 的运行历史记录以验证它是否由 Monitor 触发，并将克隆合约地址添加到 Defender。
 
-image::guide-factory-action-run-history.png[Action Run History]
+image::guide-factory-action-run-history.png[Action 运行历史记录]
 
 [[create-clone-monitor]]
-== Create Monitor for clones
+== 为克隆创建 Monitor
 
-Now that you have a clone contract to serve as a template for all future clone contracts, it's time to create a Monitor for them. Navigate to the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Monitor creation page, window=_blank], choose a name, risk category, and select the clone contract.
+现在您有一个克隆合约可以用作所有未来克隆合约的模板，是时候为它们创建一个 Monitor 了。导航到 https://defender.openzeppelin.com/v2/#/monitor/new/custom[Monitor 创建页面，window=_blank]，选择一个名称、风险类别，然后选择克隆合约。
 
-Aditionally, feel free to add any other filters for transactions, events, and functions, or notifications. Save the Monitor and observe the logs/notifications to verify that the Monitor is working as expected. 
+此外，您可以随意为交易、事件和函数或通知添加任何其他过滤器。保存 Monitor 并观察日志/通知，以验证 Monitor 是否按预期工作。
 
-image::guide-factory-monitor-clones.png[Monitor Clones]
+image::guide-factory-monitor-clones.png[Monitor 克隆]
 
 [[action-monitor-clone]]
-== Automatically add clones to Monitor
+== 自动将克隆添加到 Monitor
 
-With the last Monitor, you can update the Action to add any newly created contract to the list of addresses being monitored by the Monitor. Update the Action code with the following code, replacing `monitorId` with the ID of the Monitor created in the previous step:
+使用上一个 Monitor，您可以更新 Action 以将任何新创建的合约添加到 Monitor 正在监视的地址列表中。使用以下代码更新 Action 代码，将 `monitorId` 替换为在上一步中创建的 Monitor 的 ID：
 
 [source,jsx]
 ----
@@ -220,7 +220,7 @@ exports.handler = async function (event) {
       "type": "function"
     }
   ]`
-  // Add new clone contract
+  // 添加新的克隆合约
   await client.proposal.addContract({
     network: 'sepolia',
     address: newCloneAddress,
@@ -228,7 +228,7 @@ exports.handler = async function (event) {
     abi: newCloneAbi,
   })
 
-  // Add clone contract to Monitor
+  // 将克隆合约添加到 Monitor
   const monitorId = 'REPLACE'
   const monitor = await client.monitor.get(monitorId)
   const subscribedAddresses = monitor.addressRules[0].addresses
@@ -237,12 +237,12 @@ exports.handler = async function (event) {
 }
 ----
 
-Now when the Action runs, not only will it add the contract to Defender, it will also add it to the Monitor.
+现在，当 Action 运行时，它不仅会将合约添加到 Defender，还会将其添加到 Monitor。
 
-To verify, execute another test run!
+要验证，请执行另一次测试运行！
 
 [[references]]
-== References
+== 参考文献
 
-* xref::module/actions.adoc[Actions Documentation]
-* xref::module/monitor.adoc[Monitor Documentation]
+* xref::module/actions.adoc[Actions 文档]
+* xref::module/monitor.adoc[Monitor 文档]

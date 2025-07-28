@@ -1,5 +1,5 @@
 type Network =
-  | 'mainnet'
+  | 'mainnet' // 主网
   | 'sepolia'
   | 'holesky'
   | 'xdai'
@@ -14,12 +14,12 @@ type Network =
   | 'moonbeam'
   | 'matic'
   | 'mumbai'
-  | 'avalanche'
+  | 'avalanche' // 雪崩
   | 'fuji'
   | 'arbitrum'
   | 'arbitrum-nova'
   | 'arbitrum-sepolia'
-  | 'optimism'
+  | 'optimism' // 乐观
   | 'optimism-sepolia'
   | 'celo'
   | 'alfajores'
@@ -32,19 +32,19 @@ type Network =
   | 'base-sepolia'
   | 'linea-sepolia'
   | 'linea'
-  | 'mantle'
+  | 'mantle' // 外套
   | 'mantle-sepolia'
-  | 'scroll'
+  | 'scroll' // 滚动
   | 'scroll-sepolia'
-  | 'meld'
+  | 'meld' // 融合
   | 'meld-kanazawa'
-  | 'japan'
-  | 'japan-testnet'
+  | 'japan' // 日本
+  | 'japan-testnet' // 日本测试网
   | 'unichain'
   | 'unichain-sepolia'
   | 'geist-mainnet'
   | 'geist-polter'
-  | 'abstract'
+  | 'abstract' // 抽象
   | 'abstract-sepolia'
   | 'peaq'
   | 'peaq-agung';

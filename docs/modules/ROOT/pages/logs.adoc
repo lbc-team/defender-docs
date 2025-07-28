@@ -1,65 +1,65 @@
 [[logs]]
-= Logs
+= 日志
 
-Defender generates log trails of every potentially relevant event in the system. This includes manual actions, such as modifying an Action or Monitor, as well as automated activity, such as sending a transaction or firing a notification. Logs can be optionally forwarded to Datadog and Splunk for aggregation or exported.
+Defender 会生成系统中每个潜在相关事件的日志跟踪。这包括手动操作，例如修改 Action 或 Monitor，以及自动活动，例如发送交易或触发通知。日志可以选择性地转发到 Datadog 和 Splunk 进行聚合或导出。
 
 [[use-cases]]
-== Use cases
+== 用例
 
-* Track user actions on your team by monitoring sign ins and activity across the application
-* Detect potential attacks on your infrastructure from failed sign in attempts
-* Follow relayer activity to understand the transactions being sent from your accounts
-* Keep an audit trail of all module configuration changes
-* Filter by severity, type, user, module, time, and more 
+* 通过监控团队中的登录和应用程序中的活动来跟踪用户操作
+* 检测因登录尝试失败而对您的基础设施的潜在攻击
+* 跟踪中继器的活动以了解从您的帐户发送的交易
+* 保留所有模块配置更改的审计跟踪
+* 按严重性、类型、用户、模块、时间等进行过滤
 
-== Log Entries
+== 日志条目
 
-Every log entry is structured with the following format:
+每个日志条目都以以下格式构建：
 
-* `Module`: The origin of the log entry, such as Monitor, Actions, Workflows, Deploy, etc.
-* `Date and Time`: The day and time the log entry was generated with the format `Day Month Year` and 12-hour clock format in the browser local timezone
-* `Severity`: The  severity level of the log entry, ranging from `trace` to `error`
-* `Subject`: The trigger/cause that generated the log. If contract related, the contract name is displayed
-* `Event`: Type of acitivty logged. For example, `Created`, `Added`, `Deledated`, `Updated`, etc.
-* `Description`: Details on the event. For example, `Contract was updated`, `Address book entry was updated`, etc.
-* `User`: Team user that generated the log entry, directly or indirectly
+* `Module`：日志条目的来源，例如 Monitor、Actions、Workflows、Deploy 等。
+* `Date and Time`：生成日志条目的日期和时间，格式为 `Day Month Year`，并且采用浏览器本地时区的 12 小时制时钟格式
+* `Severity`：日志条目的严重性级别，范围从 `trace` 到 `error`
+* `Subject`：生成日志的触发器/原因。如果与合约相关，则显示合约名称
+* `Event`：记录的活动类型。例如，`Created`、`Added`、`Deledated`、`Updated` 等。
+* `Description`：有关事件的详细信息。例如，`Contract was updated`、`Address book entry was updated` 等。
+* `User`：直接或间接生成日志条目的团队用户
 
-image::logs.png[Logs Page]
+image::logs.png[日志页面]
 
-You can click on each log entry to get a detailed view, which includes the tenant id, user id, activity response, request, log id, timestamp, and more.
+您可以单击每个日志条目以获取详细视图，其中包括租户 ID、用户 ID、活动响应、请求、日志 ID、时间戳等。
 
-image::logs-detailed.png[Logs Detailed View]
+image::logs-detailed.png[日志详细视图]
 
-== Log Forwarding
+== 日志转发
 
-Generated logs can be forwarded to Datadog and Splunk, or any other service that supports API Key authentication. You can use this to aggregate all logs across your infrastructure in a single place.
+生成的日志可以转发到 Datadog 和 Splunk，或任何其他支持 API Key 身份验证的服务。您可以使用它来在一个地方聚合整个基础设施中的所有日志。
 
-== Setup Log Forwarding Destination
+== 设置日志转发目标
 
-To set up a log forwarding destination, open the Logs page and click the 'Send Logs to an External Service' button.
+要设置日志转发目标，请打开 Logs 页面，然后单击“Send Logs to an External Service”按钮。
 
-Form fields:
+表单字段：
 
-* *URL* field is a required field. All logs are forwarded to this URL address using HTTP POSTs.
+* *URL* 字段是必填字段。所有日志都使用 HTTP POST 转发到此 URL 地址。
 
-* *API Header Name* is optional. This is the name of the request header that contains the API Key value. Most log management services require it. Please refer to your log management service documentation to determine if you need it. 
+* *API Header Name* 是可选的。这是包含 API Key 值的请求标头的名称。大多数日志管理服务都需要它。请参阅您的日志管理服务文档以确定您是否需要它。
 
-* *API Key* is an optional field. API Key is sent with every request for authentication purposes. Most log management services require it. Please refer to your log management service documentation to determine if you need it. 
+* *API Key* 是一个可选字段。API Key 随每个请求一起发送以进行身份验证。大多数日志管理服务都需要它。请参阅您的日志管理服务文档以确定您是否需要它。
 
-* *Log Types* lets you specify which subset of Defender generated logs you want to have forwarded based on Defender components.
+* *Log Types* 允许您根据 Defender 组件指定要转发的 Defender 生成的日志的子集。
 
-* *Log Levels* lets you specify which subset of Defender generated logs you want to have forwarded based on the log levels. For example debug logs can be used for Autotasks debugging purposes and they can contain data that should not be exported to external systems.
+* *Log Levels* 允许您根据日志级别指定要转发的 Defender 生成的日志的子集。例如，调试日志可用于 Autotasks 调试目的，并且它们可能包含不应导出到外部系统的数据。
 
-NOTE: In the next section we will cover how to setup Log Forwarding with Splunk and Datadog but it is worth noting that Log Forwarding works with any other service that supports API Key authentication.
+NOTE: 在下一节中，我们将介绍如何使用 Splunk 和 Datadog 设置日志转发，但值得注意的是，日志转发适用于任何其他支持 API Key 身份验证的服务。
 
 === Splunk
 
-Forwarding logs to Splunk is done by using Splunk HEC(HTTP Event Collector).
-Documentation for setting up logging with Splunk HEC can be found https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector[here,window=_blank].
+通过使用 Splunk HEC(HTTP Event Collector) 完成将日志转发到 Splunk。
+有关使用 Splunk HEC 设置日志记录的文档，请参见 https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector[此处,window=_blank]。
 
-NOTE: Log Forwarding does not work with Splunk trial accounts because of Splunk internals.
+NOTE: 由于 Splunk 内部原因，日志转发不适用于 Splunk 试用帐户。
 
-Example:
+示例:
 
 * *URL*: `\https://username.splunkcloud.com/services/collector/raw`
 
@@ -67,17 +67,15 @@ Example:
 
 * *API Key*: `Splunk xxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-NOTE: `URL` value is dynamic as URL includes account username.
+NOTE: `URL` 值是动态的，因为 URL 包含帐户用户名。
 
-NOTE: `API Key` should contain `Splunk` prefix.
-
+NOTE: `API Key` 应包含 `Splunk` 前缀。
 
 === Datadog
 
-Documentation for setting up logging on Datadog can be found https://docs.datadoghq.com/logs/[here,window=_blank].
+有关在 Datadog 上设置日志记录的文档，请参见 https://docs.datadoghq.com/logs/[此处,window=_blank]。
 
-
-Example:
+示例:
 
 * *URL*: `\https://http-intake.logs.datadoghq.com/api/v2/logs`
 
@@ -85,8 +83,8 @@ Example:
 
 * *API Key*: `xxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-NOTE: Datadog uses different sites around the world. For example, if you are relying on an EU server the `URL` field value should be https://http-intake.logs.datadoghq.eu/api/v2/logs
+NOTE: Datadog 在世界各地使用不同的站点。例如，如果您依赖于 EU 服务器，则 `URL` 字段值应为 https://http-intake.logs.datadoghq.eu/api/v2/logs
 
-NOTE: `API Key` value can be obtained from Datadog site by opening `Logs` section from the left menu.
-Go to `Cloud` section and select `AWS` provider.
-After following those steps, the `API Key` value is displayed in the bottom section of the page.
+NOTE: 可以从 Datadog 站点获取 `API Key` 值，方法是从左侧菜单打开 `Logs` 部分。
+转到 `Cloud` 部分并选择 `AWS` 提供程序。
+完成这些步骤后，`API Key` 值将显示在页面底部。

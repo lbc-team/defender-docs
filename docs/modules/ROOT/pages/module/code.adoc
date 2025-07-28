@@ -1,141 +1,141 @@
 [[code-inspector]]
-= Code Inspector
+= 代码检查器
 
-Code Inspector seamlessly integrates with Github to maximize security with every step of your development process via automatic code analysis powered by machine learning intelligence and state-of-the-art tools developed by our security experts.
+代码检查器与 Github 无缝集成，通过由机器学习智能和我们的安全专家开发的最先进的工具驱动的自动代码分析，在开发过程的每一步最大限度地提高安全性。
 
-For every push to your code, the OpenZeppelin Code Inspector dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender.
+对于每次代码推送，OpenZeppelin 代码检查器都会深入进行详细检查，识别潜在的漏洞并提出改进建议，以提高代码质量。它会生成一份简洁的报告，可以在 PR 评论中进行总结，以便快速直接访问，同时在 Defender 上提供更详细的报告。
  
 [[use-cases]]
-== Use cases
+== 用例
 
-* Automatically conduct security analysis on pull requests, identifying vulnerabilities and suggesting improvements.
-* Utilize summarized reports in the pull request for immediate insights into your code's health and security.
-* Access comprehensive, detailed reports on Defender for an in-depth understanding of potential vulnerabilities and code optimization areas.
-* Use OpenZeppelin's Dependency Checker to identify reused contracts and match them against a database of known vulnerabilities.
-* Apply static analysis rules to Solidity files, identifying potential issues and their severity for high-quality code maintenance.
+* 自动对拉取请求进行安全分析，识别漏洞并提出改进建议。
+* 在拉取请求中使用摘要报告，以便立即了解代码的健康状况和安全性。
+* 访问 Defender 上的全面、详细的报告，以便深入了解潜在的漏洞和代码优化领域。
+* 使用 OpenZeppelin 的依赖项检查器来识别重用的合约，并将其与已知漏洞数据库进行匹配。
+* 将静态分析规则应用于 Solidity 文件，识别潜在问题及其严重程度，以实现高质量的代码维护。
 
 [[features]]
-== Features
+== 功能
 
 [IMPORTANT]
-Some issues found by Code Inspector are detected by our AI models. Keep in mind that while we provide confidence levels, the models may occasionally generate incorrect or misleading information. Make sure to verify the information accordingly and we'd love to hear your feedback.
+代码检查器发现的某些问题是由我们的 AI 模型检测到的。请记住，虽然我们提供了置信度，但这些模型有时可能会生成不正确或具有误导性的信息。请务必相应地验证这些信息，我们很乐意听到您的反馈。
 
-Code Inspector has a wide range of functionalities designed to enhance security, efficiency, and code quality. These processes are powered by machine learning models and state-of-the-art tools developed by our security experts.
+代码检查器具有广泛的功能，旨在提高安全性、效率和代码质量。这些过程由机器学习模型和我们的安全专家开发的最先进的工具提供支持。
 
-* *Reused Code*: Identifies vulnerabilities in reused smart contract code by generating a unique fingerprint for each contract and matching it against a database of known issues.
-* *Vulnerable Dependencies*: Notify when a OpenZeppelin Contracts dependency with a known vulnerability is used, providing you with the necessary information to address the issue.
-* *Test Suggestions*: Opportunities to apply fuzzing tests to functions, providing you with areas where further testing could prove beneficial.
-* *External Call Safety*: Safety of external calls, highlighting any instances that might pose a severity concern.
-* *Standard Compatibility*: Compatibility of your contracts with established standards, flagging potential compatibility issues.
-* *Reentrancy Attack Vectors*: Potential reentrancy attack vectors at both the file and function level, assigning these threats high-severity labels.
-* *Code Readability*: Missing docstrings in functions and misspelled words throughout the codebase, ensuring your code is as legible and understandable as possible.
-* *Code Efficiency and Security Practices*: Areas in your code where improvements can be made for better performance and highlights potential security risks, enabling you to optimize and secure your contracts more effectively.
+* *重用代码*：通过为每个合约生成唯一的指纹并将其与已知问题数据库进行匹配，来识别重用智能合约代码中的漏洞。
+* *易受攻击的依赖项*：当使用具有已知漏洞的 OpenZeppelin Contracts 依赖项时发出通知，为您提供解决该问题所需的信息。
+* *测试建议*：有机会对函数应用模糊测试，为您提供进一步测试可能被证明有益的领域。
+* *外部调用安全性*：外部调用的安全性，突出显示任何可能构成严重问题的实例。
+* *标准兼容性*：您的合约与已建立标准的兼容性，标记潜在的兼容性问题。
+* *重入攻击向量*：文件和函数级别的潜在重入攻击向量，为这些威胁分配高严重性标签。
+* *代码可读性*：函数中缺少文档字符串以及整个代码库中的拼写错误，确保您的代码尽可能清晰易懂。
+* *代码效率和安全实践*：代码中可以进行改进以获得更好性能的领域，并突出显示潜在的安全风险，使您能够更有效地优化和保护您的合约。
 
 [[installation]]
-== Installation
+== 安装
 
 [NOTE]
-Installation must be initiated from Defender. Installing the app directly from GitHub will not correctly set up the integration.
+必须从 Defender 启动安装。直接从 GitHub 安装应用程序将无法正确设置集成。
 
-The installation process connects your Defender account and your GitHub repositories. Follow the following steps:
+安装过程会将您的 Defender 帐户和您的 GitHub 存储库连接起来。请按照以下步骤操作：
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code Inspector page, window=_blank] on Defender.
-. Click on the Install Code Inspector button, which redirects you to Github.
-. Select and approve the repositories to install the app.
-. Generate your first report by creating or updating a pull request on a repository that has the app installed.
+. 导航到 Defender 上的 https://defender.openzeppelin.com/v2/#/code[代码检查器页面, window=_blank]。
+. 单击“安装代码检查器”按钮，该按钮会将您重定向到 Github。
+. 选择并批准要安装应用程序的存储库。
+. 通过在安装了应用程序的存储库上创建或更新拉取请求来生成您的第一个报告。
 
-The installation is currently done solely through Defender, ensuring a seamless connection for the reports. Following the installation, no additional setup is required. If you encounter installation issues, refer to our <<installation-issues,Troubleshooting>> section for guidance.
+安装目前仅通过 Defender 完成，确保报告的无缝连接。安装完成后，无需进行其他设置。如果您遇到安装问题，请参阅我们的 <<installation-issues,故障排除>> 部分以获取指导。
 
 [[usage]]
-== Usage
+== 用法
 
-Code Inspector is designed to streamline your code analysis workflow. Once installed, the app is triggered whenever a pull request (PR) is opened or a new commit is pushed to an existing PR in your GitHub repository. To avoid skipping the report, the PR must contain at least a modification to any Solidity file or the `package.json` file.
+代码检查器旨在简化您的代码分析工作流程。安装完成后，每当在您的 GitHub 存储库中打开拉取请求 (PR) 或将新提交推送到现有 PR 时，该应用程序就会被触发。为避免跳过报告，PR 必须至少包含对任何 Solidity 文件或 `package.json` 文件的修改。
 
-The app automatically generates a summary report for each new commit, which is posted as a comment in your PR. This summary report is continuously updated with the latest issues discovered in the most recent commit, and the commit hash is directly viewable in the report.
+该应用程序会自动为每个新提交生成摘要报告，该报告作为评论发布在您的 PR 中。此摘要报告会不断更新为最新提交中发现的最新问题，并且提交哈希可以直接在报告中查看。
 
-Along with the summary reports in PR comments, a detailed report for each commit is created and can be accessed on Defender, offering in-depth information on the identified issues and how to fix them.
+除了 PR 评论中的摘要报告外，还会为每个提交创建一个详细报告，可以在 Defender 上访问，其中提供了有关已识别问题以及如何修复它们的深入信息。
 
-If you wish to stop receiving reports for a specific repository, it's as simple as navigating to the Code Inspector settings and removing the respective repository from the list.
+如果您希望停止接收特定存储库的报告，只需导航到代码检查器设置并从列表中删除相应的存储库即可。
 
-=== Statuses
-These are the possible statuses of reports:
+=== 状态
+以下是报告的可能状态：
 
-* `Running`: The report has been triggered, and it's running.
-* `Succeeded`: The report has been successfully generated, and it's available in Defender and Github.
-* `Failed`: The report has failed. Make sure that your repository contains valid Solidity files. If this issue persists, please get in touch.
-* `Throttled`: The report has been throttled as your tenant exceeded the Code Inpsector quota limit. If you would like to increase your quota, please get in touch.
-* `Skipped`: The report has been skipped. Check that the PR and/or commit contains at least one modification to a Solidity file or the `package.json` file.
+* `运行中`：报告已触发，正在运行。
+* `成功`：报告已成功生成，可在 Defender 和 Github 中找到。
+* `失败`：报告失败。请确保您的存储库包含有效的 Solidity 文件。如果此问题仍然存在，请联系我们。
+* `已限制`：由于您的租户超出代码检查器配额限制，报告已受到限制。如果您想增加配额，请联系我们。
+* `已跳过`：报告已跳过。检查 PR 和/或提交是否至少包含对 Solidity 文件或 `package.json` 文件的修改。
 
 [[reports]]
-== Reports
+== 报告
 
 [[summary]]
-=== Summary Report
+=== 摘要报告
 
-The summary report provides a clear overview of potential vulnerabilities detected in the code during the review process. The report is conveniently categorized by process and severity level, making it easier to identify areas that need attention. You can navigate to the complete report on Defender via the provided link. Each report is tied to a specific commit, ensuring accurate tracking of changes and issues over time.
+摘要报告清楚地概述了在审查过程中检测到的代码中存在的潜在漏洞。该报告方便地按流程和严重程度进行分类，从而更容易识别需要关注的区域。您可以通过提供的链接导航到 Defender 上的完整报告。每个报告都与特定的提交相关联，从而确保准确跟踪随时间的变化和问题。
  
-image::code-report-summary.png[Summary Report]
+image::code-report-summary.png[摘要报告]
 
-In this example, you can see the number of issues detected by Code Inspector, along with their respective severity levels. By clicking the link at the bottom of the report, you can view the full details of these vulnerabilities on Defender.
+在此示例中，您可以看到代码检查器检测到的问题数量以及它们各自的严重程度。通过单击报告底部的链接，您可以在 Defender 上查看这些漏洞的完整详细信息。
 
 [[issues]]
-=== Issues
+=== 问题
 
-Full reports identify issues within your smart contracts using a broad range of rules. The rules cover many aspects, such as known vulnerabilities, best practices, code efficiency, and secure coding principles.
+完整报告使用广泛的规则识别您的智能合约中的问题。这些规则涵盖许多方面，例如已知漏洞、最佳实践、代码效率和安全编码原则。
 
-image::contract-inspector-detailed-report.png[Full Report 1]
+image::contract-inspector-detailed-report.png[完整报告 1]
 
-Each issue is assigned a severity level based on the potential impact on the contract's functionality and security. An explanation accompanies each flagged issue, articulating the reason for the concern.
+每个问题都根据对合约功能和潜在影响的安全程度分配一个严重级别。每当标记一个问题，都会有相应的解释，阐明引起关注的原因。
 
-Every issue has a suggested resolution tailored to improving your code quality and overall security. This might include recommendations to refine your code, modify visibility scopes, apply necessary mathematical checks, enhance documentation, or adhere to a specific Ethereum standard.
+每个问题都有一个建议的解决方案，旨在提高您的代码质量和整体安全性。这可能包括改进代码、修改可见性范围、应用必要的数学检查、增强文档或遵守特定 Ethereum 标准的建议。
 
-Depicted below is an example of a vulnerability detected in a dependency with a brief description of its potential impact. The specific dependency and its version are outlined, pinpointing where the problem exists. 
+下面描述了一个在依赖项中检测到的漏洞的示例，其中简要描述了其潜在影响。其中概述了特定依赖项及其版本，从而可以查明问题所在。
 
-image::dependency-checker-detailed-report.png[Dependency Checker Report]
+image::dependency-checker-detailed-report.png[依赖项检查器报告]
 
-To help you resolve these issues, recommendations on updates or patches that can address the vulnerabilities are provided along with the relevant advisory links for a more detailed understanding of the issue.
+为了帮助您解决这些问题，我们提供了有关可以解决漏洞的更新或补丁的建议，以及相关的咨询链接，以便更详细地了解该问题。
 
-By reviewing and applying the proposed solutions in this report, you can enhance the robustness and reliability of your smart contracts, ensuring adherence to best practices and industry standards. This makes the audit process smoother and improves the preparedness of your contracts for successful deployment.
+通过查看和应用此报告中提出的解决方案，您可以增强智能合约的稳健性和可靠性，确保遵守最佳实践和行业标准。这使得审计过程更加顺利，并提高了您的合约为成功部署所做的准备。
 
 [[standards]]
-=== Standards
+=== 标准
 
-This feature introduces a new section in the report called **Standards**. This section provides insights into your contracts that implement interfaces from the OpenZeppelin Contracts library. For example, if you are using an `IERC20`, Code Inspector will check the implementation details and properties to ensure you are using this ERC correctly.
+此功能在报告中引入了一个名为 **标准** 的新部分。本节提供了对您的合约的见解，这些合约实现了来自 OpenZeppelin Contracts 库的接口。例如，如果您使用的是 `IERC20`，代码检查器将检查实现细节和属性，以确保您正确使用此 ERC。
 
-#### Detailed Checks
+#### 详细检查
 
-For each function and event defined in an interface, Code Inspector performs comprehensive checks to verify compliance with the standard. These checks include:
+对于接口中定义的每个函数和事件，代码检查器都会执行全面的检查，以验证是否符合标准。这些检查包括：
 
-- **Signature:** Ensures that the function or event signature matches the standard's specification. Example: `transfer(address,uint256)`
-- **Visibility:** Checks that the visibility of functions and events adheres to the standard's requirements. Example: `external`, `public`
-- **Mutability:** For functions, ensures that the mutability is correctly specified as per the standard. Example: `view`, `pure`
-- **Return Type:** Verifies that the return types of functions align with the expected types defined in the standard. Example `returns (bool)`
-- **Parameter Names:** Confirms that the parameter names are consistent with those defined in the standard, enhancing code readability and maintainability. Example: `transfer(address recipient, uint256 amount)`
-- **Return Names:** Ensures that the return variable names, where used, are consistent with the standard. Example: `returns (bool success)`
+- **签名：** 确保函数或事件签名与标准的规范匹配。例如：`transfer(address,uint256)`
+- **可见性：** 检查函数和事件的可见性是否符合标准的要求。例如：`external`、`public`
+- **可变性：** 对于函数，确保可变性已根据标准正确指定。例如：`view`、`pure`
+- **返回类型：** 验证函数的返回类型是否与标准中定义的预期类型一致。例如：`returns (bool)`
+- **参数名称：** 确认参数名称与标准中定义的名称一致，从而提高代码的可读性和可维护性。例如：`transfer(address recipient, uint256 amount)`
+- **返回名称：** 确保返回变量名称（如果使用）与标准一致。例如：`returns (bool success)`
 
-If any attribute of a function or event fails, the entire function or event is marked as failed. Additionally, if any function or event within an implementation fails, the entire implementation is considered non-compliant.
+如果函数或事件的任何属性失败，则整个函数或事件都将标记为失败。此外，如果实现中的任何函数或事件失败，则整个实现都被认为是不合规的。
 
 [[configuration]]
-== Configuration
+== 配置
 
-You can configure repository-specific parameters for Code Inspector using a file called `defender.config.json` in the root directory. The structure of the file is separated into processes run by Code Inspector. Each process has a list of parameters that you can adjust to your needs. For example, you can specify which directories to scan, which is useful to prevent Code Inspector from analyzing test or script files written in Solidity.
+您可以使用根目录中名为 `defender.config.json` 的文件为代码检查器配置特定于存储库的参数。该文件的结构被划分为由代码检查器运行的流程。每个流程都有一个参数列表，您可以根据需要进行调整。例如，您可以指定要扫描的目录，这对于防止代码检查器分析用 Solidity 编写的测试或脚本文件非常有用。
 
-=== Contract Inspector
-Contract Inspector runs a xref:#rules[set of rules] to detect potential issues in your code. You can configure the following parameters:
+=== 合约检查器
+合约检查器运行一组 xref:#rules[规则]来检测代码中的潜在问题。您可以配置以下参数：
 
-- `enabled`:  ability to turn off the Contract Inspector. False meaning not to run, and true to run. (default: `true`)
-- `scan_directories`: list of directories to scan with paths starting from the root directory. default: `["."]`
-- `include_rules`: list of rules to run. default: xref:#rules[all rules].
-- `exclude_rules`: list of rules to not run. default: none.
+- `enabled`：能够关闭合约检查器。False 表示不运行，true 表示运行。（默认值：`true`）
+- `scan_directories`：要扫描的目录列表，路径从根目录开始。默认值：`["."]`
+- `include_rules`：要运行的规则列表。默认值：xref:#rules[所有规则]。
+- `exclude_rules`：不运行的规则列表。默认值：无。
 
-=== Dependency Checker
-Dependency Checker verifies that your dependencies are not vulnerable to known issues. You can configure the following parameters:
+=== 依赖项检查器
+依赖项检查器验证您的依赖项是否容易受到已知问题的影响。您可以配置以下参数：
 
-- `enabled`:  ability to turn off Dependency Checker. False meaning not to run, and true to run. (default: `true`)
+- `enabled`：能够关闭依赖项检查器。False 表示不运行，true 表示运行。（默认值：`true`）
 
-==== Example
+==== 示例
 
-The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories, excluding two rules (`naming-convention` and `unused-state`).
+以下 `defender.config.json` 配置文件将禁用依赖项检查器，并在 `src/contracts1` 和 `src/contracts2` 目录上运行合约检查器，并排除两个规则（`naming-convention` 和 `unused-state`）。
 
 [source,json]
 ----
@@ -152,440 +152,438 @@ The following `defender.config.json` configuration file will disable Dependency 
 ----
 
 [[assets]]
-== Assets
+== 资产
 
-The Assets page allows you to manage your Code Inspector assets, supporting two types: Smart Contracts and GitHub repositories. When you install the Code Inspector GitHub app and select repositories, they will appear on this page. Additionally, you can create Smart Contract assets from addresses in your address book. Note that Smart Contract assets must be verified on Etherscan for this feature to work.
+“资产”页面允许您管理代码检查器资产，支持两种类型：智能合约和 GitHub 存储库。当您安装代码检查器 GitHub 应用程序并选择存储库后，它们将显示在此页面上。此外，您可以从地址簿中的地址创建智能合约资产。请注意，智能合约资产必须在 Etherscan 上进行验证，此功能才能正常工作。
 
-Smart Contract assets can be manually triggered for reports on the report page. GitHub assets can be triggered manually and automatically from new pull requests (PRs) and commits.
+可以在报告页面上手动触发智能合约资产以生成报告。可以从新的拉取请求 (PR) 和提交上手动和自动触发 GitHub 资产。
 
-image::code-assets.png[Code Assets]
+image::code-assets.png[代码资产]
 
 [[asset-settings]]
-=== Settings
+=== 设置
 
-The Asset Settings page offers two main settings to manage how Defender handles asset security: Automatically Generate Report and Vulnerability Detection.
+“资产设置”页面提供了两个主要设置来管理 Defender 如何处理资产安全：自动生成报告和漏洞检测。
 
-==== Automatically Trigger Report for Pull Requests
+==== 自动触发拉取请求的报告
 
-Automatically Generate Report, is specifically for GitHub repositories. When enabled, this setting ensures continuous monitoring by generating new reports automatically whenever a new pull request (PR) is opened or a new commit is pushed to a PR. 
+“自动生成报告”专门用于 GitHub 存储库。启用后，此设置通过在每次打开新的拉取请求 (PR) 或将新提交推送到 PR 时自动生成新报告来确保持续监控。
 
-==== Active Vulnerability Detection and Notification
+==== 主动漏洞检测和通知
 
-Active Vulnerability Detection and Notification provides a robust security measure by automatically scanning your assets for new vulnerabilities.
-This setting is applicable to both GitHub repositories and smart contracts. To enable this feature for Github repositories assets, you must activate the setting and select a specific branch to be monitored.
+“主动漏洞检测和通知”通过自动扫描您的资产是否存在新漏洞来提供强大的安全措施。
+此设置适用于 GitHub 存储库和智能合约。要为 Github 存储库资产启用此功能，您必须激活该设置并选择要监控的特定分支。
 
-* *Automated Scanning*: Leveraging Defender's advanced smart contracts scanning capabilities, when our team becomes aware of a new vulnerability, whether disclosed or undisclosed, we promptly update our scanning algorithms to detect it. We then scan all assets configured to be monitored
-* *Automated Notification*: Once the automatic scanning is completed an automated system notification email will be sent to inform you whether the vulnerability was detected in your monitored assets. If detected, the notifications include relevant information tailored to the nature of the vulnerability.
-* *Risk Mitigation*: When detected, to aid in addressing and mitigating detected vulnerabilities, notifications may include suggestions for risk mitigation, providing actionable steps for administrators to protect their smart contracts and associated assets.
+* *自动扫描*：利用 Defender 的高级智能合约扫描功能，当我们的团队意识到新的漏洞（无论是已公开还是未公开）时，我们会立即更新我们的扫描算法以检测它。然后，我们会扫描所有配置为受监控的资产
+* *自动通知*：自动扫描完成后，将发送一封自动系统通知电子邮件，告知您是否在受监控的资产中检测到该漏洞。如果检测到，通知将包括根据漏洞性质量身定制的相关信息。
+* *风险缓解*：当检测到时，为了帮助解决和缓解检测到的漏洞，通知可能包括风险缓解建议，从而为管理员提供可操作的步骤来保护其智能合约和关联资产。
 
-By enabling Active Vulnerability Detection and Notification for your assets, you can benefit from continuous, automated scanning and timely notifications, empowering you to respond quickly to new threats and maintain the security of your smart contracts and GitHub repositories. This proactive approach ensures that you can stay ahead of potential vulnerabilities and safeguard your code effectively.
-
+通过为您的资产启用“主动漏洞检测和通知”，您可以受益于持续的自动扫描和及时的通知，从而使您能够快速响应新的威胁并维护智能合约和 GitHub 存储库的安全性。这种主动方法可确保您能够领先于潜在的漏洞并有效地保护您的代码。
 
 [[settings]]
-== Settings
+== 设置
 
-The Settings page allows you to manage the permissions and access level of the Code Inspector. If you need to make changes to the repositories that the app has access to, a convenient link takes you directly to the GitHub settings page of the app, facilitating effortless repository management.
+“设置”页面允许您管理代码检查器的权限和访问级别。如果您需要更改应用程序有权访问的存储库，一个便捷的链接会将您直接带到应用程序的 GitHub 设置页面，从而简化存储库管理。
 
-In the Github tab, you can globally suspend or uninstall the app, giving you complete control over its operation within your projects.
+在“Github”选项卡中，您可以全局暂停或卸载应用程序，从而完全控制其在项目中的运行。
 
-image::code-settings-advanced.png[Code Inspector Github]
+image::code-settings-advanced.png[代码检查器 Github]
 
 [[troubleshooting]]
-== Troubleshooting
+== 故障排除
 
 [[installation-issues]]
-=== Installation Issues
+=== 安装问题
 
-* *Installing the app outside Defender*: Code Inspector must be installed via Defender. If you attempt to install it from elsewhere, the installation will not succeed. Ensure you're logged in to your OpenZeppelin account and navigate to Code Inspector from Defender for a successful installation.
+* *在 Defender 之外安装应用程序*：必须通过 Defender 安装代码检查器。如果您尝试从其他位置安装它，安装将不会成功。确保您已登录到您的 OpenZeppelin 帐户，然后从 Defender 导航到代码检查器以进行成功安装。
 
-* *Code Inspector Access*: Access to Code Inspector is required for a successful installation. If you find that you don't have access and you think this is a mistake, contact OpenZeppelin support to get the necessary permissions.
+* *代码检查器访问权限*：成功安装需要访问代码检查器。如果您发现您没有访问权限并且认为这是一个错误，请联系 OpenZeppelin 支持以获取必要的权限。
 
 [[repo-size-issues]]
-=== Repository Size Issues
+=== 存储库大小问题
 
-Errors related to analysis timeouts are often caused by large codebases. To mitigate this issue, it is recommended to use the `scan_directories` option in the defender configuration file to scope the analysis to relevant files only. By specifying which directories to include in the scan, the configuration file can significantly reduce processing times and prevent timeouts. For detailed instructions on setting up the configuration file, please refer to the xref:module/code.adoc#configuration[Configuration] section.
-
+与分析超时相关的错误通常是由大型代码库引起的。为了缓解此问题，建议使用 defender 配置文件中的 `scan_directories` 选项将分析范围仅限定于相关文件。通过指定要包含在扫描中的目录，配置文件可以显着减少处理时间并防止超时。有关设置配置文件的详细说明，请参阅 xref:module/code.adoc#configuration[配置] 部分。
 
 [[rules]]
-== Rules
+== 规则
 
 [cols='1,1,1']
 |===
-|ID|Description|Severity
+|ID|描述|严重程度
 
 |`alert-uniswap-v2-router-liquidity-considerations`
-|Identifies any instance of a Uniswap Router V2 addLiquidity call.
-|note
+|识别 Uniswap Router V2 addLiquidity 调用的任何实例。
+|注意
 
 |`array-length-to-stack`
-|Identifies when the length of an array can be written to the stack to save gas.
-|note
+|识别何时可以将数组的长度写入堆栈以节省 Gas。
+|注意
 
 |`call-with-arbitrary-address-bytes`
-|Identifies a potentially unsafe external call.
-|medium
+|识别一个可能不安全的外部调用。
+|中
 
 |`chainlink-deprecated-functions`
-|Identifies usage of chainlink's deprecated functions.
-|medium
+|识别 Chainlink 的已弃用函数的使用。
+|中
 
 |`check-consistent-usage-of-msgsender-msgdata`
-|Identifies usage of `msg.sender` or `msg.data` when `_msgSender()` or/and `_msgData()` are present
-|note
+|当存在 `_msgSender()` 或/和 `_msgData()` 时，识别 `msg.sender` 或 `msg.data` 的使用
+|注意
 
 |`check-effect-interact`
-|Identifies a possible violation of the check, effect and interact pattern.
+|识别检查、效果和交互模式的可能违规。
 |ethtrust
 
 |`check-erc4337-compatibility`
-|Identifies if the contract may not be compatible with ERC-4337.
-|note
+|识别合约是否可能与 ERC-4337 不兼容。
+|注意
 
 |`check-return-data-from-external-call`
-|Identifies when the external call return data check is missing.
-|note
+|识别缺少外部调用返回数据检查的时间。
+|注意
 
 |`constants-not-using-proper-format`
-|Identifies when a constant is not using the proper format.
-|note
+|识别常量未使用正确格式的时间。
+|注意
 
 |`dangerous-strict-equality`
-|Identifies the use of strict equalities that can cause a Gridlock.
-|medium
+|识别可能导致僵局的严格相等的使用。
+|中
 
 |`default-values-assigned`
-|Identifies an instance of a variable initialized to its default value.
-|note
+|识别初始化为其默认值的变量的实例。
+|注意
 
 |`delegatecall-to-arbitrary-address`
-|Identifies when an there is a delegatecall or call code to an arbitrary address.
-|high
+|识别何时存在到任意地址的 delegatecall 或调用代码。
+|高
 
 |`delegatecall-usage`
-|Identifies an instance of delegatecall.
+|识别 delegatecall 的实例。
 |ethtrust
 
 |`different-pragma-directives`
-|Identifies whether different Solidity versions are used.
-|low
+|识别是否使用不同的 Solidity 版本。
+|低
 
 |`disableinitializers-not-called-in-implementation-constructor`
-|Identifies if `_disableInitializers()` is not being called in the constructor of an Initializable contract
-|note
+|识别是否未在 Initializable 合约的构造函数中调用 `_disableInitializers()`
+|注意
 
 |`doc-code-mismatch-model`
-|Identifies a possible docstrings and code mismatch.
-|low
+|识别可能的文档字符串和代码不匹配。
+|低
 
 |`duplicated-import`
-|Identifies duplicated imports.
-|note
+|识别重复的导入。
+|注意
 
 |`exact-balance`
-|Identifies whether a balance is  compared to an exact value.
+|识别是否将余额与确切值进行比较。
 |ethtrust
 
 |`external-call-reentrancy-attack-vector`
-|Identifies external calls as a possible vector for a reentrancy attacks.
-|note
+|将外部调用识别为重入攻击的可能向量。
+|注意
 
 |`fallback-with-return-value`
-|Identifies if there are fallback functions with return values.
-|note
+|识别是否存在具有返回值的回退函数。
+|注意
 
 |`floating-pragma`
-|Identifies pragma directives that do not specify a particular, fixed version of Solidity.
-|low
+|识别未指定特定、固定 Solidity 版本的 pragma 指令。
+|低
 
 |`function-init-state-variable`
-|Identifies when a state variable is initialized by a function.
-|note
+|识别何时由函数初始化状态变量。
+|注意
 
 |`function-level-access-control-model`
-|Identifies a possible access control attack vector on a function.
-|high
+|识别函数上可能的访问控制攻击向量。
+|高
 
 |`function-level-reentrancy-model`
-|Identifies a possible reentrancy attack vector on a function.
-|high
+|识别函数上可能的重入攻击向量。
+|高
 
 |`function-visibility-too-broad`
-|Identifies if function visibility is unnecessarily broad.
-|note
+|识别函数可见性是否不必要地广泛。
+|注意
 
 |`gas-limit-on-call`
-|Identifies when an external call has a hard-coded gas limit.
-|low
+|识别外部调用何时具有硬编码的 Gas 限制。
+|低
 
 |`hashing-dynamic-values`
-|Identifies a hashing of a packed encoded dynamic value.
+|识别压缩编码动态值的哈希。
 |ethtrust
 
 |`identify-hardhat-console-import`
-|Identifies a hardhat console import.
-|note
+|识别 Hardhat 控制台导入。
+|注意
 
 |`identify-to-do-comments`
-|Identifies todo comments in the code.
-|note
+|识别代码中的 todo 注释。
+|注意
 
 |`inconsistent-order-contract`
-|Identifies when a contract has a inconsistent order.
-|note
+|识别合约的顺序不一致的时间。
+|注意
 
 |`inconsistent-use-named-returns`
-|Identifies inconsistent usage of named returns within a codebase.
-|note
+|识别代码库中命名返回的不一致使用。
+|注意
 
 |`incorrect-format-onERC721Received`
-|Identifies when a contract includes the `onERC721Received` function and it has an incorrect format.
-|note
+|识别当合约包含 `onERC721Received` 函数且格式不正确时。
+|注意
 
 |`incorrect-modifier`
-|Identifies an incorrect definition of a modifier.
-|medium
+|识别修饰符的错误定义。
+|中
 
 |`incremental-update-optimization`
-|Identifies the use of `i++` (rather than `++i`) to save gas in for loop headers.
-|note
+|识别在 for 循环标头中使用 `i++`（而不是 `++i`）以节省 Gas。
+|注意
 
 |`indecisive-license`
-|Identifies when a file has multiple SPDX licenses.
-|note
+|识别何时文件具有多个 SPDX 许可证。
+|注意
 
 |`int-negative-evaluation-overflow`
-|Identifies when additive inverse of an int variable is evaluated.
-|note
+|识别何时评估 int 变量的加法逆。
+|注意
 
 |`lack-of-gap-variable`
-|Identifies when an upgradeable contract does not have a gap variable.
-|low
+|识别可升级合约何时没有间隙变量。
+|低
 
 |`lack-of-indexed-event-parameters`
-|Identifies when a lack of indexed event parameter.
-|note
+|识别何时缺少索引事件参数。
+|注意
 
 |`lack-of-security-contact`
-|Identifies when a contract does not have a security contact.
-|note
+|识别合约何时没有安全联系人。
+|注意
 
 |`lack-of-spdx-license-identifier`
-|Identifies when a lack of SPDX license identifier.
-|note
+|识别何时缺少 SPDX 许可证标识符。
+|注意
 
 |`lock-ether`
-|Identifies any instance of locked ETH within a contract.
-|high
+|识别合约中锁定的 ETH 的任何实例。
+|高
 
 |`memory-side-effect-assembly`
-|Identifies when some code may be vulnerable to a Solidity compiler vulnerability.
-|medium
+|识别某些代码何时可能容易受到 Solidity 编译器漏洞的影响。
+|中
 
 |`missing-docstrings`
-|Identifies when a function is missing docstrings.
-|low
+|识别何时函数缺少文档字符串。
+|低
 
 |`missing-initializer-modifier`
-|Identifies when a function is missing the initializer modifier.
-|low
+|识别何时函数缺少初始化器修饰符。
+|低
 
 |`missing-mapping-named-parameters`
-|identifies when a mapping is missing named parameters
-|note
+|识别何时映射缺少命名参数
+|注意
 
 |`missing-return`
-|Identifies when a function is missing the return statement.
-|low
+|识别何时函数缺少返回语句。
+|低
 
 |`misuse-boolean-literal`
-|Detects the misuse of a Boolean literal (used in complex expressions or as conditionals).
-|medium
+|检测布尔字面量的误用（用于复杂表达式或作为条件）。
+|中
 
 |`msg-value-loop`
-|Identifies usage of msg.value inside a loop.
-|note
+|识别循环内部 msg.value 的使用。
+|注意
 
 |`multiple-contracts-per-file`
-|Identifies multiple contract declarations per file.
-|note
+|识别每个文件的多个合约声明。
+|注意
 
 |`name-reused`
-|Identifies in a codebase when two or more contracts have the same name.
-|note
+|识别在代码库中何时有两个或多个合约具有相同的名称。
+|注意
 
 |`non-explicit-imports`
-|Identifies a non-explicit import.
-|note
+|识别非显式导入。
+|注意
 
 |`not-operator-assembly`
-|Identifies usage of the `not` operator inside assembly code because it functions differently than in other languages.
-|note
+|识别组合代码中使用 `not` 运算符，因为它与其他语言中的功能不同。
+|注意
 
 |`outdated-solidity-version`
-|Identifies a Solidity file with an outdated Solidity version.
-|note
+|识别具有过时 Solidity 版本的 Solidity 文件。
+|注意
 
 |`overriding-state-values-in-constructor`
-|Identifies cases where state variables are explicitly set to values within a contract but are overwritten by the constructor.
-|note
+|识别状态变量在合约中显式设置为值但被构造函数覆盖的情况。
+|注意
 
 |`possible-incorrect-abi-decode`
-|Identifies the potential for incorrect ABI decoding.
-|note
+|识别可能的不正确的 ABI 解码。
+|注意
 
 |`possible-return-bomb`
-|Identifies a possible vector for a return bomb attack.
-|note
+|识别返回 Bomb 攻击的可能向量。
+|注意
 
 |`pragma-spans-breaking-changes`
-|Identifies a Solidity file with pragma that spans versions of solidity where breaking changes may have been introduced.
-|low
+|识别具有跨越 Solidity 版本（其中可能引入了重大更改）的 pragma 的 Solidity 文件。
+|低
 
 |`precision-loss-div-before-mul`
-|Identifies possible precision loss due to division before multiplication
-|note
+|识别由于乘法之前的除法可能导致的精度损失
+|注意
 
 |`redundant-safemath-library`
-|Identifies a redundant use of SafeMath library.
-|note
+|识别 SafeMath 库的冗余使用。
+|注意
 
 |`replace-revert-strings-custom-errors`
-|Identifies when a revert string could be replaced by a custom error.
-|note
+|识别何时可以用自定义错误替换 revert 字符串。
+|注意
 
 |`require-instead-of-revert`
-|Identifies when a require statement does not check for any conditions.
-|low
+|识别 require 语句何时不检查任何条件。
+|低
 
 |`require-missing-message`
-|Identifies when an error message is missing from the require statement.
-|low
+|识别 require 语句中何时缺少错误消息。
+|低
 
 |`require-multiple-conditions`
-|Identifies a require statement with multiple conditions.
-|low
+|识别具有多个条件的 require 语句。
+|低
 
 |`revert-missing-message`
-|Identifies when a revert statement is missing the error message.
-|low
+|识别 revert 语句何时缺少错误消息。
+|低
 
 |`selfdestruct-usage`
-|Identifies an instance of selfdestruct.
+|识别 selfdestruct 的实例。
 |ethtrust
 
 |`state-updated-without-event`
-|Identifies if a function is updating the state without an event emission.
-|note
+|识别函数是否在更新状态而没有事件发出。
+|注意
 
 |`state-var-visibility-not-explicitly-declared`
-|Identifies when the visibility of a state variable that has not been explicitly declared.
-|note
+|识别何时未明确声明状态变量的可见性。
+|注意
 
 |`sushiswap-callback-attack`
-|Identifies possible attacks on sushiswap callback where a fake pool address can pass authorization check.
-|note
+|识别 sushiswap 回调上可能的攻击，其中虚假池地址可以传递授权检查。
+|注意
 
 |`swapped-arguments-function-call`
-|Identifies when the arguments of function call have been swapped.
-|note
+|识别何时交换了函数调用的参数。
+|注意
 
 |`too-many-digits`
-|Identifies a literal number with many digits.
-|note
+|识别具有许多数字的文字数字。
+|注意
 
 |`transferfrom-dangerous-from`
-|Identifies usage of `transferFrom` with `from` parameter not being a `msg.sender`.
-|high
+|识别使用 `transferFrom`，其中 `from` 参数不是 `msg.sender`。
+|高
 
 |`unchecked-call-success`
-|Identifies when the external call fail check is missing.
+|识别何时缺少外部调用失败检查。
 |ethtrust
 
 |`unchecked-increment`
-|Identifies that an incremental update is not wrapped in an unchecked block.
-|note
+|识别增量更新未包装在未经检查的块中。
+|注意
 
 |`unchecked-keyword`
-|Identifies unchecked code inside a function.
-|note
+|识别函数内部未经检查的代码。
+|注意
 
 |`unchecked-math`
-|Identifies a potentially unsafe usage of unchecked math.
-|high
+|识别可能不安全的未经检查的数学运算使用。
+|高
 
 |`unicode-direction-control`
-|Identifies the use of unicode direction control character.
+|识别 Unicode 方向控制字符的使用。
 |ethtrust
 
 |`unnecessary-assignment`
-|Identifies an unnecessary assignment of a variable.
-|note
+|识别变量的不必要的赋值。
+|注意
 
 |`unnecessary-cast`
-|Identifies an unnecessary cast.
-|note
+|识别不必要的类型转换。
+|注意
 
 |`unsafe-abi-encoding`
-|Identifies any use of unsafe ABI encoding.
-|low
+|识别不安全的 ABI 编码的任何使用。
+|低
 
 |`unsafe-mint-ERC721`
-|Identifies if a `_mint` function is used instead of `_safeMint` in ERC721 context.
-|note
+|识别在 ERC721 上下文中是否使用 `_mint` 函数而不是 `_safeMint`。
+|注意
 
 |`unused-arguments`
-|Identifies an unused function argument.
-|note
+|识别未使用的函数参数。
+|注意
 
 |`unused-enum`
-|Identifies an unused enum.
-|note
+|识别未使用的枚举。
+|注意
 
 |`unused-error`
-|Identifies an unused error.
-|note
+|识别未使用的错误。
+|注意
 
 |`unused-event`
-|Identifies an unused event.
-|note
+|识别未使用的事件。
+|注意
 
 |`unused-function`
-|Identifies an unused function with internal or private visibility.
-|note
+|识别具有内部或专用可见性的未使用的函数。
+|注意
 
 |`unused-imports`
-|Identifies an unused import.
-|note
+|识别未使用的导入。
+|注意
 
 |`unused-named-returns`
-|Identifies an unused named return variable.
-|note
+|识别未使用的命名返回变量。
+|注意
 
 |`unused-state-variable`
-|Identifies an unused state variable.
-|note
+|识别未使用的状态变量。
+|注意
 
 |`unused-struct`
-|Identifies an unused struct.
-|note
+|识别未使用的结构体。
+|注意
 
 |`use-of-transfer-send`
-|Identifies instance of transfer or send.
-|low
+|识别传输或发送的实例。
+|低
 
 |`use-of-uint-instead-of-uint256`
-|Identifies if an `int/uint` is used instead of `int256/uint256`.
-|note
+|识别是否使用 `int/uint` 而不是 `int256/uint256`。
+|注意
 
 |`variable-could-be-constant`
-|Identifies variables that could be declared as `constant`.
-|note
+|识别可以声明为 `constant` 的变量。
+|注意
 
 |`variable-could-be-immutable`
-|Identifies variables that are only ever set in the constructor and could be `immutable`.
-|note
+|识别仅在构造函数中设置的变量，并且可以是 `immutable`。
+|注意
 
 |`void-constructor-call`
-|Identifies the call to a constructor that is not implemented.
-|low
+|识别对未实现的构造函数的调用。
+|低
 |===

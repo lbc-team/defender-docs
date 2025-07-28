@@ -1,22 +1,22 @@
-# How to manage roles of a TimelockController
+:page-title: 如何管理 TimelockController 的角色
 
-Defender allows you to oversee and command contract permissions of any smart contract that uses https://docs.openzeppelin.com/contracts/api/access#AccessControl[AccessControl from OpenZeppelin Contracts, window=_blank]. This guide will lead you through the steps of importing a TimelockController contract, creating a proposal, and managing its roles. A `TimelockController` is a smart contract that enforces a delay between when an operation is queued and when it can be executed. This mechanism is commonly used in decentralized governance to increase security and provide transparency, allowing stakeholders to observe and react to changes before they are executed. TimelockController uses the following `AccessControl`` setup:
+Defender 允许你监督和指挥任何使用 https://docs.openzeppelin.com/contracts/api/access#AccessControl[来自 OpenZeppelin Contracts 的 AccessControl, window=_blank] 的智能合约的合约权限。本指南将引导你完成导入 TimelockController 合约、创建提案和管理其角色的步骤。`TimelockController` 是一种智能合约，它强制在操作排队和执行之间设置延迟。这种机制通常用于去中心化治理，以提高安全性并提供透明度，允许利益相关者在更改执行之前观察并做出反应。TimelockController 使用以下 `AccessControl` 设置：
 
-* The *Proposer* role is in charge of queueing operations: this is the role the Governor instance should be granted, and it should likely be the only proposer in the system.
+* *Proposer* 角色负责对操作进行排队：这是应该授予 Governor 实例的角色，并且它可能应该是系统中唯一的 proposer。
 
-* The *Executor* role is in charge of executing already available operations: we can assign this role to the special zero address to allow anyone to execute (if operations can be particularly time sensitive, the Governor should be made Executor instead).
+* *Executor* 角色负责执行已可用的操作：我们可以将此角色分配给特殊的零地址，以允许任何人执行（如果操作可能特别时间敏感，则应该将 Governor 设置为 Executor）。
 
-* Lastly, there is the *Admin* role, which can grant and revoke the two previous roles: this is a very sensitive role that will be granted automatically to the timelock itself, and optionally to a second account, which can be used for ease of setup but should promptly renounce the role.
+* 最后，还有 *Admin* 角色，它可以授予和撤销先前的两个角色：这是一个非常敏感的角色，它将自动授予给 timelock 本身，并且可以选择授予给第二个帐户，该帐户可用于简化设置，但应立即放弃该角色。
 
 [[pre-requisites]]
-== Pre-requisites
+== 先决条件
 
-* OpenZeppelin Defender account.
+* OpenZeppelin Defender 帐户。
 
 [[timelock-controller]]
-== 1. Creating TimelockController
+== 1. 创建 TimelockController
 
-First, you need to deploy a contract that implements `TimelockController`. For example, using OpenZeppelin Contracts 5.0:
+首先，你需要部署一个实现 `TimelockController` 的合约。例如，使用 OpenZeppelin Contracts 5.0：
 
 [source, solidity]
 ----
@@ -30,63 +30,63 @@ contract Timelock is TimelockController {
 }
 ----
 
-This contract will grant the *Admin* role to the deployer, and the *Proposer* and *Executor* roles to the accounts passed as arguments. If you want to grant the *Proposer* and *Executor* roles to the same account, you can pass the same address twice. After deploying the contract, copy its address and proceed to the next step.
+此合约会将 *Admin* 角色授予部署者，并将 *Proposer* 和 *Executor* 角色授予作为参数传递的帐户。如果要将 *Proposer* 和 *Executor* 角色授予同一帐户，可以两次传递相同的地址。部署合约后，复制其地址并继续下一步。
 
 [[importing-to-defender]]
-== 2. Importing to Defender
+== 2. 导入到 Defender
 
-Navigate to the https://defender.openzeppelin.com/v2/#/address-book/new[Address Book on Defender, window=_blank] and add your contract with its address and network. If the contract is verified, Defender will automatically pick up the ABI. Otherwise, you need to https://gist.github.com/mverzilli/a35ab1b5bd7039167cc9270e9fd60632[paste the ABI, window=_blank] manually.
+导航到 https://defender.openzeppelin.com/v2/#/address-book/new[Defender 上的地址簿, window=_blank] 并使用其地址和网络添加你的合约。如果合约已验证，Defender 将自动获取 ABI。否则，你需要 https://gist.github.com/mverzilli/a35ab1b5bd7039167cc9270e9fd60632[手动粘贴 ABI, window=_blank]。
 
 [[create-a-proposal]]
-== 3. Creating a proposal
+== 3. 创建提案
 
-xref:module/transaction-proposals.adoc[Defender Transaction Proposals] allows you to create and manage proposals. Proposals in turn can directly execute actions on schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal, navigate to the https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposal creation page, window=_blank] and select your imported `TimelockController`.
+xref:module/transaction-proposals.adoc[Defender 交易提案] 允许你创建和管理提案。提案反过来可以直接通过 TimelockController 合约执行函数的计划延迟执行操作。为了创建一个新的提案，导航到 https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[交易提案创建页面, window=_blank] 并选择你导入的 `TimelockController`。
 
-Then, select the `schedule` function from the functions dropdown and fill the information about the proposal you want to execute. For example:
+然后，从函数下拉列表中选择 `schedule` 函数，并填写有关你要执行的提案的信息。例如：
 
-image::guide-timelock-roles-schedule.png[Proposal Data]
+image::guide-timelock-roles-schedule.png[提案数据]
 
-Finally, select the approval process to send this proposal. This depends on who is the proposal of your `TimelockController` contract. For this guide, the proposer is an EOA wallet. With Defender, you can create an approval process that is connected to your EOA and send this proposal with it.
+最后，选择审批流程以发送此提案。这取决于你的 `TimelockController` 合约的提议者是谁。对于本指南，提议者是一个 EOA 钱包。使用 Defender，你可以创建一个连接到你的 EOA 的审批流程，并使用它发送此提案。
 
-image::guide-timelock-proposer.png[Proposer]
+image::guide-timelock-proposer.png[提议者]
 
-You can then execute the proposal by creating another Transaction Proposal and selecting the `execute` function with the previous proposal data.
+然后，你可以通过创建另一个交易提案并使用先前的提案数据选择 `execute` 函数来执行该提案。
 
 [[granting-a-role]]
-== 4. Granting a role
+== 4. 授予角色
 
-Now, you can use xref:module/access-control.adoc[Defender Access Control] to grant or revoke roles of your `TimelockController` contract. Navigate to https://defender.openzeppelin.com/v2/#/access-control/contracts[Access Control, window=_blank] and select your imported `TimelockController` contract.
+现在，你可以使用 xref:module/access-control.adoc[Defender 访问控制] 来授予或撤销你的 `TimelockController` 合约的角色。导航到 https://defender.openzeppelin.com/v2/#/access-control/contracts[访问控制, window=_blank] 并选择你导入的 `TimelockController` 合约。
 
-image::guide-timelock-roles.png[Timelock Controller Roles]
+image::guide-timelock-roles.png[Timelock Controller 角色]
 
-In order to grant someone a role, you need to have access to the address that holds admin power over the role. For example, with the DEFAULT_ADMIN_ROLE, you can grant or revoke any role. In this case, you can use an EOA that holds the DEFAULT_ADMIN_ROLE to grant the PROPOSER_ROLE to another address.
+为了授予某人一个角色，你需要有权访问拥有该角色管理权限的地址。例如，使用 DEFAULT_ADMIN_ROLE，你可以授予或撤销任何角色。在这种情况下，你可以使用拥有 DEFAULT_ADMIN_ROLE 的 EOA 将 PROPOSER_ROLE 授予另一个地址。
 
-First, expand the dropdown of `PROPOSER_ROLE` and paste the address to grant the role to.
+首先，展开 `PROPOSER_ROLE` 的下拉列表并将地址粘贴到要授予角色的位置。
 
-image::guide-timelock-role-receiver.png[Receiver of role]
+image::guide-timelock-role-receiver.png[角色接收者]
 
-Then, scroll down and use an approval process that holds the DEFAULT_ADMIN_ROLE to send the transaction, like an EOA wallet. Click on `Save Changes`, which will send the transaction to your wallet.
+然后，向下滚动并使用拥有 DEFAULT_ADMIN_ROLE 的审批流程来发送交易，例如 EOA 钱包。单击 `保存更改`，这将把交易发送到你的钱包。
 
-image::guide-timelock-roles-grant.png[Grant a role]
+image::guide-timelock-roles-grant.png[授予角色]
 
-On the right side of the page, you will see that the transaction was executed and the role was granted to the address you selected.
+在该页面的右侧，你将看到交易已执行，并且该角色已授予你选择的地址。
 
-image::guide-timelock-roles-granted.png[Granted a role]
+image::guide-timelock-roles-granted.png[已授予角色]
 
 [[revoking-a-role]]
-== Revoking a role
+== 撤销角色
 
-To revoke a role, you need do the same steps but unselect the address to revoke the role from in the dropdown.
+要撤销一个角色，你需要执行相同的步骤，但取消选择下拉列表中要撤销角色的地址。
 
-image::guide-timelock-role-remover.png[Remover of role]
+image::guide-timelock-role-remover.png[角色移除者]
 
-Then, use the same approval process and save the changes. The transaction should be executed and the role revoked, as confirmed on the right side of the page.
+然后，使用相同的审批流程并保存更改。交易应执行并撤销该角色，如在该页面的右侧确认的那样。
 
-image::guide-timelock-role-revoked.png[Revoked role]
+image::guide-timelock-role-revoked.png[已撤销角色]
 
 [[references]]
-== References
+== 参考
 
-* xref:module/transaction-proposals.adoc[Transaction Proposals Documentation]
-* xref::module/access-control.adoc[Access Control Documentation]
-* https://docs.openzeppelin.com/contracts/governance#timelock[TimelockController Documentation, window=_blank]
+* xref:module/transaction-proposals.adoc[交易提案文档]
+* xref::module/access-control.adoc[访问控制文档]
+* https://docs.openzeppelin.com/contracts/governance#timelock[TimelockController 文档, window=_blank]

@@ -1,29 +1,29 @@
-# Automate smart contract transaction for hourly activity 
+# 自动化智能合约交易以执行每小时活动
 
-Defender allows you to automate smart contract operational tasks with easy integration with the rest of Defender. This tutorial shows how to build an action that sends an on-chain transaction every hour that adds an object to a box and increases the number of objects inside.
+Defender 允许你通过与 Defender 其余部分的简单集成来自动化智能合约操作任务。本教程展示了如何构建一个 action，该 action 每小时发送一次链上交易，用于向 box 中添加一个对象并增加其中的对象数量。
 
 [[pre-requisites]]
-== Pre-requisites
+== 先决条件
 
-* OpenZeppelin Defender account.
+* OpenZeppelin Defender 账户。
 
-NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.adoc[monitor] contracts through Defender!
+NOTE: 学习如何通过 Defender xref::tutorial/deploy.adoc[部署] 和 xref::tutorial/monitor.adoc[监控] 合约！
 
 [[setup]]
-== 1. Set up action
+== 1. 设置 action
 
-You will configure an action that sends an hourly transaction with the `addObject()` function to the `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074` contract in Sepolia, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
+你将配置一个 action，该 action 使用 `addObject()` 函数每小时向 Sepolia 中 `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074` 合约发送一次交易，这是在 xref::tutorial/deploy.adoc[部署]教程中部署的 Box 合约的示例。 要做到这一点，请按照下列步骤操作：
 
-. Run the following command in your terminal:
-. Open https://defender.openzeppelin.com/v2/#/relayers[Defender Relayers, window=_blank] in a web browser.
-. Click on *Create Relayer* with the name `Actions Relayer` and Sepolia network.
-. Fund it with some Sepolia ETH. This relayer will send and pay for the automated transactions.
-. Open https://defender.openzeppelin.com/v2/#/actions[Defender Actions, window=_blank].
-. Click on *Create Action*.
-. Name the action `Hourly object add`.
-. Select *Schedule* as trigger, and a *Timespan* of 1 hour as schedule.
-. Select the *Actions Relayer* as the connected relayer.
-. Paste the following code in the *Code* field:
+. 在你的终端中运行以下命令：
+. 在 Web 浏览器中打开 https://defender.openzeppelin.com/v2/#/relayers[Defender Relayers, window=_blank]。
+. 使用名称 `Actions Relayer` 和 Sepolia 网络单击 *Create Relayer*。
+. 使用一些 Sepolia ETH 为其充值。 此 relayer 将发送并支付自动交易的费用。
+. 打开 https://defender.openzeppelin.com/v2/#/actions[Defender Actions, window=_blank]。
+. 单击 *Create Action*。
+. 将 action 命名为 `Hourly object add`。
+. 选择 *Schedule* 作为触发器，并选择 1 小时的 *Timespan* 作为计划。
+. 选择 *Actions Relayer* 作为连接的 relayer。
+. 将以下代码粘贴到 *Code* 字段中：
 +
 [source,jsx]
 ----
@@ -43,35 +43,35 @@ exports.handler = async function(credentials) {
   return txRes.hash;
 }
 ----
-The contract address is the target, which is `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074`, and data is `0x62029d2a`, the encoded version of the `addObject()` function of the contract.
+合约地址是目标地址，即 `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074`，数据是 `0x62029d2a`，合约的 `addObject()` 函数的编码版本。
 +
-. Click on *Save Action*.
+. 单击 *Save Action*。
 
-After saving, the Actions page should look like this:
+保存后，Actions 页面应如下所示：
 
 image::tutorial-actions-action.png[Actions action card]
 
-Your action will now be running every hour! You can check the https://defender.openzeppelin.com/v2/#/logs[Defender Logs, window=_blank] for more detailed information about the activity.
+你的 action 现在将每小时运行一次！ 你可以查看 https://defender.openzeppelin.com/v2/#/logs[Defender Logs, window=_blank] 获取关于活动的更多详细信息。
 
 [[verify]]
-== 2. Verify activity
+== 2. 验证活动
 
-After the action has run for a while, you can verify that the transaction is being sent every hour. To do so, open the https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan contract page, window=_blank] and look for transactions from the configured Relayer. An alternative is to search your Relayer in Etherscan and look for the transactions sent to the contract.
+在 action 运行一段时间后，你可以验证交易是否每小时发送一次。 为此，请打开 https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan 合约页面, window=_blank]，并查找来自已配置 Relayer 的交易。 另一种方法是在 Etherscan 中搜索你的 Relayer，并查找发送到合约的交易。
 
-You will also receive alerts in case the action fails (for example, if the Relayer runs out of gas). They look like this:
+如果 action 失败，你也会收到警报（例如，如果 Relayer 的 gas 用完）。 它们看起来像这样：
 
 image::tutorial-actions-alert.png[Actions alert]
 
 [[next-steps]]
-== Next steps
+== 下一步
 
-Congratulations! You can modify the action to automate other contracts and build more complex transactions. In case you are interested in advanced use cases, we are working on actions-related guides.
+恭喜！ 你可以修改 action 以自动化其他合约并构建更复杂的交易。 如果你对高级用例感兴趣，我们正在开发与 action 相关的指南。
 
-NOTE: Alongisde actions, we recommend using Access Control to manage a contract's permissions through Defender. Learn how to use Access Control with its tutorial xref::tutorial/access-control.adoc[here].
+NOTE: 除了 action 之外，我们建议使用 Access Control 通过 Defender 管理合约的权限。 学习如何通过其教程 xref::tutorial/access-control.adoc[这里] 使用 Access Control。
 
 [[references]]
-== References
+== 参考
 
-* xref::module/actions.adoc[Actions Documentation]
-* xref::module/actions.adoc#defining-code[More information on Action's Javascript code]
-* https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2 Sepolia contract, window=_blank]
+* xref::module/actions.adoc[Actions 文档]
+* xref::module/actions.adoc#defining-code[关于 Action 的 JavaScript 代码的更多信息]
+* https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2 Sepolia 合约, window=_blank]
