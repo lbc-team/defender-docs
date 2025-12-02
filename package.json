@@ -4,7 +4,7 @@
   "description": "OpenZeppelin Defender documentation",
   "private": true,
   "scripts": {
-    "docs": "oz-docs",
+    "docs": "oz-docs && node fix-assets-path.js",
     "docs:watch": "oz-docs watch"
   },
   "repository": {

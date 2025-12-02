@@ -1,0 +1,6 @@
+{
+  "buildDir": "build/site",
+  "pathMappings": {
+    "/_/": "/docs/openzeppelin/ConfidentialContracts/_/"
+  }
+}
